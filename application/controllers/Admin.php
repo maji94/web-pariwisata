@@ -193,7 +193,6 @@ class Admin extends CI_Controller {
 
 		$data['page'] = "admin/profil";
 		$this->load->view('admin/dashboard',$data);
-
 	}
 
 	public function produk(){
@@ -829,7 +828,6 @@ class Admin extends CI_Controller {
 		// print_r($data);
 
 		$this->load->view('admin/dashboard',$data);
-
 	}
 
 	public function kontak(){
@@ -1042,7 +1040,6 @@ class Admin extends CI_Controller {
 
 		$data['page'] = "admin/kontak";
 		$this->load->view('admin/dashboard',$data);
-
 	}
 
 	public function anggota(){
@@ -1183,7 +1180,6 @@ class Admin extends CI_Controller {
 
 		$data['page'] = "admin/anggota";
 		$this->load->view('admin/dashboard',$data);
-
 	}
 
 	public function berita(){
@@ -1333,7 +1329,6 @@ class Admin extends CI_Controller {
 		// print_r($data);
 
 		$this->load->view('admin/dashboard', $data);
-
 	}
 
 	public function kegiatan(){
@@ -1407,7 +1402,6 @@ class Admin extends CI_Controller {
 
 		$data['page'] = "admin/kegiatan";
 		$this->load->view('admin/dashboard',$data);
-
 	}
 
 	public function forum(){
@@ -1534,7 +1528,6 @@ class Admin extends CI_Controller {
 		// print_r($data);
 
 		$this->load->view('admin/dashboard',$data);
-
 	}
 
 	public function getLogout(){

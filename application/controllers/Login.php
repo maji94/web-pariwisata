@@ -7,17 +7,14 @@ class Login extends CI_Controller {
 		parent::__construct();
 		$this->load->model('m_admin');
 		$this->cek = $this->session->userdata('logged_in');
-    $this->set = $this->session->userdata('lvl_user');
-    if (empty($this->cek)) {
-      $this->load->view('admin/login');
-		}
-    else {
-      redirect('admin');
-    }
+    $this->set = $this->session->userdata('lvl_user');    
 	}
 
 	public function index(){
-		
+    $data = array(
+      'page'  => "home/login",
+    );
+    $this->load->view('home/st_front', $data);
 	}
 
 	public function getLogin() {
