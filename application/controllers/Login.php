@@ -33,6 +33,7 @@ class Login extends CI_Controller {
         $sess_data['lvl_user']   = $qck->level;
         $sess_data['id_user']    = $qck->id_user;
         $sess_data['username']   = $qck->username;
+        $sess_data['nama']   = $qck->nama;
         $this->session->set_userdata($sess_data);
 
         redirect('admin');

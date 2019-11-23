@@ -32,10 +32,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/plugins/bootstrap/css/bootstrap.min.css">
 
   <!-- Weather css -->
-  <!-- <link href="<?php echo base_url(); ?>assets/css/svg-weather.css" rel="stylesheet"> -->
+  <!-- <link href="<?php// echo base_url(); ?>assets/css/svg-weather.css" rel="stylesheet"> -->
 
   <!-- Echart js -->
-  <!-- <script src="<?php echo base_url(); ?>assets/plugins/charts/echarts/js/echarts-all.js"></script> -->
+  <!-- <script src="<?php// echo base_url(); ?>assets/plugins/charts/echarts/js/echarts-all.js"></script> -->
 
   <!-- Style.css -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/main.css">
@@ -46,250 +46,27 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <!--color css-->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/color/color-1.min.css" id="color"/>
 
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.bootstrap4.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/summernote/summernote-bs4.css';?>">
+
 </head>
 
-<body class="sidebar-mini fixed">
+<body class="sidebar-mini fixed" <?php echo $this->session->flashdata('notif'); ?>>
    <div class="loader-bg">
       <div class="loader-bar"></div>
    </div>
 
    <div class="wrapper">
-      <!--   <div class="loader-bg">
-         <div class="loader-bar"></div>
-      </div> -->
       <!-- Navbar-->
       <?php $this->load->view('admin/a_header'); ?>
 
       <!-- Side-Nav-->
       <?php $this->load->view('admin/a_sidebar'); ?>
 
-      <!-- Sidebar chat start -->
-      <!-- <div id="sidebar" class="p-fixed header-users showChat">
-         <div class="had-container">
-            <div class="card card_main header-users-main">
-               <div class="card-content user-box">
-                  <div class="md-group-add-on p-20">
-                     <span class="md-add-on">
-                        <i class="icofont icofont-search-alt-2 chat-search"></i>
-                     </span>
-                     <div class="md-input-wrapper">
-                        <input type="text" class="md-form-control"  name="username" id="search-friends">
-                        <label>Search</label>
-                     </div>
-                  </div>
-                  <div class="media friendlist-main">
-                     <h6>Friend List</h6>
-                  </div>
-                  <div class="main-friend-list">
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice"  data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="7" data-status="offline" data-username="Michael Scofield" data-toggle="tooltip" data-placement="left" title="Michael Scofield">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-3.png" alt="Generic placeholder image">
-                           <div class="live-status bg-danger"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Michael Scofield</div>
-                           <span>3 hours ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="5" data-status="online" data-username="Irina Shayk" data-toggle="tooltip" data-placement="left" title="Irina Shayk">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-4.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Irina Shayk</div>
-                           <span>1 day ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="6" data-status="offline" data-username="Sara Tancredi" data-toggle="tooltip" data-placement="left" title="Sara Tancredi">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-5.png" alt="Generic placeholder image">
-                           <div class="live-status bg-danger"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Sara Tancredi</div>
-                           <span>2 days ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip"  data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="3" data-status="online" data-username="Alice"  data-toggle="tooltip" data-placement="left" title="Alice">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-2.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Alice</div>
-                           <span>1 hour ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                     <div class="media friendlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
-                        <a class="media-left" href="#!">
-                           <img class="media-object img-circle" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-                           <div class="live-status bg-success"></div>
-                        </a>
-                        <div class="media-body">
-                           <div class="friend-header">Josephin Doe</div>
-                           <span>20min ago</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div> -->
-
-      <!-- <div class="showChat_inner">
-         <div class="media chat-inner-header">
-            <a class="back_chatBox">
-               <i class="icofont icofont-rounded-left"></i> Josephin Doe
-            </a>
-         </div>
-         <div class="media chat-messages">
-            <a class="media-left photo-table" href="#!">
-               <img class="media-object img-circle m-t-5" src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="Generic placeholder image">
-               <div class="live-status bg-success"></div>
-            </a>
-            <div class="media-body chat-menu-content">
-               <div class="">
-                  <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                  <p class="chat-time">8:20 a.m.</p>
-               </div>
-            </div>
-         </div>
-         <div class="media chat-messages">
-            <div class="media-body chat-menu-reply">
-               <div class="">
-                  <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
-                  <p class="chat-time">8:20 a.m.</p>
-               </div>
-            </div>
-            <div class="media-right photo-table">
-               <a href="#!">
-                  <img class="media-object img-circle m-t-5" src="<?php echo base_url(); ?>assets/images/avatar-2.png" alt="Generic placeholder image">
-                  <div class="live-status bg-success"></div>
-               </a>
-            </div>
-         </div>
-         <div class="media chat-reply-box">
-            <div class="md-input-wrapper">
-               <input type="text" class="md-form-control" id="inputEmail" name="inputEmail" >
-               <label>Share your thoughts</label>
-               <span class="highlight"></span>
-               <span class="bar"></span>
-               <button type="button" class="chat-send waves-effect waves-light">
-                  <i class="icofont icofont-location-arrow f-20 "></i>
-               </button>
-               <button type="button" class="chat-send waves-effect waves-light">
-                  <i class="icofont icofont-location-arrow f-20 "></i>
-               </button>
-            </div>
-         </div>
-      </div> -->
-
-      <!-- Sidebar chat end-->
-      
       <?php $this->load->view($page); ?>
    </div>
-
 
    <!-- Required Jqurey -->
    <script src="<?php echo base_url(); ?>assets/plugins/jquery/dist/jquery.min.js"></script>
@@ -311,13 +88,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
    <!-- notification -->
    <script src="<?php echo base_url(); ?>assets/plugins/notification/js/bootstrap-growl.min.js"></script>
+   <script src="<?php echo base_url(); ?>assets/pages/notification.js"></script>
 
    <!-- Rickshaw Chart js -->
-   <!-- <script src="<?php echo base_url(); ?>assets/plugins/d3/d3.js"></script> -->
-   <!-- <script src="<?php echo base_url(); ?>assets/plugins/rickshaw/rickshaw.js"></script> -->
+   <!-- <script src="<?php// echo base_url(); ?>assets/plugins/d3/d3.js"></script> -->
+   <!-- <script src="<?php// echo base_url(); ?>assets/plugins/rickshaw/rickshaw.js"></script> -->
 
    <!-- Sparkline charts -->
-   <!-- <script src="<?php echo base_url(); ?>assets/plugins/jquery-sparkline/dist/jquery.sparkline.js"></script> -->
+   <!-- <script src="<?php// echo base_url(); ?>assets/plugins/jquery-sparkline/dist/jquery.sparkline.js"></script> -->
 
    <!-- Counter js  -->
    <script src="<?php echo base_url(); ?>assets/plugins/waypoints/jquery.waypoints.min.js"></script>
@@ -325,9 +103,78 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
    <!-- custom js -->
    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/main.min.js"></script>
-   <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/dashboard.js"></script>
+   <!-- <script type="text/javascript" src="<?php// echo base_url(); ?>assets/pages/dashboard.js"></script> -->
    <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/elements.js"></script>
    <script src="<?php echo base_url(); ?>assets/js/menu.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+   <!-- panggil summernote -->
+   <script type="text/javascript" src="<?php echo base_url().'assets/summernote/summernote-bs4.js';?>"></script>
+      
+   <script type="text/javascript">
+
+    
+    $(document).ready(function() {
+      var table = $('#example').DataTable();
+
+      $('#isi').summernote({
+        height: "300px",
+        callbacks: {
+          onImageUpload : function(image) {
+            uploadImage(image[0]);
+          },
+          onMediaDelete : function(target) {
+            deleteImage(target[0].src);
+          }
+        }
+      });
+
+      function uploadImage(image) {
+        var data = new FormData();
+        data.append("image", image);
+        $.ajax({
+          url: "<?php echo site_url('admin/upload_image')?>",
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: data,
+          type: "POST",
+          success: function(url) {
+            $('#isi').summernote("insertImage", url);
+          },
+          error: function(data) {
+            console.log(data);
+          }
+        });
+      }
+
+      function deleteImage(src) {
+        $.ajax({
+          data: {src : src},
+          type: "POST",
+          url: "<?php echo site_url('admin/delete_image')?>",
+          cache: false,
+          success: function(response) {
+            console.log(response);
+          }
+        });
+      }
+    });
+
+    $('#edit_banner').on('show.bs.modal', function (event){
+      var div = $(event.relatedTarget)
+      var id = div.data('id')
+      var edit_oleh = div.data('oleh')
+      var oldFoto = div.data('foto')
+      var modal = $(this)
+
+      modal.find('#oldFoto').attr("value",oldFoto)
+      modal.find('#edit_oleh').attr("value",edit_oleh)
+      modal.find('#id').attr("value",id)
+      
+    });
+   </script>
 
 </body>
 
