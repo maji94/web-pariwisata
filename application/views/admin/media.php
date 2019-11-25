@@ -2,13 +2,13 @@
   $links = $this->uri->segment(3);
   if ($links == "artikel") {
     $header = "Artikel";
-    $add = "artikel";
+    $jenis = "artikel";
   }else if ($links == "foto") {
     $header = "Galeri Foto";
-    $add = "foto";
+    $jenis = "foto";
   }else if ($links == "video") {
     $header = "Galeri Video";
-    $add = "video";
+    $jenis = "video";
   }
  ?>
 <div class="content-wrapper">
@@ -43,7 +43,7 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-header-text">Data Artikel </h5>
-            <a href="<?php echo site_url('admin/media/add/'.$add); ?>" class="btn btn-success waves-effect waves-light f-right"><i class="icofont icofont-plus"></i><span class="m-l-10"> Tambah Data</span></a>
+            <a href="<?php echo site_url('admin/media/add/'.$jenis); ?>" class="btn btn-success waves-effect waves-light f-right"><i class="icofont icofont-plus"></i><span class="m-l-10"> Tambah Data</span></a>
           </div>
           <div class="card-block">
             <div class="row">
@@ -51,135 +51,46 @@
                 <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
+                      <th>No.</th>
+                      <th>Foto Headline</th>
+                      <th>Judul</th>
+                      <th>Tanggal</th>
+                      <th>Oleh</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                    <?php $no=1; foreach ($data as $d) { ?>
                     <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
+                      <td width="5%"><?php echo $no; ?></td>
+                      <td>
+                        <?php if ($d->jenis == "foto") {?>
+                        <img src="<?php echo base_url('assets/images/'.$jenis.'/'.str_replace('.', '_thumb.', unserialize($d->konten)[0])); ?>" alt="" style="width: 200px">
+                        <?php }else{ ?>
+                        <img src="<?php echo base_url('assets/images/'.$jenis.'/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" style="width: 200px">
+                        <?php } ?>
+                      </td>
+                      <td><?php echo $d->judul; ?></td>
+                      <td><?php echo tgl_indo(date($d->tanggal)); ?></td>
+                      <td><?php echo $d->oleh; ?></td>
                       <td align="center" width="5%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
+                        <a href="<?php echo site_url('admin/media/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
                           <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
+                        </a><br>
+                        <a href="<?php echo site_url('admin/media/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
                           <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
+                        </a>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td align="center" width="5%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td align="center" width="5%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td align="center" width="5%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td align="center" width="10%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td align="center" width="5%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td align="center" width="5%">
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </button><br>
-                        <button style="margin-bottom: 5px;width: 70px;" type="button" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </button>
-                        </div>
-                      </td>
-                    </tr>
+                    <?php $no++; } ?>
                   </tbody>
                   <tfoot>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
+                      <th>No.</th>
+                      <th>Foto Headline</th>
+                      <th>Judul</th>
+                      <th>Tanggal</th>
+                      <th>Oleh</th>
                       <th>Action</th>
                     </tr>
                   </tfoot>

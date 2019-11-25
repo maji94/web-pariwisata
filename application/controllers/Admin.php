@@ -6,7 +6,6 @@ class Admin extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('m_admin');
-		$this->load->library('upload');
 		$this->cek = $this->session->userdata('logged_in');
     $this->set = $this->session->userdata('lvl_user');
     date_default_timezone_set('Asia/Jakarta');
@@ -28,7 +27,8 @@ class Admin extends CI_Controller {
 		if(isset($_FILES["image"]["name"])){
 			$config['upload_path'] = './assets/images/editor/';
 			$config['allowed_types'] = 'jpg|jpeg|png|gif';
-			$this->upload->initialize($config);
+	    $this->load->library('upload', $config);
+			// $this->upload->initialize($config);
 			if(!$this->upload->do_upload('image')){
 				$this->upload->display_errors();
 				return FALSE;
@@ -192,6 +192,7 @@ class Admin extends CI_Controller {
 	public function media(){
 		$links = $this->uri->segment(3);
 		$links2 = $this->uri->segment(4);
+		$links3 = $this->uri->segment(5);
 		$tableName = 'tb_media';
 
 		$time = time();
@@ -219,14 +220,14 @@ class Admin extends CI_Controller {
 			    $this->load->library('upload', $config);
 
 					$data_artikel = array(
-						'judul' => $this->input->post('judul'),
-						'tanggal' => $this->input->post('tanggal'),
-						'jenis' => "artikel",
-						'oleh' => $this->session->userdata('nama'),
-						'konten' => $this->input->post('isi'),
-						'link_foto' => $this->input->post('link_foto'),
+						'judul'      => $this->input->post('judul'),
+						'tanggal'    => $this->input->post('tanggal'),
+						'jenis'      => "artikel",
+						'oleh'       => $this->session->userdata('nama'),
+						'konten'     => $this->input->post('isi'),
+						'link_foto'  => $this->input->post('link_foto'),
 						'link_video' => $this->input->post('link_video'),
-						'dilihat' => 1,
+						'dilihat'    => 1,
 					);
 
 					if ($_FILES['foto']['name'] == "") {
@@ -248,6 +249,75 @@ class Admin extends CI_Controller {
 	        }
 
 					$data_media = $data_artikel;
+				}else if ($links2 == "foto") {
+					$path = './assets/images/foto/';
+			    $config['upload_path']    = $path;
+			    $this->load->library('upload', $config);
+
+			    $data_foto = array(
+			    	'judul'   => $this->input->post('judul'),
+			    	'tanggal' => $this->input->post('tanggal'),
+			    	'jenis'   => "foto",
+						'oleh'    => $this->input->post('oleh'),
+			    );
+
+			    $input = sizeof($_FILES['foto']['tmp_name']);
+          $files = $_FILES['foto'];
+          for ($i=0; $i < $input ; $i++) {
+            $_FILES['foto']['name'] = $files['name'][$i];
+            $_FILES['foto']['type'] = $files['type'][$i];
+            $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+            $_FILES['foto']['error'] = $files['error'][$i];
+            $_FILES['foto']['size'] = $files['size'][$i];
+            
+            $this->upload->do_upload('foto');
+
+            $thumb['source_image']   = 'assets/images/foto/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+
+            $konten[] = $this->upload->file_name;
+          }
+
+          for ($j=0; $j < $input; $j++) { 
+            unlink($path.$konten[$j]);
+          }
+
+          $data_foto['konten'] = serialize($konten);
+          $data_media = $data_foto;
+
+				}else if ($links2 == "video") {
+					$path = './assets/images/video/';
+			    $config['upload_path']    = $path;
+			    $this->load->library('upload', $config);
+
+					$data_video = array(
+						'judul'      => $this->input->post('judul'),
+						'tanggal'    => $this->input->post('tanggal'),
+						'jenis'      => "video",
+						'konten'     => $this->input->post('konten'),
+					);
+
+					if ($_FILES['foto']['name'] == "") {
+	          $data_video['headline'] = "";
+	        }else{
+	          if ( ! $this->upload->do_upload('foto')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else{
+	          	$data_video['headline'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/video/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	          }
+	        }
+
+					$data_media = $data_video;
 				}
 
 				$ins_media = $this->m_admin->InsertData($tableName, $data_media);
@@ -259,14 +329,197 @@ class Admin extends CI_Controller {
 					redirect('admin/media/'.$links2);
         }
 
+			}else  if ($links == "edit") {
+				$data = array(
+					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
+					'title' => 'Ubah Data Media',
+					'page'  => 'admin/crud_media',
+				);
+			}else if ($links == "do_edit") {
+				if ($links2 == "artikel") {
+					$path = './assets/images/artikel/';
+			    $config['upload_path']    = $path;
+			    $this->load->library('upload', $config);
+
+			    $data_artikel = array(
+			    	'judul'      => $this->input->post('judul'),
+			    	'tanggal'    => $this->input->post('tanggal'),
+			    	'konten'     => $this->input->post('isi'),
+			    	'link_foto'  => $this->input->post('link_foto'),
+			    	'link_video' => $this->input->post('link_video'),
+			    );
+
+			    if ($_FILES['foto']['name'] == "") {
+	          $data_artikel['headline'] = $this->input->post('oldFoto');
+	        }else{
+	          if ( ! $this->upload->do_upload('foto')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else{
+	          	$data_artikel['headline'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/artikel/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto')));
+	          }
+	        }
+
+					$data_media = $data_artikel;
+				}else if ($links2 == "foto") {
+					$path = './assets/images/foto/';
+			    $config['upload_path']    = $path;
+			    $this->load->library('upload', $config);
+
+			    $get =  array('id' => $this->input->post('id'));
+          $getData = $this->m_admin->getContent($tableName, $get);
+          $getFoto = unserialize($getData[0]->konten);
+          $n_getFoto = sizeof($getFoto);
+
+          $input = sizeof($_FILES['foto']['tmp_name']);
+          $files = $_FILES['foto'];
+
+          // echo "<pre>";
+          // print_r($input);
+          for ($i=0; $i < $input ; $i++) {
+
+            $_FILES['foto']['name'] = $files['name'][$i];
+            $_FILES['foto']['type'] = $files['type'][$i];
+            $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+            $_FILES['foto']['error'] = $files['error'][$i];
+            $_FILES['foto']['size'] = $files['size'][$i];
+            
+            if ($_FILES['foto']['name']) {
+              $this->upload->do_upload('foto');
+              $konten[] = $this->upload->file_name;
+            }else{
+              $konten[] = $this->input->post('oldFoto')[$i];
+            }
+            
+            $thumb['source_image'] = 'assets/images/foto/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+          }
+
+          $data_foto = array(
+            'judul' => $this->input->post('judul'),
+            'tanggal' => $this->input->post('tanggal'),
+            'konten' => serialize($konten),
+            'oleh' => $this->input->post(''),
+          );
+
+          for ($i=0; $i < $n_getFoto; $i++) { 
+            if (in_array($getFoto[$i], $konten) == FALSE) {
+              unlink($path.str_replace('.', '_thumb.', $getFoto[$i]));
+            }
+          }
+
+          for ($j=0; $j < $input; $j++) { 
+            unlink($path.$konten[$j]);
+          }
+
+          $data_media = $data_foto;
+
+
+				}else if ($links2 == "video") {
+					$path = './assets/images/video/';
+			    $config['upload_path']    = $path;
+			    $this->load->library('upload', $config);
+
+			    $data_video = array(
+						'judul'      => $this->input->post('judul'),
+						'tanggal'    => $this->input->post('tanggal'),
+						'oleh'       => $this->input->post('oleh'),
+						'konten'     => $this->input->post('konten'),
+					);
+
+			    if ($_FILES['foto']['name'] == "") {
+	          $data_video['headline'] = $this->input->post('oldFoto');
+	        }else{
+	          if ( ! $this->upload->do_upload('foto')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else{
+	          	$data_video['headline'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/video/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto')));
+	          }
+	        }
+
+					$data_media = $data_video;
+				}
+
+				$where = array('id' => $this->input->post('id'));
+				$upd_media = $this->m_admin->UpdateData($tableName, $data_media, $where);
+				if($upd_media){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/media/'.$links2);
+				}else {
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/media/'.$links2);
+				}
+			}else if ($links == "delete") {
+				$where = array('id'=>$links3);
+        $filefoto = $this->m_admin->getContent($tableName, $where);
+
+        if ($links2 == "artikel") {
+        	$explode = explode("img", $filefoto[0]->konten);
+	        foreach ($explode as $d) {
+	        	$cut_text = substr($d, strpos($d, "editor/"));
+						if ($cut_text{3 - 1} != '">') { // jika huruf ke 50 (50 - 1 karena index dimulai dari 0) buka  spasi
+							$new_pos = strrpos($cut_text, '">'); // cari posisi spasi, pencarian dari huruf terakhir
+							$cut_text = substr($cut_text, (strpos($cut_text, "editor/")+7), ($new_pos-7));
+						}
+						
+						if (strpos($d, "editor/") != 0) {
+		        	$carigambar[] = $cut_text;
+						}
+	        }
+
+	        $path = './assets/images/artikel/';
+	        $path2 = './assets/images/editor/';
+	        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->headline));
+	        foreach ($carigambar as $c) {
+		        unlink($path2.$c);
+	        }
+        }else if ($links2 == "video") {        	
+	        $path = './assets/images/video/';
+	        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->headline));
+        }
+        
+        $del_media = $this->m_admin->DeleteData($tableName, $where);
+        if ($del_media) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/media/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/media/'.$links2);
+        }
 			}else {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
+					'title' => 'Manajemen Media Website',
 					'page' => "admin/media",
-				);				
+				);
+
+				if ($links == "artikel") {
+					$data['data'] = $this->m_admin->getContent($tableName, array('jenis'=>"artikel"));
+				}else if ($links == "foto") {
+					$data['data'] = $this->m_admin->getContent($tableName, array('jenis'=>"foto"));
+				}else if ($links == "video") {
+					$data['data'] = $this->m_admin->getContent($tableName, array('jenis'=>"video"));
+				}
 			}
 		}
-
 		$this->load->view('admin/dashboard', $data);
 	}
 

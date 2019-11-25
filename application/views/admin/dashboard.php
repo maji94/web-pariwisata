@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.bootstrap4.min.css">
   <!-- summernote -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/summernote/summernote-bs4.css';?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/summernote/summernote-lite.css';?>">
 
 </head>
 
@@ -110,16 +110,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
    <!-- panggil summernote -->
-   <script type="text/javascript" src="<?php echo base_url().'assets/summernote/summernote-bs4.js';?>"></script>
+   <script type="text/javascript" src="<?php echo base_url().'assets/summernote/summernote-lite.js';?>"></script>
       
    <script type="text/javascript">
 
     
     $(document).ready(function() {
       var table = $('#example').DataTable();
-
+      
       $('#isi').summernote({
-        height: "300px",
+        toolbar: [
+          // [groupName, [list of button]]
+          ['misc', ['undo', 'redo', 'fullscreen','codeview']],
+          ['style', ['bold', 'italic', 'underline', 'clear']],
+          ['font', ['strikethrough', 'superscript', 'subscript']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['color', ['color']],
+          ['height', ['height']],
+          ['fontsize', ['fontsize','fontname']],
+          ['insert', ['picture', 'link', 'table', 'hr']],
+        ],
+        placeholder: 'Your text here ..',
+        tabsize: 2,
+        minHeight: 200,
         callbacks: {
           onImageUpload : function(image) {
             uploadImage(image[0]);
@@ -161,6 +174,67 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         });
       }
     });
+
+    function hapus(id){
+      $(id).remove();
+    }
+
+    function PreviewImage(upload,uploadPreview) {
+      var oFReader = new FileReader();
+      oFReader.readAsDataURL(document.getElementById(upload).files[0]);
+
+      oFReader.onload = function (oFREvent) {
+        document.getElementById(uploadPreview).src = oFREvent.target.result;
+      }
+    }
+
+    <?php if ($this->uri->segment(3) == "add") { ?>
+      var i = 1;
+    <?php }else if ($this->uri->segment(3) == "edit") { ?>
+      var i = parseInt($("#n_edit").val());
+    <?php } ?>
+
+    function additem() {
+      //                menentukan target append
+        var itemlist = document.getElementById('itemlist');
+        
+      //                membuat element
+        var col = document.createElement('div');
+        col.setAttribute('class', 'col-md-4 col-xs-12');
+        col.style = "margin-bottom:5px";
+
+      //                meng append element
+        itemlist.appendChild(col);
+
+      //                membuat element input
+        var jenis_input = document.createElement('input');
+        jenis_input.setAttribute('class', 'form-control');
+        jenis_input.setAttribute('type', 'file');
+        jenis_input.setAttribute('name', 'foto[]');
+        jenis_input.setAttribute('id', 'foto[' + i + ']');
+        jenis_input.setAttribute('onchange', 'PreviewImage("foto['+i+']","prevFoto['+i+']");');
+
+        var preview = document.createElement('img');
+        preview.setAttribute('id', 'prevFoto[' + i + ']');
+        preview.setAttribute('class', 'form-control');
+        preview.setAttribute('alt', 'Foto Galeri');
+        preview.style = "width : 100%; height : 200px;";
+
+        var hapus = document.createElement('span');
+
+      //                meng append element input
+        col.appendChild(jenis_input);
+        col.appendChild(preview);
+        col.appendChild(hapus);
+
+        hapus.innerHTML = '<button class="btn btn-danger btn-mini" type="button" style="margin-top:5px;"><i class="icofont icofont-close"></i> Hapus</button><br>';
+      //                membuat aksi delete element
+        hapus.onclick = function () {
+            col.parentNode.removeChild(col);
+        };
+
+        i++;
+    }
 
     $('#edit_banner').on('show.bs.modal', function (event){
       var div = $(event.relatedTarget)
