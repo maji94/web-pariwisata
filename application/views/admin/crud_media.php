@@ -186,7 +186,8 @@
               <div class="row" style="margin-top: 1rem;">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                  <button type="submit" class="btn btn-success waves-effect waves-light m-r-30"><i class="icofont icofont-tick-mark"></i><span class="m-l-10"> Simpan</button>
+                  <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="icofont icofont-tick-mark"></i><span class="m-l-10"> Simpan</button>
+                  <a href="<?php echo site_url('admin/media/'.$this->uri->segment(4)); ?>" class="btn btn-primary waves-effect waves-light m-r-10"><i class="icofont icofont-arrow-left"></i><span class="m-l-10"> Kembali</a>
                 </div>
               </div>
             <?php echo form_close(); ?>

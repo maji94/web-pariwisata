@@ -179,7 +179,7 @@ class Admin extends CI_Controller {
 			}else {
 				$data = array(
 					'data' => $this->m_admin->getBanner(),
-					'title' => 'Manajemen Banner Website',
+					'title' => 'Manajemen Banner',
 					'page' => "admin/banner",
 				);				
 			}
@@ -286,7 +286,6 @@ class Admin extends CI_Controller {
 
           $data_foto['konten'] = serialize($konten);
           $data_media = $data_foto;
-
 				}else if ($links2 == "video") {
 					$path = './assets/images/video/';
 			    $config['upload_path']    = $path;
@@ -328,7 +327,6 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/media/'.$links2);
         }
-
 			}else  if ($links == "edit") {
 				$data = array(
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
@@ -406,10 +404,10 @@ class Admin extends CI_Controller {
           }
 
           $data_foto = array(
-            'judul' => $this->input->post('judul'),
+            'judul'   => $this->input->post('judul'),
             'tanggal' => $this->input->post('tanggal'),
-            'konten' => serialize($konten),
-            'oleh' => $this->input->post(''),
+            'konten'  => serialize($konten),
+            'oleh'    => $this->input->post('oleh'),
           );
 
           for ($i=0; $i < $n_getFoto; $i++) { 
@@ -492,9 +490,17 @@ class Admin extends CI_Controller {
 	        foreach ($carigambar as $c) {
 		        unlink($path2.$c);
 	        }
-        }else if ($links2 == "video") {        	
-	        $path = './assets/images/video/';
+        }else if ($links2 == "video") {
+        	$path = './assets/images/video/';
 	        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->headline));
+        }else if ($links2 == "foto") {
+            $path = './assets/images/foto/';
+            $filefoto = $this->m_admin->getContent($tableName, $where);
+            $konten = unserialize($filefoto[0]->konten);
+            $n = sizeof($konten);
+            for ($i=0; $i < $n ; $i++) {
+              unlink($path.str_replace('.', '_thumb.', $konten[$i]));
+            }
         }
         
         $del_media = $this->m_admin->DeleteData($tableName, $where);
@@ -526,20 +532,20 @@ class Admin extends CI_Controller {
 	public function kreatif(){
 		$links = $this->uri->segment(3);
 		$links2 = $this->uri->segment(4);
-		$tableName = 'tb_berita';
+		$tableName = 'tb_kreatif';
 
 		if(!isset($_SESSION['logged_in'])){
 			redirect('login');
 		}else{
 			if ($links == "") {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
+					'title' => 'Manajemen Kreatif',
+					'page' => "admin/kreatif",
 				);
 			}else {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
+					'title' => 'Manajemen Kreatif',
+					'page' => "admin/kreatif",
 				);				
 			}
 		}
