@@ -126,13 +126,13 @@
               <div class="form-group row">
                 <label for="link_foto" class="col-md-2 col-form-label form-control-label">Link Foto </label>
                 <div class="col-md-10">
-                    <input type="text" id="link_foto" name="link_foto" class="form-control" placeholder="Copy dan paste link foto yang terdapat pada halaman galeri foto (opsional)" value="<?php echo $link_foto; ?>">
+                    <input type="text" id="link_foto" name="link_foto" class="form-control" placeholder="Copy dan paste link foto yang terdapat pada halaman galeri foto" value="<?php echo $link_foto; ?>">
                 </div>
               </div>
               <div class="form-group row">
                 <label for="link_video" class="col-md-2 col-form-label form-control-label">Link Video </label>
                 <div class="col-md-10">
-                    <input type="text" id="link_video" name="link_video" class="form-control" placeholder="Copy dan paste link video yang terdapat pada halaman galeri video (opsional)" value="<?php echo $link_video; ?>">
+                    <input type="text" id="link_video" name="link_video" class="form-control" placeholder="Copy dan paste link video yang ada pada Youtube" value="<?php echo $link_video; ?>">
                 </div>
               </div>
               <?php }else if ($links2 == "foto") { ?>

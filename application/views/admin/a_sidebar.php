@@ -78,33 +78,33 @@
                </li>
             </ul>
          </li>
-         <li class="<?php if($link == 'destinasi'){echo "active";} ?> treeview">
+         <li class="<?php if($link == 'atraksi'){echo "active";} ?> treeview">
             <a class="waves-effect waves-dark" href="#!">
                <i class="icon-directions"></i>
-               <span> Destinasi</span>
+               <span> Atraksi</span>
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
                <li class="<?php if($link2 == 'alam'){echo 'active';} ?>">
-                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/destinasi/alam'); ?>">
+                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/alam'); ?>">
                      <i class="icon-arrow-right"></i>
                      Alam
                   </a>
                </li>
                <li class="<?php if($link2 == 'budaya'){echo 'active';} ?>">
-                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/destinasi/budaya'); ?>">
+                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/budaya'); ?>">
                      <i class="icon-arrow-right"></i>
                      Budaya
                   </a>
                </li>
                <li class="<?php if($link2 == 'museum'){echo 'active';} ?>">
-                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/destinasi/museum'); ?>">
+                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/museum'); ?>">
                      <i class="icon-arrow-right"></i>
                      Museum
                   </a>
                </li>
                <li class="<?php if($link2 == 'kuliner'){echo 'active';} ?>">
-                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/destinasi/kuliner'); ?>">
+                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/kuliner'); ?>">
                      <i class="icon-arrow-right"></i>
                      Kuliner
                   </a>
