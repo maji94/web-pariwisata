@@ -56,6 +56,9 @@
                       <th>Judul</th>
                       <th>Tanggal</th>
                       <th>Oleh</th>
+                      <?php if ($jenis != "artikel") { ?>
+                      <th>Link</th>
+                      <?php } ?>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -73,6 +76,9 @@
                       <td><?php echo $d->judul; ?></td>
                       <td><?php echo tgl_indo(date($d->tanggal)); ?></td>
                       <td><?php echo $d->oleh; ?></td>
+                      <?php if ($jenis != "artikel") { ?>
+                      <td><?php echo site_url('galeri/'.$jenis.'/'.$d->id); ?></td>
+                      <?php } ?>
                       <td align="center" width="5%">
                         <a href="<?php echo site_url('admin/media/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
                           <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
@@ -91,6 +97,9 @@
                       <th>Judul</th>
                       <th>Tanggal</th>
                       <th>Oleh</th>
+                      <?php if ($jenis != "artikel") { ?>
+                      <th>Link</th>
+                      <?php } ?>
                       <th>Action</th>
                     </tr>
                   </tfoot>

@@ -73,7 +73,7 @@
                 <i class="icofont icofont-home"></i> Dashboard
               </a>
             </li>
-            <li class="breadcrumb-item"><a href="<?php echo site_url('admin/media/'.$links); ?>"> <?php echo $header; ?></a>
+            <li class="breadcrumb-item"><a href="<?php echo site_url('admin/media/'.$links2); ?>"> <?php echo $header; ?></a>
             </li>
             <li class="breadcrumb-item"><a href="#"> <?php echo 'Tambah Data '.$header; ?></a>
             </li>

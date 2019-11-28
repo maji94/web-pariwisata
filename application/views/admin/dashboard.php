@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.bootstrap4.min.css">
   <!-- summernote -->
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/summernote/summernote-lite.css';?>">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url().'assets/summernote/summernote-bs4.css';?>">
 
 </head>
 
@@ -110,7 +110,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
 
    <!-- panggil summernote -->
-   <script type="text/javascript" src="<?php echo base_url().'assets/summernote/summernote-lite.js';?>"></script>
+   <script type="text/javascript" src="<?php echo base_url().'assets/summernote/summernote-bs4.js';?>"></script>
       
    <script type="text/javascript">
 
@@ -192,6 +192,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       var i = 1;
     <?php }else if ($this->uri->segment(3) == "edit") { ?>
       var i = parseInt($("#n_edit").val());
+      if (i == 0) {
+        i = 1;
+      }
     <?php } ?>
 
     function additem() {
