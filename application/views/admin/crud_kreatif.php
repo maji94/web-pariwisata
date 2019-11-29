@@ -19,7 +19,6 @@
     $foto_galeri = "";
     $foto_galeri0 = "";
     $n_konten = "";
-    $foto_headline = "";
     $link_video = "";
     $link_maps = "";
   }else{
@@ -31,7 +30,6 @@
     $foto_galeri = unserialize($data[0]->foto_galeri);
     $foto_galeri0 = base_url('assets/images/kreatif/'.str_replace('.', '_thumb.', $foto_galeri[0]));
     $n_konten = sizeof($foto_galeri);
-    $foto_headline = $data[0]->foto_headline;
     $link_video = $data[0]->link_video;
     $link_maps = $data[0]->link_maps;
   }
@@ -81,28 +79,21 @@
                 </div>
               </div>
               <div class="form-group row">
-                <label for="headline" class="col-md-2 col-form-label form-control-label">Foto Headline *</label>
-                <div class="col-md-10">
-                  <input type="hidden" name="oldFoto_headline" value="<?php echo $foto_headline; ?>">
-                  <input type="file" id="headline" name="headline" class="form-control">
-                </div>
-              </div>
-              <div class="form-group row">
                 <label for="konten" class="col-md-2 col-form-label form-control-label">Deskripsi *</label>
                 <div class="col-md-10">
-                  <textarea class="form-control" id="isi" name="konten"><?php echo $konten; ?></textarea>
+                  <textarea class="form-control" id="isi" name="konten" required><?php echo $konten; ?></textarea>
                 </div>
               </div>
               <div class="form-group row">
-                <label for="link_video" class="col-md-2 col-form-label form-control-label">Link Video *</label>
+                <label for="link_video" class="col-md-2 col-form-label form-control-label">Link Video </label>
                 <div class="col-md-10">
                     <input type="text" id="link_video" name="link_video" class="form-control" placeholder="Copy dan paste link video yang ada pada Youtube" value="<?php echo $link_video; ?>">
                 </div>
               </div>
               <div class="form-group row">
-                <label for="link_maps" class="col-md-2 col-form-label form-control-label">Link Google Maps *</label>
+                <label for="link_maps" class="col-md-2 col-form-label form-control-label">Link Google Maps </label>
                 <div class="col-md-10">
-                    <input type="text" id="link_maps" name="link_maps" class="form-control" placeholder="Copy dan paste link peta yang ada di Google Maps " value="<?php echo $link_maps; ?>" required>
+                    <input type="text" id="link_maps" name="link_maps" class="form-control" placeholder="Copy dan paste link peta yang ada di Google Maps " value="<?php echo $link_maps; ?>">
                 </div>
               </div>
               <input type="hidden" name="n_edit" id="n_edit" value="<?php echo $n_konten; ?>">
@@ -111,7 +102,7 @@
                   <label for="tanggal" class="col-md-2 col-form-label form-control-label">Unggah Foto *</label>
                   <div class="col-md-10" id="itemlist" style="padding:0px">
                     <div class="col-md-4 col-xs-12" style="margin-bottom:5px;">
-                      <input class="form-control" type="file" id="foto[0]" name="foto[]" onchange="PreviewImage('foto[0]','prevFoto[0]','#oldFoto0');">
+                      <input class="form-control" type="file" id="foto[0]" name="foto[]" onchange="PreviewImage('foto[0]','prevFoto[0]','#oldFoto0');" <?php echo $req; ?>>
                       <?php if ($links == "edit") { ?>
                       <input type="hidden" name="oldFoto[]" id="oldFoto0" value="<?php echo $foto_galeri[0]; ?>"><?php } ?>
                       <img src="<?php echo $foto_galeri0; ?>" class="form-control" id="prevFoto[0]" style="height: 200px; width: 100%;" alt="Foto Galeri">

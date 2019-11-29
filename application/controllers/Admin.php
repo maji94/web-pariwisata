@@ -562,24 +562,6 @@ class Admin extends CI_Controller {
 					'link_maps'  => $this->input->post('link_maps'),
 				);
 
-				if ($_FILES['headline']['name'] == "") {
-          $data_kreatif['foto_headline'] = "";
-        }else{
-          if ( ! $this->upload->do_upload('headline')){ 
-          $error = array('error' => $this->upload->display_errors());
-          $pesan = $error['error'];
-          echo $pesan;
-          }else{
-          	$data_kreatif['foto_headline'] = $this->upload->file_name;
-
-            $thumb['source_image'] = 'assets/images/kreatif/'.$this->upload->file_name;
-            $this->load->library('image_lib');
-            $this->image_lib->initialize($thumb);
-            $this->image_lib->resize();
-            unlink($path.$this->upload->file_name);
-          }
-        }
-
         $input = sizeof($_FILES['foto']['tmp_name']);
         $files = $_FILES['foto'];
         for ($i=0; $i < $input ; $i++) {
@@ -624,25 +606,6 @@ class Admin extends CI_Controller {
 					'link_video' => $this->input->post('link_video'),
 					'link_maps'  => $this->input->post('link_maps'),
 				);
-
-				if ($_FILES['headline']['name'] == "") {
-          $data_kreatif['foto_headline'] = $this->input->post('oldFoto_headline');
-        }else{
-          if ( ! $this->upload->do_upload('headline')){ 
-          $error = array('error' => $this->upload->display_errors());
-          $pesan = $error['error'];
-          echo $pesan;
-          }else{
-          	$data_kreatif['foto_headline'] = $this->upload->file_name;
-
-            $thumb['source_image'] = 'assets/images/kreatif/'.$this->upload->file_name;
-            $this->load->library('image_lib');
-            $this->image_lib->initialize($thumb);
-            $this->image_lib->resize();
-            unlink($path.$this->upload->file_name);
-            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto_headline')));
-          }
-        }
 
         $get =  array('id' => $this->input->post('id'));
         $getData = $this->m_admin->getContent($tableName, $get);
@@ -718,7 +681,6 @@ class Admin extends CI_Controller {
 
         $path = './assets/images/kreatif/';
         $path2 = './assets/images/editor/';
-        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto_headline));
         foreach ($carigambar as $c) {
 	        unlink($path2.$c);
         }
@@ -790,25 +752,24 @@ class Admin extends CI_Controller {
 					'link_maps'  => $this->input->post('link_maps'),
 				);
 
-				if ($_FILES['headline']['name'] == "") {
-          $data_atraksi['foto_headline'] = "";
-        }else{
-          if ( ! $this->upload->do_upload('headline')){ 
-          $error = array('error' => $this->upload->display_errors());
-          $pesan = $error['error'];
-          echo $pesan;
-          }else{
-          	$data_atraksi['foto_headline'] = $this->upload->file_name;
+				if ($links2 == "alam" OR $links2 == "budaya") {
+					if ($_FILES['headline']['name'] == "") {
+	          $data_atraksi['foto_headline'] = "";
+	        }else{
+	          if ( ! $this->upload->do_upload('headline')){
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else{
+	          	$data_atraksi['foto_headline'] = $this->upload->file_name;
 
-            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
-            $this->load->library('image_lib');
-            $this->image_lib->initialize($thumb);
-            $this->image_lib->resize();
-            unlink($path.$this->upload->file_name);
-          }
-        }
-
-        if ($links2 == "alam" OR $links2 == "budaya") {
+	            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	          }
+	        }        
 					$data_atraksi['link_foto'] = $this->input->post('link_foto');
 				}else if ($links2 == "museum" OR $links2 == "kuliner") {
 					$input = sizeof($_FILES['foto']['tmp_name']);
@@ -858,26 +819,25 @@ class Admin extends CI_Controller {
 					'link_maps'  => $this->input->post('link_maps'),
 				);
 
-				if ($_FILES['headline']['name'] == "") {
-          $data_atraksi['foto_headline'] = $this->input->post('oldFoto_headline');
-        }else{
-          if ( ! $this->upload->do_upload('headline')){ 
-          $error = array('error' => $this->upload->display_errors());
-          $pesan = $error['error'];
-          echo $pesan;
-          }else{
-          	$data_atraksi['foto_headline'] = $this->upload->file_name;
-
-            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
-            $this->load->library('image_lib');
-            $this->image_lib->initialize($thumb);
-            $this->image_lib->resize();
-            unlink($path.$this->upload->file_name);
-            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto_headline')));
-          }
-        }
-
         if ($links2 == "alam" OR $links2 == "budaya") {
+					if ($_FILES['headline']['name'] == "") {
+	          $data_atraksi['foto_headline'] = $this->input->post('oldFoto_headline');
+	        }else{
+	          if ( ! $this->upload->do_upload('headline')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else{
+	          	$data_atraksi['foto_headline'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto_headline')));
+	          }
+	        }
 					$data_atraksi['link_foto'] = $this->input->post('link_foto');
 				}else if ($links2 == "museum" OR $links2 == "kuliner") {
 					$get =  array('id' => $this->input->post('id'));
@@ -933,7 +893,7 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/atraksi/'.$links2);
 				}
-			}else if ($links == "delete") {				
+			}else if ($links == "delete") {
 				$where = array('id'=>$links3);
         $filefoto = $this->m_admin->getContent($tableName, $where);
 
@@ -955,7 +915,9 @@ class Admin extends CI_Controller {
 
         $path = './assets/images/'.$links2.'/';
         $path2 = './assets/images/editor/';
-        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto_headline));
+        if ($links2 == "alam" OR $links2 == "budaya") {
+	        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto_headline));
+	      }
         foreach ($carigambar as $c) {
 	        unlink($path2.$c);
         }

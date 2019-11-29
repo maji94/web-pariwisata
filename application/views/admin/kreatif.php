@@ -63,7 +63,7 @@
                     <tr>
                       <td width="5%"><?php echo $no; ?></td>
                       <td>
-                        <img src="<?php echo base_url('assets/images/kreatif/'.str_replace('.', '_thumb.', $d->foto_headline)); ?>" alt="" style="width: 200px">
+                        <img src="<?php echo base_url('assets/images/kreatif/'.str_replace('.', '_thumb.', unserialize($d->foto_galeri)[0])); ?>" alt="" style="width: 200px">
                       </td>
                       <?php if ($links == "event") { ?>
                         <td><?php echo date('d-m-Y H:i:s', strtotime($d->tanggal)); ?></td>

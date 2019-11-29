@@ -14,6 +14,7 @@
       <?php 
       $link = $this->uri->segment(2);
       $link2 = $this->uri->segment(3);
+      $link3 = $this->uri->segment(4);
        ?>
 
       <!-- Sidebar Menu-->
@@ -37,19 +38,19 @@
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
-               <li class="<?php if($link2 == 'artikel'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'artikel' OR $link3 == 'artikel'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/media/artikel'); ?>">
                      <i class="icon-arrow-right"></i>
                      Artikel
                   </a>
                </li>
-               <li class="<?php if($link2 == 'foto'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'foto' OR $link3 == 'foto'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/media/foto'); ?>">
                      <i class="icon-arrow-right"></i>
                      Galeri Foto
                   </a>
                </li>
-               <li class="<?php if($link2 == 'video'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'video' OR $link3 == 'video'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/media/video'); ?>">
                      <i class="icon-arrow-right"></i>
                      Galeri Video
@@ -64,13 +65,13 @@
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
-               <li class="<?php if($link2 == 'komunitas'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'komunitas' OR $link3 == 'komunitas'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/kreatif/komunitas'); ?>">
                      <i class="icon-arrow-right"></i>
                      Komunitas
                   </a>
                </li>
-               <li class="<?php if($link2 == 'event'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'event' OR $link3 == 'event'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/kreatif/event'); ?>">
                      <i class="icon-arrow-right"></i>
                      Event
@@ -85,25 +86,25 @@
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
-               <li class="<?php if($link2 == 'alam'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'alam' OR $link3 == 'alam'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/alam'); ?>">
                      <i class="icon-arrow-right"></i>
                      Alam
                   </a>
                </li>
-               <li class="<?php if($link2 == 'budaya'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'budaya' OR $link3 == 'budaya'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/budaya'); ?>">
                      <i class="icon-arrow-right"></i>
                      Budaya
                   </a>
                </li>
-               <li class="<?php if($link2 == 'museum'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'museum' OR $link3 == 'museum'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/museum'); ?>">
                      <i class="icon-arrow-right"></i>
                      Museum
                   </a>
                </li>
-               <li class="<?php if($link2 == 'kuliner'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'kuliner' OR $link3 == 'kuliner'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/atraksi/kuliner'); ?>">
                      <i class="icon-arrow-right"></i>
                      Kuliner
@@ -118,13 +119,13 @@
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
-               <li class="<?php if($link2 == 'hotel'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'hotel' OR $link3 == 'hotel'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/akomodasi/hotel'); ?>">
                      <i class="icon-arrow-right"></i>
                      Hotel & Penginapan
                   </a>
                </li>
-               <li class="<?php if($link2 == 'restoran'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'restoran' OR $link3 == 'restoran'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/akomodasi/restoran'); ?>">
                      <i class="icon-arrow-right"></i>
                      Restoran
@@ -139,13 +140,13 @@
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
-               <li class="<?php if($link2 == 'unduh'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'unduh' OR $link3 == 'unduh'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/layanan/unduh'); ?>">
                      <i class="icon-arrow-right"></i>
                      Unduh Arsip
                   </a>
                </li>
-               <li class="<?php if($link2 == 'request'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'request' OR $link3 == 'request'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/layanan/request'); ?>">
                      <i class="icon-arrow-right"></i>
                      Permintaan Dokumen
@@ -160,19 +161,19 @@
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
-               <li class="<?php if($link2 == 'struktur'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'struktur' OR $link3 == 'struktur'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/tentang/struktur'); ?>">
                      <i class="icon-arrow-right"></i>
                      Struktur Organisasi
                   </a>
                </li>
-               <li class="<?php if($link2 == 'galeri_dinas'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'galeri_dinas' OR $link3 == 'galeri_dinas'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/tentang/galeri_dinas'); ?>">
                      <i class="icon-arrow-right"></i>
                      Galeri Dinas
                   </a>
                </li>
-               <li class="<?php if($link2 == 'profil'){echo 'active';} ?>">
+               <li class="<?php if($link2 == 'profil' OR $link3 == 'profil'){echo 'active';} ?>">
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/tentang/profil'); ?>">
                      <i class="icon-arrow-right"></i>
                      Profil

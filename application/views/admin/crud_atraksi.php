@@ -18,7 +18,7 @@
 
   if ($links == "add") {
     $action = "do_add";
-    $req = "";
+    $req = "required";
     $id = "";
     $nama = "";
     $konten = "";
@@ -88,6 +88,7 @@
                   <input type="text" id="nama" name="nama" class="form-control" placeholder="SIlahkan masukkan nama <?php echo $jenis; ?>" required value="<?php echo $nama; ?>">
                 </div>
               </div>
+              <?php if ($links2 == "alam" OR $links2 == "budaya") { ?>
               <div class="form-group row">
                 <label for="headline" class="col-md-2 col-form-label form-control-label">Foto Headline *</label>
                 <div class="col-md-10">
@@ -95,6 +96,7 @@
                   <input type="file" id="headline" name="headline" class="form-control" <?php echo $req; ?>>
                 </div>
               </div>
+              <?php } ?>
               <div class="form-group row">
                 <label for="konten" class="col-md-2 col-form-label form-control-label">Deskripsi *</label>
                 <div class="col-md-10">
