@@ -944,35 +944,194 @@ class Admin extends CI_Controller {
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Atrkasi',
 					'page'  => "admin/atraksi",
-				);				
+				);
 			}
 		}
 
 		$this->load->view('admin/dashboard', $data);
-		// echo "<pre>";
-		// print_r($explode);
-		// echo "<br>";
-		// print_r($carigambar);
 	}
 
 	public function akomodasi(){
 		$links = $this->uri->segment(3);
 		$links2 = $this->uri->segment(4);
-		$tableName = 'tb_berita';
+		$links3 = $this->uri->segment(5);
+		$tableName = 'tb_akomodasi';
+
+
+		$time = time();
+		$path = './assets/images/'.$links2.'/';
+    $config['allowed_types']  = 'pdf|jpeg|jpg|png|bmp';
+    $config['max_size']       = '150000';
+    $config['file_name']      = $time;
+    $config['upload_path']    = $path;
+    $this->load->library('upload', $config);
+
+    $thumb['image_library']  = 'gd2';
+    $thumb['create_thumb']   = TRUE;
+    $thumb['maintain_ratio'] = TRUE;
+    $thumb['width']          = 2000;
 
 		if(!isset($_SESSION['logged_in'])){
 			redirect('login');
 		}else{
-			if ($links == "") {
+			if ($links == "add") {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
+					'title' => 'Manajemen Akomodasi',
+					'page' => "admin/crud_akomodasi",
 				);
+			}else if ($links == "do_add") {
+				$data_akomodasi = array(
+					'jenis'			 => $links2,
+					'nama'       => $this->input->post('nama'),
+					'konten'     => $this->input->post('konten'),
+					'link_video' => $this->input->post('link_video'),
+					'link_maps'  => $this->input->post('link_maps'),
+				);
+
+        $input = sizeof($_FILES['foto']['tmp_name']);
+        $files = $_FILES['foto'];
+        for ($i=0; $i < $input ; $i++) {
+          $_FILES['foto']['name'] = $files['name'][$i];
+          $_FILES['foto']['type'] = $files['type'][$i];
+          $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+          $_FILES['foto']['error'] = $files['error'][$i];
+          $_FILES['foto']['size'] = $files['size'][$i];
+          $this->upload->do_upload('foto');
+
+          $thumb['source_image']   = 'assets/images/'.$links2.'/'.$this->upload->file_name;
+          $this->load->library('image_lib');
+          $this->image_lib->initialize($thumb);
+          $this->image_lib->resize();
+
+          $foto_galeri[] = $this->upload->file_name;
+        }
+
+        for ($j=0; $j < $input; $j++) { 
+          unlink($path.$foto_galeri[$j]);
+        }
+
+        $data_akomodasi['foto_galeri'] = serialize($foto_galeri);
+        $ins_kreatif = $this->m_admin->InsertData($tableName, $data_akomodasi);
+        if ($ins_kreatif) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditambahkan', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/akomodasi/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/akomodasi/'.$links2);
+        }
+			}else if ($links == "edit") {
+				$data = array(
+					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
+					'title' => "Tambah Data Akomodasi",
+					'page'  => "admin/crud_akomodasi",
+				);
+			}else if ($links == "do_edit") {
+				$data_kreatif = array(
+					'nama'       => $this->input->post('nama'),
+					'konten'     => $this->input->post('konten'),
+					'link_video' => $this->input->post('link_video'),
+					'link_maps'  => $this->input->post('link_maps'),
+				);
+
+        $get =  array('id' => $this->input->post('id'));
+        $getData = $this->m_admin->getContent($tableName, $get);
+        $getFoto = unserialize($getData[0]->foto_galeri);
+        $n_getFoto = sizeof($getFoto);
+
+        $input = sizeof($_FILES['foto']['tmp_name']);
+        $files = $_FILES['foto'];
+
+        // echo "<pre>";
+        // print_r($input);
+        for ($i=0; $i < $input ; $i++) {
+
+          $_FILES['foto']['name'] = $files['name'][$i];
+          $_FILES['foto']['type'] = $files['type'][$i];
+          $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+          $_FILES['foto']['error'] = $files['error'][$i];
+          $_FILES['foto']['size'] = $files['size'][$i];
+          
+          if ($_FILES['foto']['name']) {     	
+            $this->upload->do_upload('foto');
+            $foto_galeri[] = $this->upload->file_name;
+
+            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
+	          $this->load->library('image_lib');
+	          $this->image_lib->initialize($thumb);
+	          $this->image_lib->resize();
+          }else{
+            $foto_galeri[] = $this->input->post('oldFoto')[$i];
+          }
+        }
+
+        $data_kreatif['foto_galeri'] = serialize($foto_galeri);
+
+        for ($i=0; $i < $n_getFoto; $i++) { 
+          if (in_array($getFoto[$i], $foto_galeri) == FALSE) {
+            unlink($path.str_replace('.', '_thumb.', $getFoto[$i]));
+          }
+        }
+
+        for ($j=0; $j < $input; $j++) { 
+          unlink($path.$foto_galeri[$j]);
+        }
+
+        $where = array('id' => $this->input->post('id'));
+				$upd_kreatif = $this->m_admin->UpdateData($tableName, $data_kreatif, $where);
+				if($upd_kreatif){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/akomodasi/'.$links2);
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/akomodasi/'.$links2);
+				}
+			}else if ($links == "delete") {
+				$where = array('id'=>$links3);
+        $filefoto = $this->m_admin->getContent($tableName, $where);
+
+        //START - MENGHAPUS FOTO YANG ADA DI EDITOR        
+      	$explode = explode("img", $filefoto[0]->konten);
+        foreach ($explode as $d) {
+        	$cut_text = substr($d, strpos($d, "editor/"));
+        	$num_char = 2;
+        	$char     = $cut_text{$num_char-1};
+					while($char != ' ') {
+						$char = $cut_text{++$num_char}; // Cari spasi pada posisi 49, 48, 47, dst...
+					}
+					$cut_text2 = substr($cut_text, (strpos($cut_text, "editor/")+7), ($num_char-7));
+									
+					if (strpos($d, "editor/") != 0) {
+	        	$carigambar[] = str_replace('"', "", $cut_text2);
+					}					
+        }
+
+        $path = './assets/images/kreatif/';
+        $path2 = './assets/images/editor/';
+        foreach ($carigambar as $c) {
+	        unlink($path2.$c);
+        }
+        // END
+
+        $foto_galeri = unserialize($filefoto[0]->foto_galeri);
+        $n = sizeof($foto_galeri);
+        for ($i=0; $i < $n ; $i++) {
+          unlink($path.str_replace('.', '_thumb.', $foto_galeri[$i]));
+        }
+        
+        $del_kreatif = $this->m_admin->DeleteData($tableName, $where);
+        if ($del_kreatif) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/kreatif/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/kreatif/'.$links2);
+        }
 			}else {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
-				);				
+					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
+					'title' => 'Manajemen Akomodasi',
+					'page'  => "admin/akomodasi",
+				);
 			}
 		}
 
