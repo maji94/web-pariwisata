@@ -167,8 +167,8 @@
                      Struktur Organisasi
                   </a>
                </li>
-               <li class="<?php if($link2 == 'galeri_dinas' OR $link3 == 'galeri_dinas'){echo 'active';} ?>">
-                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/tentang/galeri_dinas'); ?>">
+               <li class="<?php if($link2 == 'galeri' OR $link3 == 'galeri'){echo 'active';} ?>">
+                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/tentang/galeri'); ?>">
                      <i class="icon-arrow-right"></i>
                      Galeri Dinas
                   </a>

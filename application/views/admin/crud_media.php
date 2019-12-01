@@ -136,31 +136,31 @@
                 </div>
               </div>
               <?php }else if ($links2 == "foto") { ?>
-                <input type="hidden" name="n_edit" id="n_edit" value="<?php echo $n_konten; ?>">
-                <div class="row" style="margin-bottom: 1rem;">
-                  <div class="form-group">
-                    <label for="tanggal" class="col-md-2 col-form-label form-control-label">Unggah Foto *</label>
-                    <div class="col-md-10" id="itemlist" style="padding:0px">
-                      <div class="col-md-4 col-xs-12" style="margin-bottom:5px;">
-                        <input class="form-control" type="file" id="foto[0]" name="foto[]" onchange="PreviewImage('foto[0]','prevFoto[0]','#oldFoto0');">
-                        <?php if ($links == "edit") { ?>
-                        <input type="hidden" name="oldFoto[]" id="oldFoto0" value="<?php echo $konten[0]; ?>"><?php } ?>
-                        <img src="<?php echo $konten0; ?>" class="form-control" id="prevFoto[0]" style="height: 200px; width: 100%;" alt="Foto Galeri">
-                        <button type="button" class="btn btn-info btn-mini" onclick="additem(); return false" style="margin-top: 5px;"><i class="icofont icofont-plus"></i> Tambah Foto</button>
-                      </div>
-
-                      <?php if ($links == "edit") {
-                      for ($i=1; $i <$n_konten ; $i++) { ?>
-                        <div class="col-md-4 col-xs-12" id="<?php echo 'finput'.$i; ?>" style="margin-bottom:5px;">
-                          <input class="form-control" type="file" id="<?php echo 'foto['.$i.']'; ?>" name="<?php echo 'foto[]'; ?>" onchange="PreviewImage('<?php echo "foto[".$i."]"; ?>','<?php echo "prevFoto[".$i."]"; ?>','<?php echo "#oldFoto".$i; ?>');">
-                            <input type="hidden" name="<?php echo 'oldFoto[]'; ?>" id="<?php echo 'oldFoto'.$i; ?>" value="<?php echo $konten[$i]; ?>">
-                            <img src="<?php echo base_url('assets/images/foto/'.str_replace('.', '_thumb.', $konten[$i])); ?>" class="form-control" id="<?php echo 'prevFoto['.$i.']'; ?>" style="height: 200px; width: 100%;" alt="Foto Galeri">
-                            <span><button class="btn btn-danger btn-mini" type="button" onclick="hapus('#finput<?php echo $i; ?>');" style="margin-top: 5px;"><i class="icofont icofont-close"></i> Hapus</button></span>
-                        </div>
-                      <?php } } ?>
+              <input type="hidden" name="n_edit" id="n_edit" value="<?php echo $n_konten; ?>">
+              <div class="row" style="margin-bottom: 1rem;">
+                <div class="form-group">
+                  <label for="tanggal" class="col-md-2 col-form-label form-control-label">Unggah Foto *</label>
+                  <div class="col-md-10" id="itemlist" style="padding:0px">
+                    <div class="col-md-4 col-xs-12" style="margin-bottom:5px;">
+                      <input class="form-control" type="file" id="foto[0]" name="foto[]" onchange="PreviewImage('foto[0]','prevFoto[0]','#oldFoto0');">
+                      <?php if ($links == "edit") { ?>
+                      <input type="hidden" name="oldFoto[]" id="oldFoto0" value="<?php echo $konten[0]; ?>"><?php } ?>
+                      <img src="<?php echo $konten0; ?>" class="form-control" id="prevFoto[0]" style="height: 200px; width: 100%;" alt="Foto Galeri">
+                      <button type="button" class="btn btn-info btn-mini" onclick="additem(); return false" style="margin-top: 5px;"><i class="icofont icofont-plus"></i> Tambah Foto</button>
                     </div>
+
+                    <?php if ($links == "edit") {
+                    for ($i=1; $i <$n_konten ; $i++) { ?>
+                      <div class="col-md-4 col-xs-12" id="<?php echo 'finput'.$i; ?>" style="margin-bottom:5px;">
+                        <input class="form-control" type="file" id="<?php echo 'foto['.$i.']'; ?>" name="<?php echo 'foto[]'; ?>" onchange="PreviewImage('<?php echo "foto[".$i."]"; ?>','<?php echo "prevFoto[".$i."]"; ?>','<?php echo "#oldFoto".$i; ?>');">
+                          <input type="hidden" name="<?php echo 'oldFoto[]'; ?>" id="<?php echo 'oldFoto'.$i; ?>" value="<?php echo $konten[$i]; ?>">
+                          <img src="<?php echo base_url('assets/images/foto/'.str_replace('.', '_thumb.', $konten[$i])); ?>" class="form-control" id="<?php echo 'prevFoto['.$i.']'; ?>" style="height: 200px; width: 100%;" alt="Foto Galeri">
+                          <span><button class="btn btn-danger btn-mini" type="button" onclick="hapus('#finput<?php echo $i; ?>');" style="margin-top: 5px;"><i class="icofont icofont-close"></i> Hapus</button></span>
+                      </div>
+                    <?php } } ?>
                   </div>
                 </div>
+              </div>
               <div class="form-group row">
                 <label for="oleh" class="col-md-2 col-form-label form-control-label">Oleh </label>
                 <div class="col-md-10">

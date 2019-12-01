@@ -596,7 +596,7 @@ class Admin extends CI_Controller {
 			}else if ($links == "edit") {
 				$data = array(
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
-					'title' => "Tambah Data Kreatif",
+					'title' => "Ubah Data Kreatif",
 					'page'  => "admin/crud_kreatif",
 				);
 			}else if ($links == "do_edit") {
@@ -740,7 +740,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'title' => 'Manajemen Atraksi',
+					'title' => 'Tambah Data Atraksi',
 					'page' => "admin/crud_atraksi",
 				);
 			}else if ($links == "do_add") {
@@ -808,7 +808,7 @@ class Admin extends CI_Controller {
 			}else if ($links == "edit") {
 				$data = array(
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
-					'title' => "Tambah Data Atraksi",
+					'title' => "Ubah Data Atraksi",
 					'page'  => "admin/crud_atraksi",
 				);
 			}else if ($links == "do_edit") {
@@ -976,7 +976,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'title' => 'Manajemen Akomodasi',
+					'title' => 'Tambah Data Akomodasi',
 					'page' => "admin/crud_akomodasi",
 				);
 			}else if ($links == "do_add") {
@@ -1022,7 +1022,7 @@ class Admin extends CI_Controller {
 			}else if ($links == "edit") {
 				$data = array(
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
-					'title' => "Tambah Data Akomodasi",
+					'title' => "Ubah Data Akomodasi",
 					'page'  => "admin/crud_akomodasi",
 				);
 			}else if ($links == "do_edit") {
@@ -1141,49 +1141,307 @@ class Admin extends CI_Controller {
 	public function layanan(){
 		$links = $this->uri->segment(3);
 		$links2 = $this->uri->segment(4);
-		$tableName = 'tb_berita';
+		$links3 = $this->uri->segment(5);
+		$tableName = 'tb_layanan';
+
+
+		$time = time();
+		$path = './assets/dokumen/'.$links2.'/';
+    $config['allowed_types']  = 'pdf|doc|docx|xls|xlsx';
+    $config['max_size']       = '150000';
+    // $config['file_name']      = $time;
+    $config['upload_path']    = $path;
+    $this->load->library('upload', $config);
 
 		if(!isset($_SESSION['logged_in'])){
 			redirect('login');
 		}else{
-			if ($links == "") {
+			if ($links == "add") {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
+					'title' => 'Tambah Data Layanan',
+					'page' => "admin/crud_layanan",
 				);
+			}else if ($links == "do_add") {
+				$data_layanan = array(
+					'jenis'			 => $links2,
+					'nama'       => $this->input->post('nama'),
+					'tahun'    	 => $this->input->post('tahun'),
+					'keterangan' => $this->input->post('keterangan'),
+				);
+
+        if ($_FILES['dokumen']['name'] == "") {
+          $data_layanan['konten'] = "";
+        }else{
+          if ( ! $this->upload->do_upload('dokumen')){ 
+          $error = array('error' => $this->upload->display_errors());
+          $pesan = $error['error'];
+          echo $pesan;
+          }else{
+          	$data_layanan['konten'] = $this->upload->file_name;
+          }
+        }
+
+        $ins_layanan = $this->m_admin->InsertData($tableName, $data_layanan);
+        if ($ins_layanan) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditambahkan', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/layanan/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/layanan/'.$links2);
+        }
+			}else if ($links == "edit") {
+				$data = array(
+					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
+					'title' => "Ubah Data Layanan",
+					'page'  => "admin/crud_layanan",
+				);
+			}else if ($links == "do_edit") {
+				$data_layanan = array(
+					'nama'       => $this->input->post('nama'),
+					'tahun'    	 => $this->input->post('tahun'),
+					'keterangan' => $this->input->post('keterangan'),
+				);
+
+        if ($_FILES['dokumen']['name'] == "") {
+          $data_layanan['konten'] = $this->input->post('oldDokumen');
+        }else{
+          if ( ! $this->upload->do_upload('dokumen')){ 
+          $error = array('error' => $this->upload->display_errors());
+          $pesan = $error['error'];
+          echo $pesan;
+          }else{
+          	$data_layanan['konten'] = $this->upload->file_name;
+            unlink($path.$this->input->post('oldDokumen'));
+          }
+        }
+
+        $where = array('id' => $this->input->post('id'));
+				$upd_layanan = $this->m_admin->UpdateData($tableName, $data_layanan, $where);
+				if($upd_layanan){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/layanan/'.$links2);
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/layanan/'.$links2);
+				}
+			}else if ($links == "delete") {
+				$where = array('id'=>$links3);
+        $filefoto = $this->m_admin->getContent($tableName, $where);
+        $path = './assets/dokumen/'.$links2.'/';
+        unlink($path.$filefoto[0]->konten);
+        
+        $del_layanan = $this->m_admin->DeleteData($tableName, $where);
+        if ($del_layanan) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/layanan/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/layanan/'.$links2);
+        }
 			}else {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
-				);				
+					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
+					'title' => 'Manajemen Layanan',
+					'page'  => "admin/layanan",
+				);
 			}
 		}
 
 		$this->load->view('admin/dashboard', $data);
+		// echo "<pre>";
+		// print_r($filefoto);
+		// echo "<br>";
+		// echo $path.$filefoto[0]->konten;
 	}
 
 	public function tentang(){
 		$links = $this->uri->segment(3);
 		$links2 = $this->uri->segment(4);
-		$tableName = 'tb_berita';
+		$links3 = $this->uri->segment(5);
+		$tableName = 'tb_tentang';
+		$pesan = "";
+		$data_tentang = array();
+
+		$time = time();
+		$path = './assets/images/tentang/';
+    $config['allowed_types']  = 'pdf|jpeg|jpg|png|bmp';
+    $config['max_size']       = '150000';
+    $config['file_name']      = $time;
+    $config['upload_path']    = $path;
+    $this->load->library('upload', $config);
+
+    $thumb['image_library']  = 'gd2';
+    $thumb['create_thumb']   = TRUE;
+    $thumb['maintain_ratio'] = TRUE;
+    $thumb['width']          = 2000;
 
 		if(!isset($_SESSION['logged_in'])){
 			redirect('login');
 		}else{
-			if ($links == "") {
+			if ($links == "add") {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
+					'title' => "Tambah Data Tentang",
+					'page' => "admin/crud_tentang",
 				);
+			}else if ($links == "do_add") {
+				$data_tentang = array(
+					'jenis'   => $links2,
+					'nama'    => $this->input->post('nama'),
+					'tanggal' => $this->input->post('tanggal'),
+					'oleh'    => $this->input->post('oleh'),
+				);
+
+        $input = sizeof($_FILES['foto']['tmp_name']);
+        $files = $_FILES['foto'];
+        for ($i=0; $i < $input ; $i++) {
+          $_FILES['foto']['name'] = $files['name'][$i];
+          $_FILES['foto']['type'] = $files['type'][$i];
+          $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+          $_FILES['foto']['error'] = $files['error'][$i];
+          $_FILES['foto']['size'] = $files['size'][$i];
+          $this->upload->do_upload('foto');
+
+          $thumb['source_image']   = 'assets/images/tentang/'.$this->upload->file_name;
+          $this->load->library('image_lib');
+          $this->image_lib->initialize($thumb);
+          $this->image_lib->resize();
+
+          $konten[] = $this->upload->file_name;
+        }
+
+        for ($j=0; $j < $input; $j++) { 
+          unlink($path.$konten[$j]);
+        }
+
+        $data_tentang['konten'] = serialize($konten);
+        $ins_tentang = $this->m_admin->InsertData($tableName, $data_tentang);
+        if ($ins_tentang) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditambahkan', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/tentang/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/tentang/'.$links2);
+        }
+			}else if ($links == "edit") {
+				$data = array(
+					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
+					'title' => "Ubah Data Tentang",
+					'page'  => "admin/crud_tentang",
+				);
+			}else if ($links == "do_edit") {
+				if ($links2 == "profil") {
+					$data_tentang['konten'] = $this->input->post('konten');
+				}else if ($links2 == "galeri") {
+					$get =  array('id' => $this->input->post('id'));
+          $getData = $this->m_admin->getContent($tableName, $get);
+          $getFoto = unserialize($getData[0]->konten);
+          $n_getFoto = sizeof($getFoto);
+
+          $input = sizeof($_FILES['foto']['tmp_name']);
+          $files = $_FILES['foto'];
+
+          // echo "<pre>";
+          // print_r($input);
+          for ($i=0; $i < $input ; $i++) {
+
+            $_FILES['foto']['name'] = $files['name'][$i];
+            $_FILES['foto']['type'] = $files['type'][$i];
+            $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
+            $_FILES['foto']['error'] = $files['error'][$i];
+            $_FILES['foto']['size'] = $files['size'][$i];
+            
+            if ($_FILES['foto']['name']) {
+              $this->upload->do_upload('foto');
+              $konten[] = $this->upload->file_name;
+            }else{
+              $konten[] = $this->input->post('oldFoto')[$i];
+            }
+            
+            $thumb['source_image'] = 'assets/images/tentang/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+          }
+
+          $data_tentang['nama'] = $this->input->post('nama');
+					$data_tentang['tanggal'] = $this->input->post('tanggal');
+					$data_tentang['oleh'] = $this->input->post('oleh');
+					$data_tentang['konten'] = serialize($konten);
+
+          for ($i=0; $i < $n_getFoto; $i++) { 
+            if (in_array($getFoto[$i], $konten) == FALSE) {
+              unlink($path.str_replace('.', '_thumb.', $getFoto[$i]));
+            }
+          }
+
+          for ($j=0; $j < $input; $j++) { 
+            unlink($path.$konten[$j]);
+          }
+				}else if ($links2 == "struktur") {
+					if ($_FILES['foto']['name'] == "") {
+	          $data_tentang['konten'] = $this->input->post('oldFoto');
+	        }else{
+	          if ( ! $this->upload->do_upload('foto')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          }else {
+	          	$data_tentang['konten'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/tentang/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto')));
+	          }
+	        }
+				}
+
+        $where = array('id'=>$this->input->post('id'));
+				$upd_tentang = $this->m_admin->UpdateData($tableName, $data_tentang, $where);
+				if($upd_tentang){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/tentang/'.$links2);
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/tentang/'.$links2);
+				}
+			}else if ($links == "delete") {
+				$where = array('id'=>$links3);
+        $filefoto = $this->m_admin->getContent($tableName, $where);
+        $konten = unserialize($filefoto[0]->konten);
+        $n = sizeof($konten);
+        for ($i=0; $i < $n ; $i++) {
+          unlink($path.str_replace('.', '_thumb.', $konten[$i]));
+        }
+        
+        $del_konten = $this->m_admin->DeleteData($tableName, $where);
+        if ($del_konten) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/tentang/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/tentang/'.$links2);
+        }
 			}else {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
-				);				
+					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
+					'title' => 'Manajemen Tentang',
+				);
+				if ($links == "struktur" OR $links == "profil") {
+					$data['page']  = "admin/crud_tentang";
+					$data['pesan'] = $pesan;
+				}else{
+					$data['page']  = "admin/tentang";
+				}
 			}
 		}
 
 		$this->load->view('admin/dashboard', $data);
+		// echo "<pre>";
+		// print_r($data_tentang);
+		// echo "<pre>";
+		// print_r($carigambar);
 	}
 
 	public function operator(){
