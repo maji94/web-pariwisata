@@ -141,7 +141,7 @@
                   <input type="hidden" name="id" value="<?php echo $id; ?>">
                   <input type="hidden" name="oldFoto" id="oldFoto" value="<?php echo $konten; ?>">
                   <input class="form-control" type="file" id="foto" name="foto" onchange="PreviewImage('foto','prevFoto','#oldFoto');" <?php echo $req; ?>>
-                  <label style="color: red;font-weight: bold;"><?php echo $pesan; ?></label>
+                  <label><?php echo str_replace('<p>', '<p style="color: red;font-weight: bold;">', $this->session->flashdata('pesan')); ?></label>
                 </div>
               </div>
               <div class="form-group row">

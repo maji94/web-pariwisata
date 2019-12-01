@@ -251,6 +251,70 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       modal.find('#id').attr("value",id)
       
     });
+
+    $('#ubah_operator').on('show.bs.modal', function (event){
+      var div = $(event.relatedTarget)
+      var id = div.data('id')
+      var oldFoto = div.data('foto')
+      var username = div.data('username')
+      var nama = div.data('nama')
+      var level = div.data('level')
+      var modal = $(this)
+
+      modal.find('#edit_id').attr("value",id)
+      modal.find('#oldFoto').attr("value",oldFoto)
+      modal.find('#username').attr("value",username)
+      modal.find('#nama').attr("value",nama)
+      modal.find('#level').val(level)
+      
+    });
+
+    $('#ubah_psw').on('show.bs.modal', function (event){
+      var div = $(event.relatedTarget)
+      var id = div.data('id')
+      var modal = $(this)
+
+      modal.find('#id').attr("value",id)
+      // modal.find('#nip').html(nip)
+      
+    });
+
+    function cek_register(){
+      var passBaru = $('#password').val();
+      var konfir = $('#konf_psw').val();
+      
+      if (konfir == "") {
+        $("#pesan_konfir").css('color','#fc5d32');
+        $("#konf_psw").css('border-color','#fc5d32');
+        $("#pesan_konfir").html('Konfirmasi password tidak boleh kosong');
+        $("#pesan_konfir").fadeIn(1000);
+        error = 1;
+      }else{
+        if(konfir != passBaru){
+          $("#pesan_konfir").css('color','#fc5d32');
+          $("#konf_psw").css('border-color','#fc5d32');
+          $("#pesan_konfir").html('Maaf Konfirmasi password tidak valid');
+          $("#pesan_konfir").fadeIn(1000);
+          error = 1;
+        }else{
+          $("#pesan_konfir").css("color","#59c113");
+          $("#konf_psw").css("border-color","#59c113");
+          $("#pesan_konfir").html("Konfirmasi password valid");
+          $("#pesan_konfir").fadeIn(1000);
+          error = 0;
+        }
+      }
+    }
+
+    function cek_ubh_psw(){
+      var passBaru = $('#password').val();
+      var konfir = $('#konf_psw').val();
+    
+      if (error==1 || konfir!=passBaru || konfir=="" || passBaru=="") {
+        alert('Data harus diisi dan valid');
+        return false;
+      }
+    }
    </script>
 
 </body>

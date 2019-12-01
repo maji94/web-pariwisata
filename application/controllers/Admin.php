@@ -1401,9 +1401,11 @@ class Admin extends CI_Controller {
 				$upd_tentang = $this->m_admin->UpdateData($tableName, $data_tentang, $where);
 				if($upd_tentang){
 					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					$this->session->set_flashdata('pesan', $pesan);
 					redirect('admin/tentang/'.$links2);
 				}else{
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					$this->session->set_flashdata('pesan', $pesan);
 					redirect('admin/tentang/'.$links2);
 				}
 			}else if ($links == "delete") {
@@ -1430,7 +1432,6 @@ class Admin extends CI_Controller {
 				);
 				if ($links == "struktur" OR $links == "profil") {
 					$data['page']  = "admin/crud_tentang";
-					$data['pesan'] = $pesan;
 				}else{
 					$data['page']  = "admin/tentang";
 				}
@@ -1447,25 +1448,135 @@ class Admin extends CI_Controller {
 	public function operator(){
 		$links = $this->uri->segment(3);
 		$links2 = $this->uri->segment(4);
-		$tableName = 'tb_berita';
+		$links3 = $this->uri->segment(5);
+		$tableName = 'tb_user';
+
+		$time = time();
+		$path = './assets/images/user/';
+    $config['allowed_types']  = 'jpeg|jpg|png|bmp';
+    $config['max_size']       = '150000';
+    $config['file_name']      = $time;
+    $config['upload_path']    = $path;
+    $this->load->library('upload', $config);
+
+    $thumb['image_library']  = 'gd2';
+    $thumb['create_thumb']   = TRUE;
+    $thumb['maintain_ratio'] = TRUE;
+    $thumb['width']          = 2000;
 
 		if(!isset($_SESSION['logged_in'])){
 			redirect('login');
 		}else{
-			if ($links == "") {
-				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
+			if ($links == "ubah_psw") {
+				$data_password = array(
+					'password' => md5($this->security->xss_clean($this->input->post('konf_psw'))),
 				);
+
+				$where = array('id_user'=>$this->input->post('id'));
+				$upd_password = $this->m_admin->UpdateData($tableName, $data_password, $where);
+				if($upd_password){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/operator/');
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/operator/');
+				}
+			}else if ($links == "do_add") {
+				$data_operator = array(
+					'nama'    	=> $this->input->post('nama'),
+					'username'  => $this->input->post('username'),
+					'password'  => md5($this->input->post('username')),
+					'level' 		=> $this->input->post('level'),
+				);
+
+        if ($_FILES['foto']['name'] == "") {
+          $data_operator['foto'] = "";
+        }else{
+          if ( ! $this->upload->do_upload('foto')){ 
+          $error = array('error' => $this->upload->display_errors());
+          $pesan = $error['error'];
+          echo $pesan;
+          }else {
+          	$data_operator['foto'] = $this->upload->file_name;
+
+            $thumb['source_image'] = 'assets/images/user/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+            unlink($path.$this->upload->file_name);
+          }
+        }
+
+        $ins_operator = $this->m_admin->InsertData($tableName, $data_operator);
+        if ($ins_operator) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditambahkan', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/operator/');
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/operator/');
+        }
+			}else if ($links == "do_edit") {
+				$data_operator = array(
+					'nama'    	=> $this->input->post('nama'),
+					'username'  => $this->input->post('username'),
+					'level' 		=> $this->input->post('level'),
+				);
+
+				if ($_FILES['foto']['name'] == "") {
+          $data_operator['foto'] = $this->input->post('oldFoto');
+        }else{
+          if ( ! $this->upload->do_upload('foto')){ 
+          $error = array('error' => $this->upload->display_errors());
+          $pesan = $error['error'];
+          echo $pesan;
+          }else {
+          	$data_operator['foto'] = $this->upload->file_name;
+
+            $thumb['source_image'] = 'assets/images/user/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+            unlink($path.$this->upload->file_name);
+            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto')));
+          }
+        }
+
+        $where = array('id_user'=>$this->input->post('id'));
+				$upd_operator = $this->m_admin->UpdateData($tableName, $data_operator, $where);
+				if($upd_operator){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/operator/');
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/operator/');
+				}
+			}else if ($links == "delete") {
+				$where = array('id_user'=>$links2);
+        $filefoto = $this->m_admin->getContent($tableName, $where);
+        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto));
+        
+        $del_operator = $this->m_admin->DeleteData($tableName, $where);
+        if ($del_operator) {
+        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
+          redirect('admin/operator/'.$links2);
+        }else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/operator/'.$links2);
+        }
 			}else {
 				$data = array(
-					'title' => 'Manajemen Artikel Website',
-					'page' => "admin/media",
-				);				
+					'data'  => $this->m_admin->getContent($tableName, array('level'=>"operator")),
+					'page'  => 'admin/operator',
+					'title' => 'Manajemen Operator',
+				);
 			}
 		}
 
 		$this->load->view('admin/dashboard', $data);
+		// echo "<pre>";
+		// print_r($filefoto);
+		// echo "<pre>";
+		// print_r($data_password);
 	}
 
 	// ==========================
