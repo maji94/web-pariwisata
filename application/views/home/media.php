@@ -33,15 +33,32 @@
 			<div>
 				<div class="box">
 					<div class="image fit">
-						<img src="<?php echo base_url(); ?>assets/front/images/pic03.jpg" alt="" />
+						<img src="<?php echo base_url('assets/front/images/pic03.jpg'); ?>" alt="" />
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<p>Unggah foto terbaikmu di Bengkulu dengan #visitbengkulu</p>
-							<h2>GALERI</h2>
+							<p>UNGGAH FOTO TERBAIKMU DI BENGKULU</p>
+							<h2>GALERI FOTO</h2>
 						</header>
 						<footer class="align-center">
-							<a href="<?php echo site_url(); ?>media/galeri/all" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('media/galeri/foto'); ?>" class="button alt">Lebih Lanjut</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<img src="<?php echo base_url('assets/front/images/pic04.jpg'); ?>" alt="" />
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<p>UNGGAH VIDEO TERBAIKMU DI BENGKULU</p>
+							<h2>GALERI VIDEO</h2>
+						</header>
+						<footer class="align-center">
+							<a href="<?php echo site_url('media/galeri/video'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>

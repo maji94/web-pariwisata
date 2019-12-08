@@ -555,11 +555,12 @@ class Admin extends CI_Controller {
 				);
 			}else if ($links == "do_add") {
 				$data_kreatif = array(
-					'jenis'			 => $links2,
-					'nama'       => $this->input->post('nama'),
-					'konten'     => $this->input->post('konten'),
-					'link_video' => $this->input->post('link_video'),
-					'link_maps'  => $this->input->post('link_maps'),
+					'jenis'			   => $links2,
+					'nama'         => $this->input->post('nama'),
+					'konten'       => $this->input->post('konten'),
+					'link_video'   => $this->input->post('link_video'),
+					'link_maps'    => $this->input->post('link_maps'),
+					'tanggal_naik' => date('Y-m-d H:i:s'),
 				);
 
         $input = sizeof($_FILES['foto']['tmp_name']);
@@ -659,6 +660,20 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/kreatif/'.$links2);
 				}
+			}else if ($links == "naik") {
+				$data_kreatif = array(
+					'tanggal_naik' => date('Y-m-d H:i:s'),
+				);
+
+				$where = array('id' => $links3);
+				$upd_kreatif = $this->m_admin->UpdateData($tableName, $data_kreatif, $where);
+				if($upd_kreatif){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dinaikkan', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/kreatif/'.$links2);
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dinaikkan', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/kreatif/'.$links2);
+				}
 			}else if ($links == "delete") {
 				$where = array('id'=>$links3);
         $filefoto = $this->m_admin->getContent($tableName, $where);
@@ -748,54 +763,28 @@ class Admin extends CI_Controller {
 					'jenis'			 => $links2,
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
+					'link_foto'	 => $this->input->post('link_foto'),
 					'link_video' => $this->input->post('link_video'),
 					'link_maps'  => $this->input->post('link_maps'),
 				);
 
-				if ($links2 == "alam" OR $links2 == "budaya") {
-					if ($_FILES['headline']['name'] == "") {
-	          $data_atraksi['foto_headline'] = "";
-	        }else{
-	          if ( ! $this->upload->do_upload('headline')){
-	          $error = array('error' => $this->upload->display_errors());
-	          $pesan = $error['error'];
-	          echo $pesan;
-	          }else{
-	          	$data_atraksi['foto_headline'] = $this->upload->file_name;
+				if ($_FILES['headline']['name'] == "") {
+          $data_atraksi['foto_headline'] = "";
+        }else{
+          if ( ! $this->upload->do_upload('headline')){
+          $error = array('error' => $this->upload->display_errors());
+          $pesan = $error['error'];
+          echo $pesan;
+          }else{
+          	$data_atraksi['foto_headline'] = $this->upload->file_name;
 
-	            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
-	            $this->load->library('image_lib');
-	            $this->image_lib->initialize($thumb);
-	            $this->image_lib->resize();
-	            unlink($path.$this->upload->file_name);
-	          }
-	        }        
-					$data_atraksi['link_foto'] = $this->input->post('link_foto');
-				}else if ($links2 == "museum" OR $links2 == "kuliner") {
-					$input = sizeof($_FILES['foto']['tmp_name']);
-	        $files = $_FILES['foto'];
-	        for ($i=0; $i < $input ; $i++) {
-	          $_FILES['foto']['name'] = $files['name'][$i];
-	          $_FILES['foto']['type'] = $files['type'][$i];
-	          $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
-	          $_FILES['foto']['error'] = $files['error'][$i];
-	          $_FILES['foto']['size'] = $files['size'][$i];
-	          $this->upload->do_upload('foto');
-
-	          $thumb['source_image']   = 'assets/images/'.$links2.'/'.$this->upload->file_name;
-	          $this->load->library('image_lib');
-	          $this->image_lib->initialize($thumb);
-	          $this->image_lib->resize();
-
-	          $foto_galeri[] = $this->upload->file_name;
-	        }
-
-	        for ($j=0; $j < $input; $j++) { 
-	          unlink($path.$foto_galeri[$j]);
-	        }
-
-	        $data_atraksi['foto_galeri'] = serialize($foto_galeri);
-				}
+            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+            unlink($path.$this->upload->file_name);
+          }
+        }
 
         $ins_atraksi = $this->m_admin->InsertData($tableName, $data_atraksi);
         if ($ins_atraksi) {
@@ -815,75 +804,30 @@ class Admin extends CI_Controller {
 				$data_atraksi = array(
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
+					'link_foto'	 => $this->input->post('link_foto'),
 					'link_video' => $this->input->post('link_video'),
 					'link_maps'  => $this->input->post('link_maps'),
 				);
 
-        if ($links2 == "alam" OR $links2 == "budaya") {
-					if ($_FILES['headline']['name'] == "") {
-	          $data_atraksi['foto_headline'] = $this->input->post('oldFoto_headline');
-	        }else{
-	          if ( ! $this->upload->do_upload('headline')){ 
-	          $error = array('error' => $this->upload->display_errors());
-	          $pesan = $error['error'];
-	          echo $pesan;
-	          }else{
-	          	$data_atraksi['foto_headline'] = $this->upload->file_name;
+				if ($_FILES['headline']['name'] == "") {
+          $data_atraksi['foto_headline'] = $this->input->post('oldFoto_headline');
+        }else{
+          if ( ! $this->upload->do_upload('headline')){ 
+          $error = array('error' => $this->upload->display_errors());
+          $pesan = $error['error'];
+          echo $pesan;
+          }else{
+          	$data_atraksi['foto_headline'] = $this->upload->file_name;
 
-	            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
-	            $this->load->library('image_lib');
-	            $this->image_lib->initialize($thumb);
-	            $this->image_lib->resize();
-	            unlink($path.$this->upload->file_name);
-	            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto_headline')));
-	          }
-	        }
-					$data_atraksi['link_foto'] = $this->input->post('link_foto');
-				}else if ($links2 == "museum" OR $links2 == "kuliner") {
-					$get =  array('id' => $this->input->post('id'));
-	        $getData = $this->m_admin->getContent($tableName, $get);
-	        $getFoto = unserialize($getData[0]->foto_galeri);
-	        $n_getFoto = sizeof($getFoto);
-
-	        $input = sizeof($_FILES['foto']['tmp_name']);
-	        $files = $_FILES['foto'];
-
-	        // echo "<pre>";
-	        // print_r($input);
-	        for ($i=0; $i < $input ; $i++) {
-
-	          $_FILES['foto']['name'] = $files['name'][$i];
-	          $_FILES['foto']['type'] = $files['type'][$i];
-	          $_FILES['foto']['tmp_name'] = $files['tmp_name'][$i];
-	          $_FILES['foto']['error'] = $files['error'][$i];
-	          $_FILES['foto']['size'] = $files['size'][$i];
-	          
-	          if ($_FILES['foto']['name']) {     	
-	            $this->upload->do_upload('foto');
-	            $foto_galeri[] = $this->upload->file_name;
-
-            	$thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
-		          $this->load->library('image_lib');
-		          $this->image_lib->initialize($thumb);
-		          $this->image_lib->resize();
-	          }else{
-	            $foto_galeri[] = $this->input->post('oldFoto')[$i];
-	          }
-	        }
-
-	        $data_atraksi['foto_galeri'] = serialize($foto_galeri);
-
-	        for ($i=0; $i < $n_getFoto; $i++) { 
-	          if (in_array($getFoto[$i], $foto_galeri) == FALSE) {
-	            unlink($path.str_replace('.', '_thumb.', $getFoto[$i]));
-	          }
-	        }
-
-	        for ($j=0; $j < $input; $j++) { 
-	          unlink($path.$foto_galeri[$j]);
-	        }
-				}
-
+            $thumb['source_image'] = 'assets/images/'.$links2.'/'.$this->upload->file_name;
+            $this->load->library('image_lib');
+            $this->image_lib->initialize($thumb);
+            $this->image_lib->resize();
+            unlink($path.$this->upload->file_name);
+            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto_headline')));
+          }
+        }
+				
         $where = array('id' => $this->input->post('id'));
 				$upd_atraksi = $this->m_admin->UpdateData($tableName, $data_atraksi, $where);
 				if($upd_atraksi){
@@ -915,21 +859,11 @@ class Admin extends CI_Controller {
 
         $path = './assets/images/'.$links2.'/';
         $path2 = './assets/images/editor/';
-        if ($links2 == "alam" OR $links2 == "budaya") {
-	        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto_headline));
-	      }
         foreach ($carigambar as $c) {
 	        unlink($path2.$c);
         }
+        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto_headline));
         // END
-
-        if ($links2 == "museum" OR $links2 == "kuliner") {
-	        $foto_galeri = unserialize($filefoto[0]->foto_galeri);
-	        $n = sizeof($foto_galeri);
-	        for ($i=0; $i < $n ; $i++) {
-	          unlink($path.str_replace('.', '_thumb.', $foto_galeri[$i]));
-	        }
-        }
 
         $del_kreatif = $this->m_admin->DeleteData($tableName, $where);
         if ($del_kreatif) {
@@ -984,9 +918,12 @@ class Admin extends CI_Controller {
 					'jenis'			 => $links2,
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
-					'link_video' => $this->input->post('link_video'),
-					'link_maps'  => $this->input->post('link_maps'),
 				);
+
+				if ($links2 != "transportasi") {
+					$data_akomodasi['link_video'] = $this->input->post('link_video');
+					$data_akomodasi['link_maps']  = $this->input->post('link_maps');
+				}
 
         $input = sizeof($_FILES['foto']['tmp_name']);
         $files = $_FILES['foto'];
@@ -1029,9 +966,12 @@ class Admin extends CI_Controller {
 				$data_kreatif = array(
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
-					'link_video' => $this->input->post('link_video'),
-					'link_maps'  => $this->input->post('link_maps'),
 				);
+
+				if ($links2 != "transportasi") {
+					$data_akomodasi['link_video'] = $this->input->post('link_video');
+					$data_akomodasi['link_maps']  = $this->input->post('link_maps');
+				}
 
         $get =  array('id' => $this->input->post('id'));
         $getData = $this->m_admin->getContent($tableName, $get);
@@ -1105,7 +1045,7 @@ class Admin extends CI_Controller {
 					}					
         }
 
-        $path = './assets/images/kreatif/';
+        $path = './assets/images/'.$links2.'/';
         $path2 = './assets/images/editor/';
         foreach ($carigambar as $c) {
 	        unlink($path2.$c);
@@ -1121,10 +1061,10 @@ class Admin extends CI_Controller {
         $del_kreatif = $this->m_admin->DeleteData($tableName, $where);
         if ($del_kreatif) {
         	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
-          redirect('admin/kreatif/'.$links2);
+          redirect('admin/akomodasi/'.$links2);
         }else{
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/kreatif/'.$links2);
+					redirect('admin/akomodasi/'.$links2);
         }
 			}else {
 				$data = array(

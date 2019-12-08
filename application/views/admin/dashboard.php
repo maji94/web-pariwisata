@@ -124,7 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           ['misc', ['undo', 'redo', 'fullscreen','codeview']],
           ['style', ['bold', 'italic', 'underline', 'clear']],
           ['font', ['strikethrough', 'superscript', 'subscript']],
-          ['para', ['ul', 'ol', 'paragraph']],
+          ['para', ['ol', 'paragraph']],
           ['color', ['color']],
           ['height', ['height']],
           ['fontsize', ['fontsize','fontname']],

@@ -66,11 +66,7 @@
                     <tr>
                       <td width="5%"><?php echo $no; ?></td>
                       <td>
-                        <?php if ($links == "alam" OR $links == "budaya") { ?>
                         <img src="<?php echo base_url('assets/images/'.$jenis.'/'.str_replace('.', '_thumb.', $d->foto_headline)); ?>" alt="" style="width: 200px">
-                        <?php }else if ($links == "museum" OR $links == "kuliner") { ?>
-                        <img src="<?php echo base_url('assets/images/'.$jenis.'/'.str_replace('.', '_thumb.', unserialize($d->foto_galeri)[0])); ?>" alt="" style="width: 200px">
-                        <?php } ?>
                       </td>
                       <td><?php echo $d->nama; ?></td>
                       <td><?php echo substr(strip_tags($d->konten), 0, 200); ?> ...</td>

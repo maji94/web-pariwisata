@@ -8,6 +8,9 @@
   }else if ($links2 == "restoran") {
     $header = "Restoran";
     $jenis = "restoran";
+  }else if ($links2 == "transportasi") {
+    $header = "Transportasi";
+    $jenis = "transportasi";
   }
 
   if ($links == "add") {
@@ -72,7 +75,7 @@
           <div class="card-block">
             <?php echo  form_open_multipart('admin/akomodasi/'.$action.'/'.$jenis); ?>
               <div class="form-group row">
-                <label for="nama" class="col-md-2 col-form-label form-control-label">Nama *</label>
+                <label for="nama" class="col-md-2 col-form-label form-control-label">Nama/Judul *</label>
                 <div class="col-md-10">
                   <input type="hidden" name="id" value="<?php echo $id; ?>">
                   <input type="text" id="nama" name="nama" class="form-control" placeholder="SIlahkan masukkan nama <?php echo $jenis; ?>" required value="<?php echo $nama; ?>">
@@ -84,6 +87,7 @@
                   <textarea class="form-control" id="isi" name="konten" required><?php echo $konten; ?></textarea>
                 </div>
               </div>
+              <?php if ($links2 != "transportasi") { ?>
               <div class="form-group row">
                 <label for="link_video" class="col-md-2 col-form-label form-control-label">Link Video </label>
                 <div class="col-md-10">
@@ -96,6 +100,7 @@
                     <input type="text" id="link_maps" name="link_maps" class="form-control" placeholder="Copy dan paste link peta yang ada di Google Maps " value="<?php echo $link_maps; ?>">
                 </div>
               </div>
+              <?php } ?>
               <input type="hidden" name="n_edit" id="n_edit" value="<?php echo $n_konten; ?>">
               <div class="row" style="margin-bottom: 1rem;">
                 <div class="form-group">

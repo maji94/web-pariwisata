@@ -71,10 +71,15 @@
                       <td><?php echo $d->nama; ?></td>
                       <td><?php echo substr(strip_tags($d->konten), 0, 200); ?> ...</td>
                       <td align="center" width="5%">
-                        <a href="<?php echo site_url('admin/kreatif/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
+                        <?php if ($links == "event") { ?>
+                        <a href="<?php echo site_url('admin/kreatif/naik/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 170px;" class="btn btn-warning waves-effect waves-light" title="Jadikan Event Unggulan">
+                          <i class="icofont icofont-arrow-up"></i><span class="m-l-10">Jadikan Unggulan</span>
+                        </a><br>
+                        <?php } ?>
+                        <a href="<?php echo site_url('admin/kreatif/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 170px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
                           <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
                         </a><br>
-                        <a href="<?php echo site_url('admin/kreatif/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
+                        <a href="<?php echo site_url('admin/kreatif/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 170px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
                           <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
                         </a>
                       </td>

@@ -18,9 +18,40 @@ class M_admin extends CI_Model {
 		return $data->result();
 	}
 
+	public function getContent2($tableName, $id=null, $limit=null){
+		if ($limit != null) {
+			$this->db->limit($limit);
+		}
+		$this->db->order_by('id','DESC');
+		$data = $this->db->get_where($tableName, $id);
+		return $data->result();
+	}
+
 	public function getBanner(){
 		$this->db->select('*');
 		$data = $this->db->get('tb_banner');
+		return $data->result();
+	}
+
+	public function getMedia($jenis=null,$limit=null,$offset=null){
+		if ($jenis != null) {
+			$this->db->where('jenis', $jenis);
+		}
+		if ($limit != null) {
+			$this->db->limit($limit, $offset);
+		}
+		$this->db->order_by('id','DESC');
+		$data = $this->db->get('tb_media');
+		return $data->result();
+	}
+
+	public function getOther($tableName=null, $jenis=null){
+		$this->db->order_by('id','RANDOM');
+		if ($jenis != null) {
+			$this->db->where('jenis', $jenis);
+		}
+		$this->db->limit(2);
+		$data = $this->db->get($tableName);
 		return $data->result();
 	}
 

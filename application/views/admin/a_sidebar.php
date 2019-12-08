@@ -115,7 +115,7 @@
          <li class="<?php if($link == 'akomodasi'){echo "active";} ?> treeview">
             <a class="waves-effect waves-dark" href="#!">
                <i class="icon-map"></i>
-               <span> Akomodasi</span>
+               <span> Akomodasi & Transportasi</span>
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
@@ -129,6 +129,12 @@
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/akomodasi/restoran'); ?>">
                      <i class="icon-arrow-right"></i>
                      Restoran
+                  </a>
+               </li>
+               <li class="<?php if($link2 == 'transportasi' OR $link3 == 'transportasi'){echo 'active';} ?>">
+                  <a class="waves-effect waves-dark" href="<?php echo site_url('admin/akomodasi/transportasi'); ?>">
+                     <i class="icon-arrow-right"></i>
+                     Transportasi
                   </a>
                </li>
             </ul>

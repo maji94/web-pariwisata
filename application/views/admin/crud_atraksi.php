@@ -88,7 +88,6 @@
                   <input type="text" id="nama" name="nama" class="form-control" placeholder="SIlahkan masukkan nama <?php echo $jenis; ?>" required value="<?php echo $nama; ?>">
                 </div>
               </div>
-              <?php if ($links2 == "alam" OR $links2 == "budaya") { ?>
               <div class="form-group row">
                 <label for="headline" class="col-md-2 col-form-label form-control-label">Foto Headline *</label>
                 <div class="col-md-10">
@@ -96,21 +95,18 @@
                   <input type="file" id="headline" name="headline" class="form-control" <?php echo $req; ?>>
                 </div>
               </div>
-              <?php } ?>
               <div class="form-group row">
                 <label for="konten" class="col-md-2 col-form-label form-control-label">Deskripsi *</label>
                 <div class="col-md-10">
                   <textarea class="form-control" id="isi" name="konten" required><?php echo $konten; ?></textarea>
                 </div>
               </div>
-              <?php if ($links2 == "alam" OR $links2 == "budaya") { ?>
               <div class="form-group row">
                 <label for="link_foto" class="col-md-2 col-form-label form-control-label">Link Foto </label>
                 <div class="col-md-10">
                     <input type="text" id="link_foto" name="link_foto" class="form-control" placeholder="Copy dan paste link foto yang ada pada Galeri Foto" value="<?php echo $link_foto; ?>">
                 </div>
               </div>
-              <?php } ?>
               <div class="form-group row">
                 <label for="link_video" class="col-md-2 col-form-label form-control-label">Link Video </label>
                 <div class="col-md-10">
@@ -123,33 +119,6 @@
                     <input type="text" id="link_maps" name="link_maps" class="form-control" placeholder="Copy dan paste link peta yang ada di Google Maps " value="<?php echo $link_maps; ?>">
                 </div>
               </div>
-              <?php if ($links2 == "museum" OR $links2 == "kuliner") { ?>
-              <input type="hidden" name="n_edit" id="n_edit" value="<?php echo $n_konten; ?>">
-              <div class="row" style="margin-bottom: 1rem;">
-                <div class="form-group">
-                  <label for="tanggal" class="col-md-2 col-form-label form-control-label">Unggah Foto *</label>
-                  <div class="col-md-10" id="itemlist" style="padding:0px">
-                    <div class="col-md-4 col-xs-12" style="margin-bottom:5px;">
-                      <input class="form-control" type="file" id="foto[0]" name="foto[]" onchange="PreviewImage('foto[0]','prevFoto[0]','#oldFoto0');" <?php echo $req; ?>>
-                      <?php if ($links == "edit") { ?>
-                      <input type="hidden" name="oldFoto[]" id="oldFoto0" value="<?php echo $foto_galeri[0]; ?>"><?php } ?>
-                      <img src="<?php echo $foto_galeri0; ?>" class="form-control" id="prevFoto[0]" style="height: 200px; width: 100%;" alt="Foto Galeri">
-                      <button type="button" class="btn btn-info btn-mini" onclick="additem(); return false" style="margin-top: 5px;"><i class="icofont icofont-plus"></i> Tambah Foto</button>
-                    </div>
-
-                    <?php if ($links == "edit") {
-                    for ($i=1; $i <$n_konten ; $i++) { ?>
-                      <div class="col-md-4 col-xs-12" id="<?php echo 'finput'.$i; ?>" style="margin-bottom:5px;">
-                        <input class="form-control" type="file" id="<?php echo 'foto['.$i.']'; ?>" name="<?php echo 'foto[]'; ?>" onchange="PreviewImage('<?php echo "foto[".$i."]"; ?>','<?php echo "prevFoto[".$i."]"; ?>','<?php echo "#oldFoto".$i; ?>');">
-                          <input type="hidden" name="<?php echo 'oldFoto[]'; ?>" id="<?php echo 'oldFoto'.$i; ?>" value="<?php echo $foto_galeri[$i]; ?>">
-                          <img src="<?php echo base_url('assets/images/'.$jenis.'/'.str_replace('.', '_thumb.', $foto_galeri[$i])); ?>" class="form-control" id="<?php echo 'prevFoto['.$i.']'; ?>" style="height: 200px; width: 100%;" alt="Foto Galeri">
-                          <span><button class="btn btn-danger btn-mini" type="button" onclick="hapus('#finput<?php echo $i; ?>');" style="margin-top: 5px;"><i class="icofont icofont-close"></i> Hapus</button></span>
-                      </div>
-                    <?php } } ?>
-                  </div>
-                </div>
-              </div>
-              <?php } ?>
 
               <div class="row" style="margin-top: 1rem;">
                 <div class="col-md-2"></div>

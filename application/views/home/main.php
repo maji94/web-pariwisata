@@ -1,50 +1,16 @@
 <!-- Banner -->
 <section class="banner full">
+	<?php foreach ($foto_headline as $d) { ?>
 	<article>
-		<img src="<?php echo base_url(); ?>assets/front/images/slide01.jpg" alt="" />
+		<img src="<?php echo base_url('assets/images/banner/'.str_replace('.', '_thumb.', $d->konten)); ?>" alt="" />
 		<div class="inner">
 			<header>
-				<p>Portal Wisata terpadu yang dikelola oleh <a href="https://disparprovbengkulu.com">Dinas Pariwisata Bengkulu</a></p>
-				<h2>Halo, Sanak!</h2>
+				<p><?php echo unserialize($headline[0]->konten)['sambutan']; ?></p>
+				<h2><?php echo unserialize($headline[0]->konten)['tagline']; ?></h2>
 			</header>
 		</div>
 	</article>
-	<article>
-		<img src="<?php echo base_url(); ?>assets/front/images/slide02.jpg" alt="" />
-		<div class="inner">
-			<header>
-				<p>Portal Wisata terpadu yang dikelola oleh <a href="https://disparprovbengkulu.com">Dinas Pariwisata Bengkulu</a></p>
-				<h2>Halo, Sanak!</h2>
-			</header>
-		</div>
-	</article>
-	<article>
-		<img src="<?php echo base_url(); ?>assets/front/images/slide03.jpg"  alt="" />
-		<div class="inner">
-			<header>
-				<p>Portal Wisata terpadu yang dikelola oleh <a href="https://disparprovbengkulu.com">Dinas Pariwisata Bengkulu</a></p>
-				<h2>Halo, Sanak!</h2>
-			</header>
-		</div>
-	</article>
-	<article>
-		<img src="<?php echo base_url(); ?>assets/front/images/slide04.jpg"  alt="" />
-		<div class="inner">
-			<header>
-				<p>Portal Wisata terpadu yang dikelola oleh <a href="https://disparprovbengkulu.com">Dinas Pariwisata Bengkulu</a></p>
-				<h2>Halo, Sanak!</h2>
-			</header>
-		</div>
-	</article>
-	<article>
-		<img src="<?php echo base_url(); ?>assets/front/images/slide05.jpg"  alt="" />
-		<div class="inner">
-			<header>
-				<p>Portal Wisata terpadu yang dikelola oleh <a href="https://disparprovbengkulu.com">Dinas Pariwisata Bengkulu</a></p>
-				<h2>Halo, Sanak!</h2>
-			</header>
-		</div>
-	</article>
+	<?php } ?>
 </section>
 <!-- Banner -->
 
@@ -52,51 +18,37 @@
 <section id="one" class="wrapper style2" style="padding-bottom: 10px;">
 	<div class="inner">
 		<header class="align-center">
+			<img style="max-width:100px" src="<?php echo base_url('assets/images/logo-provinsi-bengkulu.png') ?>" alt="Logo Provinsi Bengkulu">
 			<p class="special">Artikel Pilihan oleh Dinas Pariwisata Bengkulu</p>
-			<h2 href="https://disparprovbengkulu.com/artikel.html">Artikel Terbaik</h2>
+			<h2 href="https://disparprovbengkulu.com/artikel.html">Artikel</h2>
 		</header>
 		<div class="grid-style">
 
+			<?php foreach ($artikel as $d) { ?>
 			<!-- Artikel 1 1 -->
 			<div>
 				<div class="box">
 					<div class="image fit">
-						<img src="<?php echo base_url(); ?>assets/front/images/pic02.jpg" alt="" />
+						<img src="<?php echo base_url('assets/images/artikel/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" />
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<h2>Artikel Pertama</h2>
+							<h2><?php echo $d->judul; ?></h2>
 						</header>
-						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing......</p>
+						<p><?php echo substr(strip_tags($d->konten), 0, 100); ?>...</p>
 						<footer class="align-center">
-							<a href="media/artikel/artikel1.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('media/artikel/'.$d->id) ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
 			</div>
+			<?php } ?>
 
-			<!-- Artikel 2 -->
-			<div>
-				<div class="box">
-					<div class="image fit">
-						<img src="<?php echo base_url(); ?>assets/front/images/pic02.jpg" alt="" />
-					</div>
-					<div class="content">
-						<header class="align-center">
-							<h2>Artikel Kedua</h2>
-						</header>
-						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing......</p>
-						<footer class="align-center">
-							<a href="#" class="button alt">Lebih Lanjut</a>
-						</footer>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="align-center" class="inner">
 		<ul class="actions"> 
-			<li><a href="#" class="button special fit">Lihat Semua Artikel</a></li>
+			<li><a href="<?php echo site_url('media/artikel/all'); ?>" class="button special fit">Lihat Semua Artikel</a></li>
 		</ul>
 	</div>
 </section>
@@ -105,18 +57,76 @@
 <section id="two" class="wrapper style3" style="background-image: url('<?php echo base_url(); ?>assets/front/images/banner.jpg');">
 	<div class="inner">
 		<header class="align-center">
+			<img src="<?php echo base_url('assets/images/Wonderful_Bengkulu_Putih.png'); ?>" style="float: left;width: 175px;">
+			<img src="<?php echo base_url('assets/images/Wonderful_Indonesia_Putih.png'); ?>" style="float: right;width: 210px;padding-top: 9px;">
 			<p>Selamat Datang di Bengkulu</p>
 			<h2>Wonderful Bengkulu</h2>
 		</header>
 	</div>
 </section>
 
+<section id="one" class="wrapper style2" style="padding-bottom: 10px;">
+	<div class="inner">
+		<header class="align-center">
+			<p class="special">Event Unggulan Dinas Pariwisata Provinsi Bengkulu</p>
+			<h2 href="https://disparprovbengkulu.com/artikel.html">Event</h2>
+		</header>
+		<div class="grid-style">
+
+			<?php foreach ($artikel as $d) { ?>
+			<!-- Artikel 1 1 -->
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<img src="<?php echo base_url('assets/images/artikel/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" />
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<h2><?php echo $d->judul; ?></h2>
+						</header>
+						<p><?php echo substr(strip_tags($d->konten), 0, 100); ?>...</p>
+						<footer class="align-center">
+							<a href="<?php echo site_url('media/artikel/'.$d->id) ?>" class="button alt">Lebih Lanjut</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+			<!-- Artikel 1 1 -->
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<img src="<?php echo base_url('assets/images/artikel/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" />
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<h2><?php echo $d->judul; ?></h2>
+						</header>
+						<p><?php echo substr(strip_tags($d->konten), 0, 100); ?>...</p>
+						<footer class="align-center">
+							<a href="<?php echo site_url('media/artikel/'.$d->id) ?>" class="button alt">Lebih Lanjut</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+
+		</div>
+	</div>
+	<div class="align-center" class="inner">
+		<ul class="actions"> 
+			<li><a href="<?php echo site_url('media/artikel/all'); ?>" class="button special fit">Lihat Semua Artikel</a></li>
+		</ul>
+	</div>
+</section>
+
+
 <!-- Best Photos -->
-<section id="three" class="wrapper style2" style="padding-bottom: 10px;">
+<section id="three" class="wrapper style2" style="padding-bottom: 10px;padding-top: 10px;">
 	<div class="inner">
 		<header class="align-center">
 			<p class="special">Unggah foto terbaikmu di Bengkulu dengan #visitbengkulu</p>
-			<h2 href="https://disparprovbengkulu.com/artikel.html">Galeri Foto Terbaik</h2>
+			<h2 href="https://disparprovbengkulu.com/artikel.html">Galeri Foto</h2>
 		</header>
 		<div class="gallery">
 			<!-- Best Photo 1-->    

@@ -661,20 +661,12 @@ function _page($total_row, $per_page, $uri_segment, $url) {
 	$config['total_rows'] 	= $total_row;
 	$config['uri_segment'] 	= $uri_segment;
 	$config['per_page'] 	= $per_page;
-	$config['num_tag_open'] = '<li>';
-	$config['num_tag_close']= '</li>';
-	$config['prev_link'] 	= '&lt;';
-	$config['prev_tag_open']='<li>';
-	$config['prev_tag_close']='</li>';
-	$config['next_link'] 	= '&gt;';
-	$config['next_tag_open']='<li>';
-	$config['next_tag_close']='</li>';
-	$config['cur_tag_open']='<li class="active disabled"><a href="#">';
-	$config['cur_tag_close']='</a></li>';
-	$config['first_tag_open']='<li>';
-	$config['first_tag_close']='</li>';
-	$config['last_tag_open']='<li>';
-	$config['last_tag_close']='</li>';
+	$config['prev_link'] 	= '&laquo;';
+	$config['prev_tag_open']='<a>';
+	$config['prev_tag_close']='</a>';
+	$config['next_link'] 	= '&raquo;';
+	$config['cur_tag_open']='<a class="active disabled">';
+	$config['cur_tag_close']='</a>';
 
 	$CI->pagination->initialize($config);
 	return $CI->pagination->create_links();

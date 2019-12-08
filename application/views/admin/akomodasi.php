@@ -6,6 +6,9 @@
   }else if ($links == "restoran") {
     $header = "Restoran";
     $jenis = "restoran";
+  }else if ($links == "transportasi") {
+    $header = "Transportasi";
+    $jenis = "transportasi";
   }
  ?>
 <div class="content-wrapper">
