@@ -45,6 +45,18 @@ class M_admin extends CI_Model {
 		return $data->result();
 	}
 
+	public function getAtraksi($jenis=null,$limit=null,$offset=null){
+		if ($jenis != null) {
+			$this->db->where('jenis', $jenis);
+		}
+		if ($limit != null) {
+			$this->db->limit($limit, $offset);
+		}
+		$this->db->order_by('id','DESC');
+		$data = $this->db->get('tb_atraksi');
+		return $data->result();
+	}
+
 	public function getOther($tableName=null, $jenis=null){
 		$this->db->order_by('id','RANDOM');
 		if ($jenis != null) {

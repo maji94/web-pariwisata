@@ -17,17 +17,17 @@
 			<div>
 				<div class="box">
 					<div class="image fit">
-						<a href="<?php echo site_url('media/artikel/'.$d->id); ?>">
-							<img src="<?php echo base_url('assets/images/artikel/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" />
+						<a href="<?php echo site_url('atraksi/'.$this->uri->segment(2).'/'.$d->id); ?>">
+							<img src="<?php echo base_url('assets/images/'.$this->uri->segment(2).'/'.str_replace('.', '_thumb.', $d->foto_headline)); ?>" alt="" />
 						</a>
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<p style="text-align: left;"><i class="icofont-calendar"></i> <?php echo tgl_indo($d->tanggal); ?> <span style="float: right;"><i class="icofont-eye-alt"></i>Dilihat : <?php echo $d->dilihat; ?> kali</span></p>
-							<a href="<?php echo site_url('media/artikel/'.$d->id); ?>" style="text-decoration: unset;"><h2><?php echo $d->judul; ?></h2></a>
+							<p style="text-align: right;"><i class="icofont-eye-alt"></i>Dilihat : <?php echo $d->dilihat; ?> kali</p>
+							<a href="<?php echo site_url('atraksi/'.$this->uri->segment(2).'/'.$d->id); ?>" style="text-decoration: unset;"><h2><?php echo $d->nama; ?></h2></a>
 						</header>
 						<footer class="align-center">
-							<a href="<?php echo site_url('media/artikel/'.$d->id); ?>" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('atraksi/'.$this->uri->segment(2).'/'.$d->id); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>

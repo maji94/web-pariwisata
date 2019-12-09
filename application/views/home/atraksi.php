@@ -3,7 +3,7 @@
 	<div class="inner">
 		<header class="align-center">
 			<p>#visitbengkulu</p>
-			<h2>DESTINASI</h2>
+			<h2>ATRAKSI</h2>
 		</header>
 	</div>
 </section>
@@ -25,7 +25,7 @@
 								<h2>ALAM</h2>
 						</header>
 						<footer class="align-center">
-							<a href="destinasi/alam.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('atraksi/alam/all') ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -42,7 +42,7 @@
 							<h2>BUDAYA</h2>
 						</header>
 						<footer class="align-center">
-							<a href="destinasi/budaya.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('atraksi/budaya/all') ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -59,7 +59,7 @@
 							<h2>MUSEUM</h2>
 						</header>
 						<footer class="align-center">
-							<a href="destinasi/museum.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('atraksi/museum/all') ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 							<h2>KULINER</h2>
 						</header>
 						<footer class="align-center">
-							<a href="destinasi/kuliner.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('atraksi/kuliner/all') ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>

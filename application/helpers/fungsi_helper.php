@@ -662,8 +662,6 @@ function _page($total_row, $per_page, $uri_segment, $url) {
 	$config['uri_segment'] 	= $uri_segment;
 	$config['per_page'] 	= $per_page;
 	$config['prev_link'] 	= '&laquo;';
-	$config['prev_tag_open']='<a>';
-	$config['prev_tag_close']='</a>';
 	$config['next_link'] 	= '&raquo;';
 	$config['cur_tag_open']='<a class="active disabled">';
 	$config['cur_tag_close']='</a>';

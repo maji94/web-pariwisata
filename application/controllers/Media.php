@@ -26,10 +26,22 @@ class Media extends CI_Controller {
     $tableName = "tb_media";
 
 		if ($links == "all") {
+			/* pagination */	
+			$total_row		= $this->db->query("SELECT * FROM `tb_media` WHERE jenis = 'artikel'")->num_rows();
+			$per_page		= 4;
+			
+			$awal	= $this->uri->segment(4); 
+			$awal	= (empty($awal) || $awal == 1) ? 0 : $awal;
+			
+			//if (empty($awal) || $awal == 1) { $awal = 0; } { $awal = $awal; }
+			$akhir	= $per_page;
+
 			$data = array(
-				'data' => $this->m_admin->getMedia('artikel'),
+				'data' => $this->m_admin->getMedia('artikel',$akhir,$awal),
 				'page'	=> "home/artikel",
 			);
+
+			$data['pagi']	= _page($total_row, $per_page, 4, site_url("media/artikel/".$links));
 		}else{
 			$artikel = $this->m_admin->getContent($tableName, array('id'=>$links));
 			$foto = $this->m_admin->getContent('tb_media', array('id'=>substr($artikel[0]->link_foto, (strpos($artikel[0]->link_foto, 'i/'))+2)));

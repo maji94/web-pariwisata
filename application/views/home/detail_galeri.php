@@ -33,7 +33,7 @@
 								</a>
 							</div>
 						<?php } else if ($d->jenis == "video") { ?>
-							<iframe style="width: 100%;min-height: 500px;" src="https://www.youtube.com/embed/<?php echo substr($d->konten, (strpos($d->konten, 'v='))+2); ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+							<iframe style="width: 60%;height: 25em;margin: auto;display: block;}" src="https://www.youtube.com/embed/<?php echo substr($d->konten, (strpos($d->konten, 'v='))+2); ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 						<?php } ?>
 						</br>
 						<p style="text-align: left;"><span><i class="fa fa-user" aria-hidden="true"></i> <?php echo $d->oleh; ?></span> | <i class="icofont-calendar"></i> <?php echo tgl_indo($d->tanggal); ?> | <span><i class="icofont-eye-alt"></i> Dilihat : <?php echo ($d->dilihat+1); ?> kali</span></p>
