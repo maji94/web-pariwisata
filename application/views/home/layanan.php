@@ -25,7 +25,7 @@
 							<h2>UNDUH ARSIP</h2>
 						</header>
 						<footer class="align-center">
-							<a href="layanan/unduharsip.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('layanan/unduh/all'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 							<h2>PERMINTAAN DOKUMEN</h2>
 						</header>
 						<footer class="align-center">
-							<a href="layanan/permintaandokumen.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('layanan/request'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>

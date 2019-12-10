@@ -25,7 +25,7 @@
 							<h2>HOTEL & PENGINAPAN</h2>
 						</header>
 						<footer class="align-center">
-							<a href="akomodasi/hotel.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('akomodasi/hotel/all'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -43,7 +43,25 @@
 							<h2>RESTORAN</h2>
 						</header>
 						<footer class="align-center">
-							<a href="akomodasi/resto.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('akomodasi/restoran/all'); ?>" class="button alt">Lebih Lanjut</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+
+			<!-- Content2 -->
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<img src="<?php echo site_url(); ?>assets/front/images/pic02.jpg" alt="" />
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<p>Informasi Transportasi Pesawat dan Travel di Bengkulu</p>
+							<h2>TRANSPORTASI</h2>
+						</header>
+						<footer class="align-center">
+							<a href="<?php echo site_url('akomodasi/transportasi/all'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>

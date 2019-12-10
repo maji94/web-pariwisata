@@ -3,7 +3,7 @@
 	<div class="inner">
 		<header class="align-center">
 			<p>#visitbengkulu</p>
-			<h2>LAYANAN</h2>
+			<h2>TENTANG KAMI</h2>
 		</header>
 	</div>
 </section>
@@ -25,7 +25,7 @@
 							<h2>STRUKTUR ORGANISASI</h2>
 						</header>
 						<footer class="align-center">
-							<a href="layanan/unduharsip.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('tentang/struktur'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -43,7 +43,7 @@
 							<h2>GALERI DINAS</h2>
 						</header>
 						<footer class="align-center">
-							<a href="layanan/permintaandokumen.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('tentang/galeri_dinas'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -61,7 +61,7 @@
 							<h2>PROFIL DINAS</h2>
 						</header>
 						<footer class="align-center">
-							<a href="layanan/permintaandokumen.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('tentang/profil'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
