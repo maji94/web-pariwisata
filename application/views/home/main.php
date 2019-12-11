@@ -115,49 +115,75 @@
 	</div>
 	<div class="align-center" class="inner">
 		<ul class="actions"> 
-			<li><a href="<?php echo site_url('media/artikel/all'); ?>" class="button special fit">Lihat Semua Artikel</a></li>
+			<li><a href="<?php echo site_url('media/artikel/all'); ?>" class="button special fit">Lihat Semua Event</a></li>
 		</ul>
 	</div>
 </section>
 
-
-<!-- Best Photos -->
-<section id="three" class="wrapper style2" style="padding-bottom: 10px;padding-top: 10px;">
+<section id="two" class="wrapper style3">
 	<div class="inner">
 		<header class="align-center">
-			<p class="special">Unggah foto terbaikmu di Bengkulu dengan #visitbengkulu</p>
-			<h2 href="https://disparprovbengkulu.com/artikel.html">Galeri Foto</h2>
+			<p>Our Social Media</p>
 		</header>
-		<div class="gallery">
-			<!-- Best Photo 1-->    
+		<div class="grid-style">
 			<div>
-				<div class="image fit">
-					<a href="<?php echo base_url(); ?>assets/front/images/pic01.jpg" data-lightbox="mygallery"><img src="<?php echo base_url(); ?>assets/front/images/pic01.jpg" alt="" /></a>
+				<div class="box" style="background-color: transparent;">
+					<div class="content">
+						<header class="align-center">
+							<h2>Instagram</h2>
+						</header>
+					</div>
 				</div>
 			</div>
-			<!-- Best Photo 2-->
 			<div>
-				<div class="image fit">
-					<a href="<?php echo base_url(); ?>assets/front/images/pic02.jpg" data-lightbox="mygallery"><img src="<?php echo base_url(); ?>assets/front/images/pic02.jpg" alt="" /></a>
-				</div>
-			</div>
-			<!-- Best Photo 3-->
-			<div>
-				<div class="image fit">
-					<a href="<?php echo base_url(); ?>assets/front/images/pic03.jpg" data-lightbox="mygallery"><img src="<?php echo base_url(); ?>assets/front/images/pic03.jpg" alt="" /></a>
-				</div>
-			</div>
-			<!-- Best Photo 4-->
-			<div>
-				<div class="image fit">
-					<a href="<?php echo base_url(); ?>assets/front/images/pic04.jpg" data-lightbox="mygallery"><img src="<?php echo base_url(); ?>assets/front/images/pic04.jpg" alt="" /></a>
+				<div class="box" style="background-color: transparent;">
+					<div class="content">
+						<header class="align-center">
+							<a href="https://www.youtube.com/channel/UCQhSUR6rdzqf5ra55piuFNw" target="_blank" style="text-decoration: unset;"><h2>YouTube</h2></a>
+						</header>
+						<iframe width="100%" height="360" src="https://www.youtube.com/embed/videoseries?list=PLzdSjxlMA-IK2F0gwSO8NW7210eXo1uRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+</section>
+
+<!-- Best Photos -->
+<section id="three" class="wrapper style2" style="padding-bottom: 10px;">
+	<div class="inner">
+		<header class="align-center">
+			<p class="special">Unggah foto terbaikmu di Bengkulu dengan #visitbengkulu</p>
+			<h2>Galeri Foto</h2>
+		</header>
+		<div class="grid-style">
+
+			<?php foreach ($foto as $d) { ?>
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<a href="<?php echo site_url('media/galeri/'.$d->id); ?>">
+							<img src="<?php echo base_url('assets/images/foto/'.str_replace('.', '_thumb.', unserialize($d->konten)[0])); ?>" alt="">
+						</a>
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<p style="text-align: left;"><i class="icofont-calendar"></i> <?php echo tgl_indo($d->tanggal); ?> <span style="float: right;"><i class="icofont-eye-alt"></i>Dilihat : <?php echo $d->dilihat; ?> kali</span></p>
+							<a href="<?php echo site_url('media/galeri/'.$d->id); ?>" style="text-decoration: unset;"><h2><?php echo $d->judul; ?></h2></a>
+						</header>
+						<footer class="align-center">
+							<a href="<?php echo site_url('media/galeri/'.$d->id); ?>" class="button alt">Lebih Lanjut</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+			<?php } ?>
+
+		</div>
+	</div>
 	<div class="align-center" class="inner">
 		<ul class="actions">
-			<li><a href="#" class="button special fit">Lihat Galeri</a></li>
+			<li><a href="<?php echo site_url('media/galeri/foto'); ?>" class="button special fit">Lihat Semua Galeri</a></li>
 		</ul>
 	</div>
 </section>

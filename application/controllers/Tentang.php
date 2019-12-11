@@ -21,13 +21,37 @@ class Tentang extends CI_Controller {
 		$this->load->view('home/st_front', $data);
 	}
 
-	public function hotel(){
+	public function struktur(){
 		$links = $this->uri->segment(3);
-    $tableName = "tb_akomodasi";
+    $tableName = "tb_tentang";
 
-		if ($links == "all") {
+    $data = array(
+    	'data' => $this->m_admin->getContent($tableName, array('jenis'=>"struktur")),
+    	'page' => "home/detail_tentang",
+    );
+
+		$this->load->view('home/st_front', $data);
+	}
+
+	public function profil(){
+		$links = $this->uri->segment(3);
+    $tableName = "tb_tentang";
+
+    $data = array(
+    	'data' => $this->m_admin->getContent($tableName, array('jenis'=>"profil")),
+    	'page' => "home/detail_tentang",
+    );
+
+		$this->load->view('home/st_front', $data);
+	}
+
+	public function galeri_dinas(){
+		$links = $this->uri->segment(3);
+    $tableName = "tb_tentang";
+
+    if ($links == "all") {
 			/* pagination */	
-			$total_row		= $this->db->query("SELECT * FROM `tb_akomodasi` WHERE jenis = 'hotel'")->num_rows();
+			$total_row		= $this->db->query("SELECT * FROM `tb_tentang` WHERE jenis = 'galeri'")->num_rows();
 			$per_page		= 4;
 			
 			$awal	= $this->uri->segment(4); 
@@ -37,23 +61,20 @@ class Tentang extends CI_Controller {
 			$akhir	= $per_page;
 
 			$data = array(
-				'data' => $this->m_admin->getAkomodasi('hotel',$akhir,$awal),
-				'page'	=> "home/akomodasi_all",
+				'data' => $this->m_admin->getTentang('galeri',$akhir,$awal),
+				'page'	=> "home/galeri_tentang",
 			);
 
-			$data['pagi']	= _page($total_row, $per_page, 4, site_url("akomodasi/hotel/".$links));
-		}else{
-			$hotel = $this->m_admin->getContent($tableName, array('id'=>$links));
-			$other = $this->m_admin->getOther($tableName, $hotel[0]->jenis);
-			$data = array(
-				'data' => $hotel,
-				'other' => $other,
-				'page'	=> "home/detail_akomodasi",
-			);
+			$data['pagi']	= _page($total_row, $per_page, 4, site_url("tentang/galeri_dinas/".$links));
+    }else {
+	    $data = array(
+	    	'data' => $this->m_admin->getContent($tableName, array('jenis'=>"galeri")),
+	    	'page' => "home/detail_tentang",
+	    );    	
+    }
 
-			$upd = array('dilihat'=>($hotel[0]->dilihat + 1));
-			$this->m_admin->UpdateData($tableName, $upd, array('id'=>$links));
-		}
 		$this->load->view('home/st_front', $data);
+		// echo "<pre>";
+		// print_r($data);
 	}
 }

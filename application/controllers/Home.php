@@ -17,6 +17,7 @@ class Home extends CI_Controller {
 			'headline' => $this->m_admin->getContent('tb_banner', array('jenis'=>"headline")),
 			'foto_headline' => $this->m_admin->getContent('tb_banner', array('jenis'=>"foto")),
 			'artikel' => $this->m_admin->getContent2('tb_media', array('jenis'=>"artikel"), 2),
+			'foto' => $this->m_admin->getMedia('foto',2,0),
 		);
 		$this->load->view('home/st_front', $data);
 		// echo "<pre>";

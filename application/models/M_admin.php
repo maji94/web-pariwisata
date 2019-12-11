@@ -57,6 +57,18 @@ class M_admin extends CI_Model {
 		return $data->result();
 	}
 
+	public function getKreatif($jenis=null,$limit=null,$offset=null){
+		if ($jenis != null) {
+			$this->db->where('jenis', $jenis);
+		}
+		if ($limit != null) {
+			$this->db->limit($limit, $offset);
+		}
+		$this->db->order_by('id','DESC');
+		$data = $this->db->get('tb_kreatif');
+		return $data->result();
+	}
+
 	public function getAkomodasi($jenis=null,$limit=null,$offset=null){
 		if ($jenis != null) {
 			$this->db->where('jenis', $jenis);
@@ -66,6 +78,18 @@ class M_admin extends CI_Model {
 		}
 		$this->db->order_by('id','DESC');
 		$data = $this->db->get('tb_akomodasi');
+		return $data->result();
+	}
+
+	public function getTentang($jenis=null,$limit=null,$offset=null){
+		if ($jenis != null) {
+			$this->db->where('jenis', $jenis);
+		}
+		if ($limit != null) {
+			$this->db->limit($limit, $offset);
+		}
+		$this->db->order_by('id','DESC');
+		$data = $this->db->get('tb_tentang');
 		return $data->result();
 	}
 

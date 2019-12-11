@@ -43,7 +43,7 @@
 							<h2>GALERI DINAS</h2>
 						</header>
 						<footer class="align-center">
-							<a href="<?php echo site_url('tentang/galeri_dinas'); ?>" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('tentang/galeri_dinas/all'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>

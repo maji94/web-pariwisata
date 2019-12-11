@@ -24,7 +24,7 @@
 							<h2>KOMUNITAS</h2>
 						</header>
 						<footer class="align-center">
-							<a href="kreatif/komunitas.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('kreatif/komunitas/all'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -41,7 +41,7 @@
 							<h2>EVENT</h2>
 						</header>
 						<footer class="align-center">
-							<a href="kreatif/event.html" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('kreatif/event/all'); ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
