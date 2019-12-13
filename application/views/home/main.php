@@ -73,38 +73,20 @@
 		</header>
 		<div class="grid-style">
 
-			<?php foreach ($artikel as $d) { ?>
+			<?php foreach ($event as $d) { ?>
 			<!-- Artikel 1 1 -->
 			<div>
 				<div class="box">
 					<div class="image fit">
-						<img src="<?php echo base_url('assets/images/artikel/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" />
+						<img src="<?php echo base_url('assets/images/kreatif/'.str_replace('.', '_thumb.', unserialize($d->foto_galeri)[0])); ?>" alt="" />
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<h2><?php echo $d->judul; ?></h2>
+							<h2><?php echo $d->nama; ?></h2>
 						</header>
 						<p><?php echo substr(strip_tags($d->konten), 0, 100); ?>...</p>
 						<footer class="align-center">
-							<a href="<?php echo site_url('media/artikel/'.$d->id) ?>" class="button alt">Lebih Lanjut</a>
-						</footer>
-					</div>
-				</div>
-			</div>
-
-			<!-- Artikel 1 1 -->
-			<div>
-				<div class="box">
-					<div class="image fit">
-						<img src="<?php echo base_url('assets/images/artikel/'.str_replace('.', '_thumb.', $d->headline)); ?>" alt="" />
-					</div>
-					<div class="content">
-						<header class="align-center">
-							<h2><?php echo $d->judul; ?></h2>
-						</header>
-						<p><?php echo substr(strip_tags($d->konten), 0, 100); ?>...</p>
-						<footer class="align-center">
-							<a href="<?php echo site_url('media/artikel/'.$d->id) ?>" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('kreatif/event/'.$d->id) ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -115,7 +97,7 @@
 	</div>
 	<div class="align-center" class="inner">
 		<ul class="actions"> 
-			<li><a href="<?php echo site_url('media/artikel/all'); ?>" class="button special fit">Lihat Semua Event</a></li>
+			<li><a href="<?php echo site_url('kreatif/event/all'); ?>" class="button special fit">Lihat Semua Event</a></li>
 		</ul>
 	</div>
 </section>

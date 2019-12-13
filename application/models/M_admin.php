@@ -22,7 +22,12 @@ class M_admin extends CI_Model {
 		if ($limit != null) {
 			$this->db->limit($limit);
 		}
-		$this->db->order_by('id','DESC');
+		if ($tableName == "tb_kreatif") {
+			$this->db->order_by('tanggal_naik','DESC');
+			$this->db->order_by('id','DESC');
+		}else {
+			$this->db->order_by('id','DESC');
+		}
 		$data = $this->db->get_where($tableName, $id);
 		return $data->result();
 	}

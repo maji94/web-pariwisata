@@ -279,6 +279,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       
     });
 
+    $('#detail_request').on('show.bs.modal', function (event){
+      var div = $(event.relatedTarget)
+      var id = div.data('id')
+      var nama = div.data('nama')
+      var email = div.data('email')
+      var nohp = div.data('nohp')
+      var konten = div.data('konten')
+      var keterangan = div.data('keterangan')
+      var modal = $(this)
+
+      modal.find('#id').attr("value",id)
+      modal.find('#nama').html(nama)
+      modal.find('#email').html(email)
+      modal.find('#nohp').html(nohp)
+      modal.find('#konten').html(konten)
+      modal.find('#keterangan').html(keterangan)
+    });
+
     function cek_register(){
       var passBaru = $('#password').val();
       var konfir = $('#konf_psw').val();

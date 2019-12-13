@@ -68,36 +68,45 @@
                   </thead>
                   <tbody>
                     <?php $no=1; foreach ($data as $d) { ?>
-                    <tr>
                       <?php if ($links == "unduh") { ?>
-                      <td width="5%"><?php echo $no; ?></td>
-                      <td><?php echo $d->nama; ?></td>
-                      <td><?php echo $d->tahun; ?></td>
-                      <td width="40%"><?php echo substr(strip_tags($d->keterangan), 0, 200); ?> ...</td>
-                      <td style="word-break: break-all;width: 30%;"><?php echo base_url('assets/dokumen/'.$links.'/'.$d->konten); ?></td>
-                      <td align="center" width="5%">
-                        <a href="<?php echo site_url('admin/layanan/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </a><br>
-                        <a href="<?php echo site_url('admin/layanan/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </a>
-                      </td>
+                      <tr>
+                        <td width="5%"><?php echo $no; ?></td>
+                        <td><?php echo $d->nama; ?></td>
+                        <td><?php echo $d->tahun; ?></td>
+                        <td width="40%"><?php echo substr(strip_tags($d->keterangan), 0, 200); ?> ...</td>
+                        <td style="word-break: break-all;width: 30%;"><?php echo base_url('assets/dokumen/'.$links.'/'.$d->konten); ?></td>
+                        <td align="center" width="5%">
+                          <a href="<?php echo site_url('admin/layanan/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
+                            <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
+                          </a><br>
+                          <a href="<?php echo site_url('admin/layanan/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
+                            <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
+                          </a>
+                        </td>
+                      </tr>
                       <?php }else if ($links == "request") { ?>
-                      <td width="5%"><?php echo $no; ?></td>
-                      <td><?php echo $d->nama; ?></td>
-                      <td><?php echo $d->email.'<br>'.$d->nohp; ?></td>
-                      <td width="30%"><?php echo $d->konten; ?></td>
-                      <td align="center" width="5%">
-                        <a href="<?php echo site_url('admin/layanan/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                          <i class="icofont icofont-search-2"></i><span class="m-l-10">Lihat Detail</span>
-                        </a><br>
-                        <a href="<?php echo site_url('admin/layanan/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                        </a>
-                      </td>
+                      <tr <?php if ($d->status == 1) { echo 'style="background-color: #4CAF50 ;color:white;font-weight:bold;"';} ?>>
+                        <td width="5%"><?php echo $no; ?></td>
+                        <td><?php echo $d->nama; ?></td>
+                        <td><?php echo $d->email.'<br>'.$d->nohp; ?></td>
+                        <td width="30%"><?php echo $d->konten; ?></td>
+                        <td align="center" width="5%">
+                          <a href="<?php echo site_url('admin/layanan/tandai/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 200px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
+                            <i class="icofont icofont-checked"></i><span class="m-l-10">Tandai Sudah Dibaca</span>
+                          </a><br>
+                          <a href="#" style="margin-bottom: 5px;width: 200px;" class="btn btn-warning waves-effect waves-light" title="Tandai Pesan" 
+                            data-toggle="modal" data-target="#detail_request" 
+                            data-id="<?php echo $d->id; ?>" 
+                            data-nama="<?php echo $d->nama; ?>" 
+                            data-email="<?php echo $d->email; ?>"
+                            data-nohp="<?php echo $d->nohp; ?>"
+                            data-konten="<?php echo $d->konten; ?>"
+                            data-keterangan='<?php echo $d->keterangan; ?>'>
+                            <i class="icofont icofont-search"></i><span class="m-l-10">Lihat Detail</span>
+                          </a>
+                        </td>
+                      </tr>
                       <?php } ?>
-                    </tr>
                     <?php $no++; } ?>
                   </tbody>
                   <tfoot>
@@ -127,4 +136,58 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="modal fade modal-flex" id="detail_request" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5 class="modal-title">Detail Permintaan Dokumen</h5>
+      </div>
+      <!-- end of modal-header -->
+      <div class="modal-body">
+        <form>
+          <div class="form-group row">
+            <label for="nama" class="col-md-2 col-form-label form-control-label" style="vertical-align: top;">Nama </label>
+            <div class="col-md-10">
+              : <label id="nama" class="col-form-label form-control-label"></label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="email" class="col-md-2 col-form-label form-control-label" style="vertical-align: top;">Email </label>
+            <div class="col-md-10">
+              : <label id="email" class="col-form-label form-control-label" style="text-transform: lowercase;"></label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="nohp" class="col-md-2 col-form-label form-control-label" style="vertical-align: top;">No.Hp </label>
+            <div class="col-md-10">
+              : <label id="nohp" class="col-form-label form-control-label"></label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="konten" class="col-md-2 col-form-label form-control-label" style="vertical-align: top;">Dokumen  </label>
+            <div class="col-md-10">
+              : <label id="konten" class="col-form-label form-control-label"></label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="keterangan" class="col-md-2 col-form-label form-control-label" style="vertical-align: top;">Deskripsi </label>
+            <div class="col-md-10">
+              : <label id="keterangan" class="col-form-label form-control-label"></label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <br>
+      </div>
+      <!-- end of modal body                    -->
+    </div>
+    <!-- end of modal-content -->
+  </div>
+  <!-- end of modal-dialog -->
 </div>

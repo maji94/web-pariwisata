@@ -717,7 +717,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
-					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
+					'data'  => $this->m_admin->getContent2($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Kreatif',
 					'page'  => "admin/kreatif",
 				);				
@@ -1178,7 +1178,22 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/layanan/'.$links2);
         }
-			}else {
+			}else if ($links == "tandai") {
+				$data_layanan = array(
+					'status'       => 0,
+				);
+
+				$where = array('id' => $links3);
+				$upd_layanan = $this->m_admin->UpdateData($tableName, $data_layanan, $where);
+				if($upd_layanan){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditandai sudah dibaca', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/layanan/'.$links2);
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal ditandai sudah dibaca', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/layanan/'.$links2);
+				}
+			}
+			else {
 				$data = array(
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Layanan',

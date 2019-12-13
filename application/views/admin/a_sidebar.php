@@ -143,6 +143,7 @@
             <a class="waves-effect waves-dark" href="#!">
                <i class="icon-speech"></i>
                <span> Layanan</span>
+               <span class="label label-success menu-caption">New</span>
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
@@ -156,6 +157,7 @@
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/layanan/request'); ?>">
                      <i class="icon-arrow-right"></i>
                      Permintaan Dokumen
+                     <span class="label label-warning menu-caption">1</span>
                   </a>
                </li>
             </ul>
