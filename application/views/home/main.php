@@ -1,4 +1,4 @@
-<!-- Banner -->
+Banner -->
 <section class="banner full">
 	<?php foreach ($foto_headline as $d) { ?>
 	<article>
@@ -102,7 +102,7 @@
 	</div>
 </section>
 
-<section id="two" class="wrapper style3">
+<section id="two" class="wrapper style3" style="background-image: url('<?php echo base_url(); ?>assets/front/images/banner.jpg');">
 	<div class="inner">
 		<header class="align-center">
 			<p>Our Social Media</p>
@@ -114,6 +114,11 @@
 						<header class="align-center">
 							<h2>Instagram</h2>
 						</header>
+						<!-- <div class="row"> -->
+							<div id="instafeed" class="owl-carousel owl-theme">
+								<!--  instagram feed will load here -->
+							</div>
+						<!-- </div> -->
 					</div>
 				</div>
 			</div>
@@ -123,7 +128,7 @@
 						<header class="align-center">
 							<a href="https://www.youtube.com/channel/UCQhSUR6rdzqf5ra55piuFNw" target="_blank" style="text-decoration: unset;"><h2>YouTube</h2></a>
 						</header>
-						<iframe width="100%" height="360" src="https://www.youtube.com/embed/videoseries?list=PLzdSjxlMA-IK2F0gwSO8NW7210eXo1uRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<iframe width="100%" height="313" src="https://www.youtube.com/embed/videoseries?list=PLzdSjxlMA-IK2F0gwSO8NW7210eXo1uRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 				</div>
 			</div>
@@ -175,4 +180,4 @@
 <div class="inner">
 	<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1044.6503280381876!2d102.29284643793673!3d-3.817814946490317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x185a3947fd0afa4e!2sDinas%20Pariwisata%20Provinsi%20Bengkulu!5e1!3m2!1sen!2sid!4v1572656842148!5m2!1sen!2sid" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
 </div>
-<!-- Map -->
+<!-- Map

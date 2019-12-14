@@ -10,6 +10,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/video.popup.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/icofont/icofont.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/font-awesome.min.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/instafeed/css/magnific.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/owl-carousel2-2.3.4/dist/assets/owl.carousel.min.css">
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/owl-carousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 	</head>
 	<body <?php echo $this->session->flashdata('notif'); ?>>
@@ -28,6 +31,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script src="<?php echo base_url(); ?>assets/front/js/main.js"></script>
 		<script src="<?php echo base_url(); ?>assets/front/js/lightbox-plus-jquery.min.js"></script>
 		<script src="<?php echo base_url(); ?>assets/front/js/video.popup.js"></script>
+		<script src="<?php echo base_url(); ?>assets/front/instafeed/js/instafeed.js"></script>
+		<script src="<?php echo base_url(); ?>assets/front/instafeed/js/magnific.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/front/instafeed/js/custom.js"></script>
+		<script src="<?php echo base_url(); ?>assets/front/owl-carousel2-2.3.4/dist/owl.carousel.min.js"></script>
 		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 		<script>
 			$(document).ready( function () {
