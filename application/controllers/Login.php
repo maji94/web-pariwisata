@@ -43,6 +43,7 @@ class Login extends CI_Controller {
       // echo "<pre>";
       // echo print_r($_POST);
       echo "<script>alert('Username Atau Password Tidak Valid');</script>";
+      redirect('login');
     }
   }
 

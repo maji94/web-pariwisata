@@ -16,10 +16,13 @@ class Admin extends CI_Controller {
 
 	public function index(){
 		$data = array(
+			'request' => $this->m_admin->getRequest(),
 			'title'	=> "BERANDA ".strtoupper($this->set),
 			'page'	=> "admin/a_main",
 		);
 		$this->load->view('admin/dashboard', $data);
+		// echo "<pre>";
+		// print_r($data);
 	}
 
 	//Upload image summernote
@@ -178,6 +181,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data' => $this->m_admin->getBanner(),
 					'title' => 'Manajemen Banner',
 					'page' => "admin/banner",
@@ -210,6 +214,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'title' => 'Tambah Data Media',
 					'page' => "admin/crud_media",
 				);
@@ -329,6 +334,7 @@ class Admin extends CI_Controller {
         }
 			}else  if ($links == "edit") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => 'Ubah Data Media',
 					'page'  => 'admin/crud_media',
@@ -513,6 +519,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data' => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Media Website',
 					'page' => "admin/media",
@@ -550,6 +557,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'title' => "Tambah Data Kreatif",
 					'page' => "admin/crud_kreatif",
 				);
@@ -596,6 +604,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Kreatif",
 					'page'  => "admin/crud_kreatif",
@@ -717,6 +726,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent2($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Kreatif',
 					'page'  => "admin/kreatif",
@@ -725,10 +735,6 @@ class Admin extends CI_Controller {
 		}
 
 		$this->load->view('admin/dashboard', $data);
-		// echo "<pre>";
-		// print_r($explode);
-		// echo "<pre>";
-		// print_r($carigambar);
 	}
 
 	public function atraksi(){
@@ -755,6 +761,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'title' => 'Tambah Data Atraksi',
 					'page' => "admin/crud_atraksi",
 				);
@@ -796,6 +803,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Atraksi",
 					'page'  => "admin/crud_atraksi",
@@ -875,6 +883,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Atrkasi',
 					'page'  => "admin/atraksi",
@@ -910,6 +919,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'title' => 'Tambah Data Akomodasi',
 					'page' => "admin/crud_akomodasi",
 				);
@@ -958,6 +968,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Akomodasi",
 					'page'  => "admin/crud_akomodasi",
@@ -1068,6 +1079,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Akomodasi',
 					'page'  => "admin/akomodasi",
@@ -1098,6 +1110,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'title' => 'Tambah Data Layanan',
 					'page' => "admin/crud_layanan",
 				);
@@ -1131,6 +1144,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Layanan",
 					'page'  => "admin/crud_layanan",
@@ -1195,6 +1209,7 @@ class Admin extends CI_Controller {
 			}
 			else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Layanan',
 					'page'  => "admin/layanan",
@@ -1203,10 +1218,6 @@ class Admin extends CI_Controller {
 		}
 
 		$this->load->view('admin/dashboard', $data);
-		// echo "<pre>";
-		// print_r($filefoto);
-		// echo "<br>";
-		// echo $path.$filefoto[0]->konten;
 	}
 
 	public function tentang(){
@@ -1235,6 +1246,7 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'title' => "Tambah Data Tentang",
 					'page' => "admin/crud_tentang",
 				);
@@ -1279,6 +1291,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Tentang",
 					'page'  => "admin/crud_tentang",
@@ -1382,6 +1395,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Tentang',
 				);
@@ -1394,10 +1408,6 @@ class Admin extends CI_Controller {
 		}
 
 		$this->load->view('admin/dashboard', $data);
-		// echo "<pre>";
-		// print_r($data_tentang);
-		// echo "<pre>";
-		// print_r($carigambar);
 	}
 
 	public function operator(){
@@ -1520,6 +1530,7 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
+					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('level'=>"operator")),
 					'page'  => 'admin/operator',
 					'title' => 'Manajemen Operator',
@@ -1528,10 +1539,6 @@ class Admin extends CI_Controller {
 		}
 
 		$this->load->view('admin/dashboard', $data);
-		// echo "<pre>";
-		// print_r($filefoto);
-		// echo "<pre>";
-		// print_r($data_password);
 	}
 
 	// ==========================

@@ -38,7 +38,6 @@
         <div class="card">
           <div class="card-header">
             <h5 class="card-header-text">Data <?php echo $header; ?> </h5>
-            <!-- <a href="<?php echo site_url('admin/operator/add/'); ?>" class="btn btn-success waves-effect waves-light f-right"><i class="icofont icofont-plus"></i><span class="m-l-10"> Tambah Data</span></a> -->
             <a href="#" class="btn btn-success waves-effect waves-light f-right" data-toggle="modal" data-target="#tambah_operator" title="Tambah Data"><i class="icofont icofont-plus"></i><span class="m-l-10"> Tambah Data</span>
             </a>
           </div>
@@ -51,7 +50,7 @@
                       <th>No.</th>
                       <th>Foto</th>
                       <th>Nama</th>
-                      <th>Username</th>>
+                      <th>Username</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -88,13 +87,15 @@
                       <th>No.</th>
                       <th>Foto</th>
                       <th>Nama</th>
-                      <th>Username</th>>
+                      <th>Username</th>
                       <th>Action</th>
                     </tr>
                   </tfoot>
                 </table>
               </div>
             </div>
+
+            <?php echo "<pre>";print_r($this->session->userdata()); ?>
           </div>
         </div>
         <!-- Hover effect table ends -->

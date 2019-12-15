@@ -1,4 +1,4 @@
-Banner -->
+<!-- Banner -->
 <section class="banner full">
 	<?php foreach ($foto_headline as $d) { ?>
 	<article>
@@ -114,11 +114,8 @@ Banner -->
 						<header class="align-center">
 							<h2>Instagram</h2>
 						</header>
-						<!-- <div class="row"> -->
 							<div id="instafeed" class="owl-carousel owl-theme">
-								<!--  instagram feed will load here -->
 							</div>
-						<!-- </div> -->
 					</div>
 				</div>
 			</div>

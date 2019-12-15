@@ -4355,3 +4355,28 @@
 	color: #fff;
 	text-decoration: unset;
 }
+
+.alamat {
+	text-align: left;
+	padding-left: 20px;
+}
+
+.alamat h3 {
+	color: #fff;
+	font-weight: 500;
+	margin-top: 1rem;
+}
+
+.alamat p {
+	margin-bottom: 5px;
+	color: #bbb;
+}
+
+.alamat p > a{
+	text-decoration: unset;
+	color: #bbb !important;
+}
+
+.pengunjung {
+	width: 13.6rem;
+}

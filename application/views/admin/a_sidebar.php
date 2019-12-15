@@ -3,11 +3,15 @@
 
       <div class="user-panel">
          <div class="f-left image">
-            <img src="<?php echo base_url(); ?>assets/images/avatar-1.png" alt="User Image" class="img-circle">
+            <?php if ($this->session->userdata('foto') != "") { ?>
+            <img style="height: 40px;width: 40px;" src="<?php echo base_url('assets/images/user/'.str_replace('.', '_thumb.', $this->session->userdata('foto'))); ?>" alt="User Image" class="img-circle">
+         <?php }else { ?>
+            <img style="height: 40px;width: 40px;" src="<?php echo base_url('assets/images/avatar-1.png'); ?>" alt="User Image" class="img-circle">
+         <?php } ?>
          </div>
          <div class="f-left info">
-            <p>John Doe</p>
-            <p class="designation">Admin</p>
+            <p><?php echo $this->session->userdata('nama'); ?></p>
+            <p class="designation"><?php echo $this->session->userdata('lvl_user'); ?></p>
          </div>
       </div>
 
@@ -143,7 +147,9 @@
             <a class="waves-effect waves-dark" href="#!">
                <i class="icon-speech"></i>
                <span> Layanan</span>
-               <span class="label label-success menu-caption">New</span>
+               <?php if ($request != 0) { ?>
+                  <span class="label label-success menu-caption">New</span>
+               <?php } ?>
                <i class="icon-arrow-down"></i>
             </a>
             <ul class="treeview-menu">
@@ -157,7 +163,9 @@
                   <a class="waves-effect waves-dark" href="<?php echo site_url('admin/layanan/request'); ?>">
                      <i class="icon-arrow-right"></i>
                      Permintaan Dokumen
-                     <span class="label label-warning menu-caption">1</span>
+                     <?php if ($request != 0) { ?>
+                        <span class="label label-warning menu-caption"><?php echo $request; ?></span>
+                     <?php } ?>
                   </a>
                </li>
             </ul>

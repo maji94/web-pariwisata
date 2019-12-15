@@ -108,6 +108,32 @@ class M_admin extends CI_Model {
 		return $data->result();
 	}
 
+	public function getRequest(){
+		$this->db->where('jenis', 'request');
+		$this->db->where('status', 1);
+		$data = $this->db->get('tb_layanan');
+		return $data->num_rows();
+	}
+
+	public function getPengunjung($select="*",$where=null){
+		$this->db->select($select);
+		$where;
+		$data = $this->db->get('tb_pengunjung');
+		return $data->num_rows();
+	}
+
+	public function getHits($select="*", $where=null){
+		$this->db->select($select);
+		$where;
+		$data = $this->db->get('tb_pengunjung');
+		return $data->row();
+	}
+
+	public function cekDataPengunjung($tableName, $where){
+		$data = $this->db->get_where($tableName, $where);
+		return $data->result();
+	}
+
 	// =========================
 		public function getByTime($tableName, $time){
 			$data = $this->db->get_where($tableName, $time);

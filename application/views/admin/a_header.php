@@ -25,8 +25,12 @@
             <!-- User Menu-->
             <li class="dropdown">
                <a href="#!" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle drop icon-circle drop-image">
-                  <span><img class="img-circle " src="<?php echo base_url(); ?>assets/images/avatar-1.png" style="width:40px;" alt="User Image"></span>
-                  <span>John <b>Doe</b> <i class=" icofont icofont-simple-down"></i></span>
+                  <?php if ($this->session->userdata('foto') != "") { ?>
+                     <span><img class="img-circle" style="height: 40px;width: 40px" src="<?php echo base_url('assets/images/user/'.str_replace('.', '_thumb.', $this->session->userdata('foto'))); ?>" alt="User Image"></span>
+                  <?php }else { ?>
+                     <span><img class="img-circle" style="height: 40px;width: 40px" src="<?php echo base_url('assets/images/avatar-1.png');?>" alt="User Image"></span>
+                  <?php } ?>
+                  <span><?php echo $this->session->userdata('nama'); ?> <i class=" icofont icofont-simple-down"></i></span>
                </a>
                <ul class="dropdown-menu settings-menu">
                   <li><a href="#"><i class="icon-lock"></i> Ubah Password</a></li>
