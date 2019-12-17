@@ -35,13 +35,13 @@
               <div class="form-group row">
                 <label for="sambutan" class="col-md-2 col-form-label form-control-label">Kalimat Sambutan</label>
                 <div class="col-md-5">
-                  <textarea class="form-control" rows="4" id="sambutan" name="sambutan" class="form-control" placeholder="Kalimat Sambutan Banner Website"><?php echo unserialize($data[0]->konten)['sambutan']; ?></textarea>
+                  <textarea class="form-control" rows="4" id="sambutan" name="sambutan" class="form-control" placeholder="Kalimat Sambutan Banner Website"><?php echo unserialize($headline[0]->konten)['sambutan']; ?></textarea>
                 </div>
               </div>
               <div class="form-group row">
                 <label for="tagline" class="col-md-2 col-form-label form-control-label">Tagline Banner</label>
                 <div class="col-md-5">
-                  <input type="text" id="tagline" name="tagline" class="form-control" placeholder="Tagline Banner Website" value="<?php echo unserialize($data[0]->konten)['tagline']; ?>">
+                  <input type="text" id="tagline" name="tagline" class="form-control" placeholder="Tagline Banner Website" value="<?php echo unserialize($headline[0]->konten)['tagline']; ?>">
                 </div>
               </div>
               <div class="row">
@@ -77,16 +77,19 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <?php for ($i=1; $i <count($data) ; $i++) { ?>
+                    <?php for ($i=0; $i <count($data) ; $i++) { ?>
                     <tr>
-                      <td width="5%"><?php echo $i; ?></td>
+                      <td width="5%"><?php echo ($i+1); ?></td>
                       <td><img src="<?php echo base_url('assets/images/banner/'.str_replace('.', '_thumb.', $data[$i]->konten)); ?>" alt="" style="width: 200px"></td>
                       <td><?php echo $data[$i]->oleh; ?></td>
                       <td align="center" width="15%">
-                        <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#edit_banner" data-id="<?php echo $data[$i]->id; ?>" data-oleh="<?php echo $data[$i]->oleh; ?>" data-foto="<?php echo $data[$i]->konten; ?>" style="margin-bottom: 5px;width: 70px;" title="Ubah Data">
+                        <a href="<?php echo site_url('admin/banner/naik/'.$data[$i]->id); ?>" style="margin-bottom: 5px;width: 140px;" class="btn btn-warning waves-effect waves-light" title="Naikkan Banner">
+                          <i class="icofont icofont-arrow-up"></i><span class="m-l-10">Naikkan Banner</span>
+                        </a><br>
+                        <a href="#" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#edit_banner" data-id="<?php echo $data[$i]->id; ?>" data-oleh="<?php echo $data[$i]->oleh; ?>" data-foto="<?php echo $data[$i]->konten; ?>" style="margin-bottom: 5px;width: 140px;" title="Ubah Data">
                           <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                        </a>
-                        <a href="<?php echo site_url('admin/banner/delete/'.$data[$i]->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
+                        </a><br>
+                        <a href="<?php echo site_url('admin/banner/delete/'.$data[$i]->id); ?>" style="margin-bottom: 5px;width: 140px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
                           <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
                         </button>
                       </td>

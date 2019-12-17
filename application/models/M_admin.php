@@ -32,8 +32,16 @@ class M_admin extends CI_Model {
 		return $data->result();
 	}
 
-	public function getBanner(){
+	public function getBanner($jenis=null, $limit=null){
 		$this->db->select('*');
+		if ($jenis != null) {
+			$this->db->where('jenis', $jenis);
+		}
+		if ($limit != null) {
+			$this->db->limit($limit);
+		}
+		$this->db->order_by('tanggal_naik', 'DESC');
+		$this->db->order_by('id', 'DESC');
 		$data = $this->db->get('tb_banner');
 		return $data->result();
 	}

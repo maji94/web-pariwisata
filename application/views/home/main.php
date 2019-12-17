@@ -54,7 +54,7 @@
 </section>
 <!-- Best Arcticles -->
 
-<section id="two" class="wrapper style3" style="background-image: url('<?php echo base_url(); ?>assets/front/images/banner.jpg');">
+<section id="two" class="wrapper style3" style="background-image: url('<?php echo base_url(); ?>assets/front/images/HAL-29-PANTAI-DI-PULAU-ENGGANO-DOK-ARIJO.jpg');">
 	<div class="inner">
 		<header class="align-center">
 			<img src="<?php echo base_url('assets/images/Wonderful_Bengkulu_Putih.png'); ?>" style="float: left;width: 175px;">
@@ -102,7 +102,7 @@
 	</div>
 </section>
 
-<section id="two" class="wrapper style3" style="background-image: url('<?php echo base_url(); ?>assets/front/images/banner.jpg');">
+<section id="two" class="wrapper style3" style="background-image: url('<?php echo base_url(); ?>assets/front/images/Front_gate_of_Fort_Marlborough,_Bengkulu_2015-04-19_02.jpg');">
 	<div class="inner">
 		<header class="align-center">
 			<p>Our Social Media</p>
@@ -112,7 +112,7 @@
 				<div class="box" style="background-color: transparent;">
 					<div class="content">
 						<header class="align-center">
-							<h2>Instagram</h2>
+							<a href="https://www.instagram.com/disparprovbengkulu" target="_blank" style="text-decoration: unset;"><h2>Instagram</h2></a>
 						</header>
 							<div id="instafeed" class="owl-carousel owl-theme">
 							</div>
@@ -125,7 +125,7 @@
 						<header class="align-center">
 							<a href="https://www.youtube.com/channel/UCQhSUR6rdzqf5ra55piuFNw" target="_blank" style="text-decoration: unset;"><h2>YouTube</h2></a>
 						</header>
-						<iframe width="100%" height="313" src="https://www.youtube.com/embed/videoseries?list=PLzdSjxlMA-IK2F0gwSO8NW7210eXo1uRA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+						<iframe width="100%" height="313" src="https://www.youtube.com/embed/videoseries?list=PLlJGaQuJPWtGa7XQnKPK7VGXkz1SsQAWL&autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 					</div>
 				</div>
 			</div>

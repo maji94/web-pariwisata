@@ -4,8 +4,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 	<head>
 		<title>Wonderful Bengkulu 2020</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta name="description" content="Wonderfull Bengkulu 2020. Website Resmi Dinas Pariwisata Provinsi Bengkulu dalam mewujudkan Wonderfull Bengkulu 2020">
+		<meta name="author" content="Dinas Pariwisata Bengkulu">
+		<meta name="keyword" content="dispar bengkulu, pariwisata bengkulu, wonderfull bengkulu, pantai panjang, tapak paderi bengkulu, benteng">
+		
+		<!-- Shareable -->
+		<meta property="og:title" content="Wonderfull Bengkulu 2010 | Dinas Pariwisata Provinsi Bengkulu" />
+		<meta property="og:type" content="article" />
+		<meta property="og:url" content="<?php echo site_url() ?>" />
+		<meta property="og:image" content="<?php echo base_url() ?>/assets/images/landmark.png" />
+
+		<!-- Favicons -->
+	  <link href="<?php echo base_url() ?>/assets/images/landmark.png" rel="icon">
+	  <link href="<?php echo base_url() ?>/assets/images/landmark.png" rel="apple-touch-icon">
+
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/main.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/video.popup.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/icofont/icofont.min.css">

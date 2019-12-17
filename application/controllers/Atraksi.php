@@ -9,14 +9,62 @@ class Atraksi extends CI_Controller {
 		$this->cek = $this->session->userdata('logged_in');
     $this->set = $this->session->userdata('lvl_user');
     date_default_timezone_set('Asia/Jakarta');
+    $this->dataPengunjung();
 	}
 
 	public function index(){
 	}
 
+	public function dataPengunjung(){
+		$ip         = ip_user();
+		$tanggal    = date("Y-m-d");
+		$waktu      = time();
+		$browser    = browser_user();
+		$os         = os_user();
+
+		$data = array(
+			'tanggal' => $tanggal,
+			'ip'      => $ip,
+			'hits'    => 1,
+			'online'   => $waktu,
+			'browser' => $browser,
+			'os'      => $os,
+		);
+		$where = array('ip'=>$ip,'tanggal'=>$tanggal);
+
+            // Mencek berdasarkan IPnya, apakah user sudah pernah mengakses hari ini
+		$cekip = $this->m_admin->cekDataPengunjung('tb_pengunjung', $where);
+
+            // Kalau belum ada, simpan data user tersebut ke database
+		if($cekip == null){
+			$this->m_admin->InsertData('tb_pengunjung', $data);
+		}
+            // Jika sudah ada, update
+		else{
+			$data['hits'] = $cekip[0]->hits+1;
+			$this->m_admin->UpdateData('tb_pengunjung', $data, $where);
+		}
+	}
+
+	public function pengunjung(){
+		$set=$this->db;
+		$batas = time()-300;
+		$tanggal = date('Y-m-d');
+
+		$data = array(
+			'online'    => $this->m_admin->getPengunjung("*",$set->where('online > ',$batas)),
+			'todayvisit'=> $this->m_admin->getPengunjung("*",$set->where('tanggal',$tanggal)),
+			'todayhits' => $this->m_admin->getHits("SUM(hits) AS todayhits",$set->where('tanggal', $tanggal)),
+			'totalhits' => $this->m_admin->getHits("SUM(hits) AS totalhits"),
+			'totalvisit'=> $this->m_admin->getPengunjung(),
+		);
+		return $data;
+	}
+
 	public function all(){
 		$data = array(
 			'page'	=> "home/atraksi",
+			'pengunjung'=> $this->pengunjung(),
 		);
 		$this->load->view('home/st_front', $data);
 	}
@@ -39,6 +87,7 @@ class Atraksi extends CI_Controller {
 			$data = array(
 				'data' => $this->m_admin->getAtraksi('alam',$akhir,$awal),
 				'page'	=> "home/atraksi_all",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$data['pagi']	= _page($total_row, $per_page, 4, site_url("atraksi/alam/".$links));
@@ -51,6 +100,7 @@ class Atraksi extends CI_Controller {
 				'foto' => $foto,
 				'other' => $other,
 				'page'	=> "home/detail_atraksi",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$upd = array('dilihat'=>($alam[0]->dilihat + 1));
@@ -79,6 +129,7 @@ class Atraksi extends CI_Controller {
 			$data = array(
 				'data' => $this->m_admin->getAtraksi('budaya',$akhir,$awal),
 				'page'	=> "home/atraksi_all",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$data['pagi']	= _page($total_row, $per_page, 4, site_url("atraksi/budaya/".$links));
@@ -91,6 +142,7 @@ class Atraksi extends CI_Controller {
 				'foto' => $foto,
 				'other' => $other,
 				'page'	=> "home/detail_atraksi",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$upd = array('dilihat'=>($budaya[0]->dilihat + 1));
@@ -119,6 +171,7 @@ class Atraksi extends CI_Controller {
 			$data = array(
 				'data' => $this->m_admin->getAtraksi('museum',$akhir,$awal),
 				'page'	=> "home/atraksi_all",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$data['pagi']	= _page($total_row, $per_page, 4, site_url("atraksi/museum/".$links));
@@ -131,6 +184,7 @@ class Atraksi extends CI_Controller {
 				'foto' => $foto,
 				'other' => $other,
 				'page'	=> "home/detail_atraksi",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$upd = array('dilihat'=>($museum[0]->dilihat + 1));
@@ -159,6 +213,7 @@ class Atraksi extends CI_Controller {
 			$data = array(
 				'data' => $this->m_admin->getAtraksi('kuliner',$akhir,$awal),
 				'page'	=> "home/atraksi_all",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$data['pagi']	= _page($total_row, $per_page, 4, site_url("atraksi/kuliner/".$links));
@@ -171,6 +226,7 @@ class Atraksi extends CI_Controller {
 				'foto' => $foto,
 				'other' => $other,
 				'page'	=> "home/detail_atraksi",
+				'pengunjung'=> $this->pengunjung(),
 			);
 
 			$upd = array('dilihat'=>($kuliner[0]->dilihat + 1));

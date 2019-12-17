@@ -197,12 +197,14 @@
                </li>
             </ul>
          </li>
-         <li class="<?php if($link == 'operator'){echo "active";} ?> treeview">
-            <a class="waves-effect waves-dark" href="<?php echo site_url('admin/operator'); ?>">
-               <i class="icon-people"></i>
-               <span> Operator</span>
-            </a>
-         </li>
+         <?php if ($this->session->userdata('lvl_user') == 'admin') { ?>
+            <li class="<?php if($link == 'operator'){echo "active";} ?> treeview">
+               <a class="waves-effect waves-dark" href="<?php echo site_url('admin/operator'); ?>">
+                  <i class="icon-people"></i>
+                  <span> Operator</span>
+               </a>
+            </li>
+         <?php } ?>
       </ul>
    </section>
 </aside>

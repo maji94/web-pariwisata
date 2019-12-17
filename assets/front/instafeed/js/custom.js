@@ -17,17 +17,17 @@
   var galleryFeed = new Instafeed({
     get: "user",
     userId: 6321620007,
-    accessToken: "6321620007.1677ed0.3fdd143b850f4ddcba2d46fd7ff580b5",
+    accessToken: "6321620007.1677ed0.3315542ddfd44c59bede9db5a1472193",
     resolution: "standard_resolution",
     // useHttp: "true",
     sortBy: 'most-recent',
-    limit: 8,
+    limit: 5,
     template: 
     '<div class="item instaimg">'+
       '<a href="{{link}}" title="{{caption}}" target="_blank">'+
         '<img src="{{image}}" alt="{{caption}}">'+
-        '<div class="likes"><i class="fa fa-instagram"></i> {{model.user.username}} | '+
-        '<i class="fa fa-heart"></i> {{likes}}'+
+        '<div class="likes"><i class="fa fa-instagram"></i> {{model.user.username}} '+
+        // '<i class="fa fa-heart"></i> {{likes}}'+
         '</div>'+
       '</a>'+
     '</div>',

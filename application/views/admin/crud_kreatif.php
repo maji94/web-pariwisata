@@ -130,11 +130,6 @@
                 </div>
               </div>
             <?php echo form_close(); ?>
-<?php 
-  echo "<pre>";
-  print_r($this->session->userdata());
-
- ?>
           </div>
         </div>
         <!-- Hover effect table ends -->

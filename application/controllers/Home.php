@@ -16,15 +16,13 @@ class Home extends CI_Controller {
 		$data = array(
 			'page'	=> "home/main",
 			'headline' => $this->m_admin->getContent('tb_banner', array('jenis'=>"headline")),
-			'foto_headline' => $this->m_admin->getContent('tb_banner', array('jenis'=>"foto")),
+			'foto_headline' => $this->m_admin->getBanner('foto', 5),
 			'artikel' => $this->m_admin->getContent2('tb_media', array('jenis'=>"artikel"), 2),
 			'event' => $this->m_admin->getContent2('tb_kreatif', array('jenis'=>"event"), 4),
 			'foto' => $this->m_admin->getMedia('foto',2,0),
 			'pengunjung'=> $this->pengunjung(),
 		);
 		$this->load->view('home/st_front', $data);
-		// echo "<pre>";
-		// print_r($data);
 	}
 
 	public function dataPengunjung(){

@@ -94,8 +94,6 @@
                 </table>
               </div>
             </div>
-
-            <?php echo "<pre>";print_r($this->session->userdata()); ?>
           </div>
         </div>
         <!-- Hover effect table ends -->

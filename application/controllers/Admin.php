@@ -89,6 +89,7 @@ class Admin extends CI_Controller {
 			redirect('login');
 		}else{
 			if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				if ($links2 == "headline") {
 					$data_headline = array(
 						'sambutan' => $this->input->post('sambutan'),
@@ -134,6 +135,7 @@ class Admin extends CI_Controller {
 					redirect('admin/banner');
 				}
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				$data_banner = array(
 					'jenis'=>"foto",
 					'oleh'=>$this->input->post('oleh'),
@@ -179,18 +181,33 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/banner');
         }
+			}else if ($links == "naik") {
+				$data_banner = array(
+					'tanggal_naik' => date('Y-m-d H:i:s'),
+				);
+
+				$where = array('id' => $links2);
+				$upd_banner = $this->m_admin->UpdateData($tableName, $data_banner, $where);
+				if($upd_banner){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dinaikkan', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/banner/');
+				}else{
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dinaikkan', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/banner/');
+				}
 			}else {
 				$data = array(
 					'request' => $this->m_admin->getRequest(),
-					'data' => $this->m_admin->getBanner(),
+					'data' => $this->m_admin->getBanner('foto'),
+					'headline' => $this->m_admin->getBanner('headline'),
 					'title' => 'Manajemen Banner',
 					'page' => "admin/banner",
 				);				
 			}
 		}
-		// echo "<pre>";
-		// print_r($_FILES);
 		$this->load->view('admin/dashboard', $data);
+		// echo "<pre>";
+		// print_r($data);
 	}
 
 	public function media(){
@@ -219,6 +236,7 @@ class Admin extends CI_Controller {
 					'page' => "admin/crud_media",
 				);
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				if ($links2 == "artikel") {
 					$path = './assets/images/artikel/';
 			    $config['upload_path']    = $path;
@@ -340,6 +358,7 @@ class Admin extends CI_Controller {
 					'page'  => 'admin/crud_media',
 				);
 			}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				if ($links2 == "artikel") {
 					$path = './assets/images/artikel/';
 			    $config['upload_path']    = $path;
@@ -562,6 +581,7 @@ class Admin extends CI_Controller {
 					'page' => "admin/crud_kreatif",
 				);
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				$data_kreatif = array(
 					'jenis'			   => $links2,
 					'nama'         => $this->input->post('nama'),
@@ -610,6 +630,7 @@ class Admin extends CI_Controller {
 					'page'  => "admin/crud_kreatif",
 				);
 			}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				$data_kreatif = array(
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
@@ -766,6 +787,7 @@ class Admin extends CI_Controller {
 					'page' => "admin/crud_atraksi",
 				);
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				$data_atraksi = array(
 					'jenis'			 => $links2,
 					'nama'       => $this->input->post('nama'),
@@ -809,6 +831,7 @@ class Admin extends CI_Controller {
 					'page'  => "admin/crud_atraksi",
 				);
 			}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				$data_atraksi = array(
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
@@ -924,6 +947,7 @@ class Admin extends CI_Controller {
 					'page' => "admin/crud_akomodasi",
 				);
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				$data_akomodasi = array(
 					'jenis'			 => $links2,
 					'nama'       => $this->input->post('nama'),
@@ -974,6 +998,7 @@ class Admin extends CI_Controller {
 					'page'  => "admin/crud_akomodasi",
 				);
 			}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				$data_kreatif = array(
 					'nama'       => $this->input->post('nama'),
 					'konten'     => $this->input->post('konten'),
@@ -1115,6 +1140,7 @@ class Admin extends CI_Controller {
 					'page' => "admin/crud_layanan",
 				);
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				$data_layanan = array(
 					'jenis'			 => $links2,
 					'nama'       => $this->input->post('nama'),
@@ -1150,6 +1176,7 @@ class Admin extends CI_Controller {
 					'page'  => "admin/crud_layanan",
 				);
 			}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				$data_layanan = array(
 					'nama'       => $this->input->post('nama'),
 					'tahun'    	 => $this->input->post('tahun'),
@@ -1251,6 +1278,7 @@ class Admin extends CI_Controller {
 					'page' => "admin/crud_tentang",
 				);
 			}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 				$data_tentang = array(
 					'jenis'   => $links2,
 					'nama'    => $this->input->post('nama'),
@@ -1297,6 +1325,7 @@ class Admin extends CI_Controller {
 					'page'  => "admin/crud_tentang",
 				);
 			}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 				if ($links2 == "profil") {
 					$data_tentang['konten'] = $this->input->post('konten');
 				}else if ($links2 == "galeri") {
@@ -1432,109 +1461,115 @@ class Admin extends CI_Controller {
 		if(!isset($_SESSION['logged_in'])){
 			redirect('login');
 		}else{
-			if ($links == "ubah_psw") {
-				$data_password = array(
-					'password' => md5($this->security->xss_clean($this->input->post('konf_psw'))),
-				);
-
-				$where = array('id_user'=>$this->input->post('id'));
-				$upd_password = $this->m_admin->UpdateData($tableName, $data_password, $where);
-				if($upd_password){
-					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
-					redirect('admin/operator/');
-				}else{
-					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/operator/');
-				}
-			}else if ($links == "do_add") {
-				$data_operator = array(
-					'nama'    	=> $this->input->post('nama'),
-					'username'  => $this->input->post('username'),
-					'password'  => md5($this->input->post('username')),
-					'level' 		=> $this->input->post('level'),
-				);
-
-        if ($_FILES['foto']['name'] == "") {
-          $data_operator['foto'] = "";
-        }else{
-          if ( ! $this->upload->do_upload('foto')){ 
-          $error = array('error' => $this->upload->display_errors());
-          $pesan = $error['error'];
-          echo $pesan;
-          }else {
-          	$data_operator['foto'] = $this->upload->file_name;
-
-            $thumb['source_image'] = 'assets/images/user/'.$this->upload->file_name;
-            $this->load->library('image_lib');
-            $this->image_lib->initialize($thumb);
-            $this->image_lib->resize();
-            unlink($path.$this->upload->file_name);
-          }
-        }
-
-        $ins_operator = $this->m_admin->InsertData($tableName, $data_operator);
-        if ($ins_operator) {
-        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditambahkan', 'success','icofont icofont-tick-mark');\"");
-          redirect('admin/operator/');
-        }else{
-					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/operator/');
-        }
-			}else if ($links == "do_edit") {
-				$data_operator = array(
-					'nama'    	=> $this->input->post('nama'),
-					'username'  => $this->input->post('username'),
-					'level' 		=> $this->input->post('level'),
-				);
-
-				if ($_FILES['foto']['name'] == "") {
-          $data_operator['foto'] = $this->input->post('oldFoto');
-        }else{
-          if ( ! $this->upload->do_upload('foto')){ 
-          $error = array('error' => $this->upload->display_errors());
-          $pesan = $error['error'];
-          echo $pesan;
-          }else {
-          	$data_operator['foto'] = $this->upload->file_name;
-
-            $thumb['source_image'] = 'assets/images/user/'.$this->upload->file_name;
-            $this->load->library('image_lib');
-            $this->image_lib->initialize($thumb);
-            $this->image_lib->resize();
-            unlink($path.$this->upload->file_name);
-            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto')));
-          }
-        }
-
-        $where = array('id_user'=>$this->input->post('id'));
-				$upd_operator = $this->m_admin->UpdateData($tableName, $data_operator, $where);
-				if($upd_operator){
-					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
-					redirect('admin/operator/');
-				}else{
-					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/operator/');
-				}
-			}else if ($links == "delete") {
-				$where = array('id_user'=>$links2);
-        $filefoto = $this->m_admin->getContent($tableName, $where);
-        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto));
-        
-        $del_operator = $this->m_admin->DeleteData($tableName, $where);
-        if ($del_operator) {
-        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
-          redirect('admin/operator/'.$links2);
-        }else{
-					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/operator/'.$links2);
-        }
+			if ($this->set == "operator") {
+				redirect('admin');
 			}else {
-				$data = array(
-					'request' => $this->m_admin->getRequest(),
-					'data'  => $this->m_admin->getContent($tableName, array('level'=>"operator")),
-					'page'  => 'admin/operator',
-					'title' => 'Manajemen Operator',
-				);
+				if ($links == "ubah_psw") {
+					$data_password = array(
+						'password' => md5($this->security->xss_clean($this->input->post('konf_psw'))),
+					);
+
+					$where = array('id_user'=>$this->input->post('id'));
+					$upd_password = $this->m_admin->UpdateData($tableName, $data_password, $where);
+					if($upd_password){
+						$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+						redirect('admin/operator/');
+					}else{
+						$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+						redirect('admin/operator/');
+					}
+				}else if ($links == "do_add") {
+					ini_set('memory_limit', '1024M');
+					$data_operator = array(
+						'nama'    	=> $this->input->post('nama'),
+						'username'  => $this->input->post('username'),
+						'password'  => md5($this->input->post('username')),
+						'level' 		=> $this->input->post('level'),
+					);
+
+	        if ($_FILES['foto']['name'] == "") {
+	          $data_operator['foto'] = "";
+	        }else{
+	          if ( ! $this->upload->do_upload('foto')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else {
+	          	$data_operator['foto'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/user/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	          }
+	        }
+
+	        $ins_operator = $this->m_admin->InsertData($tableName, $data_operator);
+	        if ($ins_operator) {
+	        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil ditambahkan', 'success','icofont icofont-tick-mark');\"");
+	          redirect('admin/operator/');
+	        }else{
+						$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+						redirect('admin/operator/');
+	        }
+				}else if ($links == "do_edit") {
+					ini_set('memory_limit', '1024M');
+					$data_operator = array(
+						'nama'    	=> $this->input->post('nama'),
+						'username'  => $this->input->post('username'),
+						'level' 		=> $this->input->post('level'),
+					);
+
+					if ($_FILES['foto']['name'] == "") {
+	          $data_operator['foto'] = $this->input->post('oldFoto');
+	        }else{
+	          if ( ! $this->upload->do_upload('foto')){ 
+	          $error = array('error' => $this->upload->display_errors());
+	          $pesan = $error['error'];
+	          echo $pesan;
+	          }else {
+	          	$data_operator['foto'] = $this->upload->file_name;
+
+	            $thumb['source_image'] = 'assets/images/user/'.$this->upload->file_name;
+	            $this->load->library('image_lib');
+	            $this->image_lib->initialize($thumb);
+	            $this->image_lib->resize();
+	            unlink($path.$this->upload->file_name);
+	            unlink($path.str_replace('.', '_thumb.', $this->input->post('oldFoto')));
+	          }
+	        }
+
+	        $where = array('id_user'=>$this->input->post('id'));
+					$upd_operator = $this->m_admin->UpdateData($tableName, $data_operator, $where);
+					if($upd_operator){
+						$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diubah', 'success','icofont icofont-tick-mark');\"");
+						redirect('admin/operator/');
+					}else{
+						$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
+						redirect('admin/operator/');
+					}
+				}else if ($links == "delete") {
+					$where = array('id_user'=>$links2);
+	        $filefoto = $this->m_admin->getContent($tableName, $where);
+	        unlink($path.str_replace('.', '_thumb.', $filefoto[0]->foto));
+	        
+	        $del_operator = $this->m_admin->DeleteData($tableName, $where);
+	        if ($del_operator) {
+	        	$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil dihapus', 'success','icofont icofont-tick-mark');\"");
+	          redirect('admin/operator/'.$links2);
+	        }else{
+						$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
+						redirect('admin/operator/'.$links2);
+	        }
+				}else {
+					$data = array(
+						'request' => $this->m_admin->getRequest(),
+						'data'  => $this->m_admin->getContent($tableName, array('level'=>"operator")),
+						'page'  => 'admin/operator',
+						'title' => 'Manajemen Operator',
+					);
+				}
 			}
 		}
 
@@ -1689,6 +1724,7 @@ class Admin extends CI_Controller {
 					// echo "<pre>";
 					// print_r($data);
 				}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 					$time = time();
 					$path = './assets/backend/dist/produk/';
 					$config['upload_path']		= $path;
@@ -1835,6 +1871,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-produk",
 					);
 				}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 					$time = time();
 					$path = './assets/backend/dist/produk/';
 					$config['upload_path']		= $path;
@@ -2033,6 +2070,7 @@ class Admin extends CI_Controller {
 						'page'	=> "admin/crud-tipedokumen",
 					);
 				}else if ($links == "do_editTipe") {
+				ini_set('memory_limit', '1024M');
 					$where = array('id_tipedokumen' => $this->input->post('id'));
 					$upd_data = array(
 						'color' => $this->input->post('color'),
@@ -2121,6 +2159,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-galeri",
 					);
 				}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 					$path = './assets/backend/dist/img/galeri/';
 					$config['upload_path']		= $path;
 					$config['allowed_types']	= 'jpeg|jpg|png|bmp';
@@ -2201,6 +2240,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-galeri",
 					);
 				}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 					$path = './assets/backend/dist/img/galeri/';
 					$config['upload_path']		= $path;
 					$config['allowed_types']	= 'jpeg|jpg|png|bmp';
@@ -2671,6 +2711,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-berita",
 					);
 				}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 					$path = './assets/backend/dist/img/berita/';
 					$config['upload_path']		= $path;
 					$config['allowed_types']	= 'jpeg|jpg|png|bmp';
@@ -2726,6 +2767,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-berita",
 					);
 				}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 					$path = './assets/backend/dist/img/berita/';
 					$config['upload_path']		= $path;
 					$config['allowed_types']	= 'jpeg|jpg|png|bmp';
@@ -2892,6 +2934,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-forum",
 					);
 				}else if ($links == "do_edit") {
+				ini_set('memory_limit', '1024M');
 					$path = './assets/backend/dist/forum/';
 					$config['upload_path']		= $path;
 					$config['allowed_types']	= 'jpeg|jpg|png|bmp|docx|doc|pdf';
@@ -2936,6 +2979,7 @@ class Admin extends CI_Controller {
 						'page' => "admin/crud-forum",
 					);
 				}else if ($links == "do_add") {
+				ini_set('memory_limit', '1024M');
 					$path = './assets/backend/dist/forum/';
 					$config['upload_path']		= $path;
 					$config['allowed_types']	= 'jpeg|jpg|png|bmp|docx|doc|pdf';
@@ -2997,14 +3041,14 @@ class Admin extends CI_Controller {
 
 			$this->load->view('admin/dashboard',$data);
 		}
-
-		public function getLogout(){
-			if (empty($this->cek)) {
-				header('location:'.site_url());
-			}else{
-	  		$this->session->sess_destroy();
-				header('location:'.site_url());
-	    }
-	  }
 	// ==========================
+		
+	public function getLogout(){
+		if (empty($this->cek)) {
+			header('location:'.site_url());
+		}else{
+  		$this->session->sess_destroy();
+			header('location:'.site_url());
+    }
+  }
 }
