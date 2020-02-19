@@ -454,7 +454,7 @@ class Admin extends CI_Controller {
 			    $data_video = array(
 						'judul'      => $this->input->post('judul'),
 						'tanggal'    => $this->input->post('tanggal'),
-						'oleh'       => $this->input->post('oleh'),
+						'oleh'       => $this->session->userdata('nama'),
 						'konten'     => $this->input->post('konten'),
 					);
 

@@ -142,6 +142,7 @@
                   <label for="tanggal" class="col-md-2 col-form-label form-control-label">Unggah Foto *</label>
                   <div class="col-md-10" id="itemlist" style="padding:0px">
                     <div class="col-md-4 col-xs-12" style="margin-bottom:5px;">
+                      <p class="error"><em>* Total ukuran/size foto tidak boleh melebihi 20 mb</em></p>
                       <input class="form-control" type="file" id="foto[0]" name="foto[]" onchange="PreviewImage('foto[0]','prevFoto[0]','#oldFoto0');">
                       <?php if ($links == "edit") { ?>
                       <input type="hidden" name="oldFoto[]" id="oldFoto0" value="<?php echo $konten[0]; ?>"><?php } ?>
