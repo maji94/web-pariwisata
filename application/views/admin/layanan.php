@@ -91,10 +91,10 @@
                         <td><?php echo $d->email.'<br>'.$d->nohp; ?></td>
                         <td width="30%"><?php echo $d->konten; ?></td>
                         <td align="center" width="5%">
-                          <a href="<?php echo site_url('admin/layanan/tandai/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 200px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
+                          <a href="<?php echo site_url('admin/layanan/tandai/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 200px;" class="btn btn-primary waves-effect waves-light" title="Tandai Permintaan">
                             <i class="icofont icofont-checked"></i><span class="m-l-10">Tandai Sudah Dibaca</span>
                           </a><br>
-                          <a href="#" style="margin-bottom: 5px;width: 200px;" class="btn btn-warning waves-effect waves-light" title="Tandai Pesan" 
+                          <a href="#" style="margin-bottom: 5px;width: 200px;" class="btn btn-warning waves-effect waves-light" title="Detail Permintaan" 
                             data-toggle="modal" data-target="#detail_request" 
                             data-id="<?php echo $d->id; ?>" 
                             data-nama="<?php echo $d->nama; ?>" 

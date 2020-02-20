@@ -90,7 +90,7 @@ class Login extends CI_Controller {
     else{
       // echo "<pre>";
       // echo print_r($_POST);
-      echo "<script>alert('Username Atau Password Tidak Valid');</script>";
+    //   echo "<script>alert('Username Atau Password Tidak Valid');</script>";
       redirect('login');
     }
   }

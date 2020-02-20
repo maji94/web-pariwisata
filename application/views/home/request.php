@@ -1,12 +1,11 @@
 <!-- Banner -->
 <section id="One" class="wrapper style3" style="background-image: url('../images/banner.jpg');">
-  <div class="inner">
-    <header class="align-center">
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <p>#visitbengkulu</p>
-      <h2>LAYANAN</h2>
-    </header>
-  </div>
+	<div class="inner">
+		<header class="align-center"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			<p>#visitbengkulu</p>
+			<h2>LAYANAN</h2>
+		</header>
+	</div>
 </section>
 
 <!-- Content -->

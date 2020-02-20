@@ -24,13 +24,8 @@
 					<p><a href="https://bengkuluprov.go.id" target="_blank">https://bengkuluprov.go.id</a></p>
 					<p><a href="http://www.kemenpar.go.id" target="_blank">http://www.kemenpar.go.id</a></p>
 					<p><a href="https://www.lapor.go.id" target="_blank">https://www.lapor.go.id</a></p>
-					<ul class="icons" style="margin: 0">
-						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon fa-youtube-play"><span class="label">Email</span></a></li>
-					</ul>
-					&copy; <a href="<?php echo site_url(); ?>">DINAS PARIWISATA PROVINSI BENGKULU</a>. All rights reserved.
+					<div class="sharethis-inline-follow-buttons"></div>
+					<p>&copy; <a href="<?php echo site_url(); ?>">DINAS PARIWISATA PROVINSI BENGKULU</a>. All rights reserved.</p>
 				</div>
 			</div>
 			<div>

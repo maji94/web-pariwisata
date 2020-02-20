@@ -4,7 +4,7 @@
 <!-- Banner -->
 	<section id="One" class="wrapper style3">
 		<div class="inner">
-			<header class="align-center">
+			<header class="align-center"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 				<p>#visitbengkulu</p>
 				<h2>ARTIKEL</h2>
 			</header>
@@ -33,7 +33,8 @@
 					<a id="video" video-url="<?php echo $d->link_video ?>" class="button special alt"><i class="fa fa-film" aria-hidden="true"></i> Lihat Video</a>
 					<a href="https://goo.gl/maps/sEBduEGu7czKC9MW9" class="button special alt" target="_blank"><i class="fa fa-map-o" aria-hidden="true"></i> Lihat Maps</a>
 					<br><hr>
-					Share this : <?php echo count($konten); ?>
+					Share this : 
+					<div class="sharethis-inline-share-buttons"></div>
 				</div>
 				<?php } ?>
 

@@ -1,7 +1,7 @@
 <!-- One -->
 <section id="One" class="wrapper style3">
 	<div class="inner">
-		<header class="align-center">
+		<header class="align-center"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 			<p>#visitbengkulu</p>
 			<h2>ATRAKSI</h2>
 		</header>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<p>Destinasi Wisata Alam di Provinsi Bengkulu</p>
+							<p>Destinasi Wisata Alam</p>
 								<h2>ALAM</h2>
 						</header>
 						<footer class="align-center">
@@ -38,8 +38,8 @@
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<p>Destinasi Wisata Budaya di Provinsi Bengkulu</p>
-							<h2>BUDAYA</h2>
+							<p>Destinasi Wisata Sejarah dan Budaya</p>
+							<h2>SEJARAH DAN BUDAYA</h2>
 						</header>
 						<footer class="align-center">
 							<a href="<?php echo site_url('atraksi/budaya/all') ?>" class="button alt">Lebih Lanjut</a>
@@ -55,11 +55,11 @@
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<p>Destinasi Wisata Museum di Provinsi Bengkulu</p>
-							<h2>MUSEUM</h2>
+							<p>Destinasi Wisata Buatan</p>
+							<h2>BUATAN</h2>
 						</header>
 						<footer class="align-center">
-							<a href="<?php echo site_url('atraksi/museum/all') ?>" class="button alt">Lebih Lanjut</a>
+							<a href="<?php echo site_url('atraksi/buatan/all') ?>" class="button alt">Lebih Lanjut</a>
 						</footer>
 					</div>
 				</div>
@@ -72,7 +72,7 @@
 					</div>
 					<div class="content">
 						<header class="align-center">
-							<p>Destinasi Wisata Kuliner di Provinsi Bengkulu</p>
+							<p>Destinasi Wisata Kuliner</p>
 							<h2>KULINER</h2>
 						</header>
 						<footer class="align-center">

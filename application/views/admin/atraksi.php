@@ -1,19 +1,19 @@
-<?php
-$links = $this->uri->segment(3);
-if ($links == "alam") {
-  $header = "Alam";
-  $jenis = "alam";
-} else if ($links == "budaya") {
-  $header = "Budaya";
-  $jenis = "budaya";
-} else if ($links == "buatan") {
-  $header = "Buatan";
-  $jenis = "buatan";
-} else if ($links == "kuliner") {
-  $header = "Kuliner";
-  $jenis = "kuliner";
-}
-?>
+<?php 
+  $links = $this->uri->segment(3);
+  if ($links == "alam") {
+    $header = "Alam";
+    $jenis = "alam";
+  }else if ($links == "budaya") {
+    $header = "Budaya";
+    $jenis = "budaya";
+  }else if ($links == "buatan") {
+    $header = "Buatan";
+    $jenis = "buatan";
+  }else if ($links == "kuliner") {
+    $header = "Kuliner";
+    $jenis = "kuliner";
+  }
+ ?>
 <div class="content-wrapper">
   <!-- Container-fluid starts -->
   <div class="container-fluid">
@@ -46,7 +46,7 @@ if ($links == "alam") {
         <div class="card">
           <div class="card-header">
             <h5 class="card-header-text">Data <?php echo $header; ?> </h5>
-            <a href="<?php echo site_url('admin/atraksi/add/' . $jenis); ?>" class="btn btn-success waves-effect waves-light f-right"><i class="icofont icofont-plus"></i><span class="m-l-10"> Tambah Data</span></a>
+            <a href="<?php echo site_url('admin/atraksi/add/'.$jenis); ?>" class="btn btn-success waves-effect waves-light f-right"><i class="icofont icofont-plus"></i><span class="m-l-10"> Tambah Data</span></a>
           </div>
           <div class="card-block">
             <div class="row">
@@ -62,26 +62,24 @@ if ($links == "alam") {
                     </tr>
                   </thead>
                   <tbody>
-                    <?php $no = 1;
-                    foreach ($data as $d) { ?>
-                      <tr>
-                        <td width="5%"><?php echo $no; ?></td>
-                        <td>
-                          <img src="<?php echo base_url('assets/images/' . $jenis . '/' . str_replace('.', '_thumb.', $d->foto_headline)); ?>" alt="" style="width: 200px">
-                        </td>
-                        <td><?php echo $d->nama; ?></td>
-                        <td><?php echo substr(strip_tags($d->konten), 0, 200); ?> ...</td>
-                        <td align="center" width="5%">
-                          <a href="<?php echo site_url('admin/atraksi/edit/' . $jenis . '/' . $d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
-                            <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
-                          </a><br>
-                          <a href="<?php echo site_url('admin/atraksi/delete/' . $jenis . '/' . $d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
-                            <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
-                          </a>
-                        </td>
-                      </tr>
-                    <?php $no++;
-                    } ?>
+                    <?php $no=1; foreach ($data as $d) { ?>
+                    <tr>
+                      <td width="5%"><?php echo $no; ?></td>
+                      <td>
+                        <img src="<?php echo base_url('assets/images/'.$jenis.'/'.str_replace('.', '_thumb.', $d->foto_headline)); ?>" alt="" style="width: 200px">
+                      </td>
+                      <td><?php echo $d->nama; ?></td>
+                      <td><?php echo substr(strip_tags($d->konten), 0, 200); ?> ...</td>
+                      <td align="center" width="5%">
+                        <a href="<?php echo site_url('admin/atraksi/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
+                          <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
+                        </a><br>
+                        <a href="<?php echo site_url('admin/atraksi/delete/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 70px;" class="btn btn-default waves-effect waves-light" title="Hapus Data" onclick="return confirm('Data ini akan terhapus. Lanjutkan ?');">
+                          <i class="icofont icofont-bin "></i><span class="m-l-10">Hapus</span>
+                        </a>
+                      </td>
+                    </tr>
+                    <?php $no++; } ?>
                   </tbody>
                   <tfoot>
                     <tr>

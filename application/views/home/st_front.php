@@ -2,9 +2,9 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<title>Wonderful Bengkulu 2020</title>
-		<meta charset="utf-8">
+		
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="description" content="Wonderfull Bengkulu 2020. Website Resmi Dinas Pariwisata Provinsi Bengkulu dalam mewujudkan Wonderfull Bengkulu 2020">
@@ -12,14 +12,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<meta name="keyword" content="dispar bengkulu, pariwisata bengkulu, wonderfull bengkulu, pantai panjang, tapak paderi bengkulu, benteng">
 		
 		<!-- Shareable -->
-		<meta property="og:title" content="Wonderfull Bengkulu 2010 | Dinas Pariwisata Provinsi Bengkulu" />
+		<meta property="og:title" content="Wonderfull Bengkulu 2020 | Dinas Pariwisata Provinsi Bengkulu" />
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="<?php echo site_url() ?>" />
-		<meta property="og:image" content="<?php echo base_url() ?>/assets/images/landmark.png" />
+		<meta property="og:image" content="<?php echo base_url() ?>assets/images/landmark.png" />
 
 		<!-- Favicons -->
-	  <link href="<?php echo base_url() ?>/assets/images/landmark.png" rel="icon">
-	  <link href="<?php echo base_url() ?>/assets/images/landmark.png" rel="apple-touch-icon">
+	  <link href="<?php echo base_url() ?>assets/images/landmark.png" rel="icon">
+	  <link href="<?php echo base_url() ?>assets/images/landmark.png" rel="apple-touch-icon">
 
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/main.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/css/video.popup.css">
@@ -29,6 +29,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/owl-carousel2-2.3.4/dist/assets/owl.carousel.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets/front/owl-carousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+		
+		<!--ShareThis -->
+		<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5df84c97076ae6001453b6bf&product=inline-share-buttons&cms=sop' async='async'></script>
+		
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115883445-5"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-115883445-5');
+        </script>
+
 	</head>
 	<body <?php echo $this->session->flashdata('notif'); ?>>
 

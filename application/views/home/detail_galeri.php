@@ -10,7 +10,7 @@
 <!-- Banner -->
 	<section id="One" class="wrapper style3">
 		<div class="inner">
-			<header class="align-center">
+			<header class="align-center"><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 				<p>#visitbengkulu</p>
 				<h2><?php echo $header; ?></h2>
 			</header>
@@ -52,6 +52,7 @@
 						<?php } ?>
 						<hr>
 						Share this : 
+    					<div class="sharethis-inline-share-buttons"></div>
 					</div>
 				<?php } ?>
 

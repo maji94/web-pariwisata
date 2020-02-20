@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?><!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <title>DASHBOARD | <?php echo $title; ?></title>
   <!-- HTML5 Shim and Respond.js IE9 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <meta charset="utf-8">
+  
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
   <!-- Favicon icon -->
@@ -77,7 +77,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <script src="<?php echo base_url(); ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
    <!-- waves effects.js -->
-   <script src="<?php echo base_url(); ?>assets/plugins/Waves/waves.min.js"></script>
+   <script src="<?php echo base_url(); ?>assets/plugins/waves/waves.min.js"></script>
 
    <!-- Scrollbar JS-->
    <script src="<?php echo base_url(); ?>assets/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -90,20 +90,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
    <script src="<?php echo base_url(); ?>assets/plugins/notification/js/bootstrap-growl.min.js"></script>
    <script src="<?php echo base_url(); ?>assets/pages/notification.js"></script>
 
-   <!-- Rickshaw Chart js -->
-   <!-- <script src="<?php// echo base_url(); ?>assets/plugins/d3/d3.js"></script> -->
-   <!-- <script src="<?php// echo base_url(); ?>assets/plugins/rickshaw/rickshaw.js"></script> -->
-
-   <!-- Sparkline charts -->
-   <!-- <script src="<?php// echo base_url(); ?>assets/plugins/jquery-sparkline/dist/jquery.sparkline.js"></script> -->
-
    <!-- Counter js  -->
    <script src="<?php echo base_url(); ?>assets/plugins/waypoints/jquery.waypoints.min.js"></script>
    <script src="<?php echo base_url(); ?>assets/plugins/countdown/js/jquery.counterup.js"></script>
 
    <!-- custom js -->
    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/main.min.js"></script>
-   <!-- <script type="text/javascript" src="<?php// echo base_url(); ?>assets/pages/dashboard.js"></script> -->
+   <!-- <script type="text/javascript" src="<?//php echo base_url(); ?>assets/pages/dashboard.js"></script> -->
    <script type="text/javascript" src="<?php echo base_url(); ?>assets/pages/elements.js"></script>
    <script src="<?php echo base_url(); ?>assets/js/menu.min.js"></script>
    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
