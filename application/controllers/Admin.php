@@ -249,7 +249,8 @@ class Admin extends CI_Controller {
 						'oleh'       => $this->session->userdata('nama'),
 						'konten'     => $this->input->post('isi'),
 						'link_foto'  => $this->input->post('link_foto'),
-						'link_video' => $this->input->post('link_video'),
+            'link_video' => $this->input->post('link_video'),
+            'link_maps'  => $this->input->post('link_maps'),
 						'dilihat'    => 1,
 					);
 
@@ -281,7 +282,8 @@ class Admin extends CI_Controller {
 			    	'judul'   => $this->input->post('judul'),
 			    	'tanggal' => $this->input->post('tanggal'),
 			    	'jenis'   => "foto",
-						'oleh'    => $this->input->post('oleh'),
+            'oleh'    => $this->input->post('oleh'),
+            'status'  => "1"
 			    );
 
 			    $input = sizeof($_FILES['foto']['tmp_name']);
@@ -318,7 +320,8 @@ class Admin extends CI_Controller {
 						'judul'      => $this->input->post('judul'),
 						'tanggal'    => $this->input->post('tanggal'),
 						'jenis'      => "video",
-						'konten'     => $this->input->post('konten'),
+            'konten'     => $this->input->post('konten'),
+            'status'     => "1"
 					);
 
 					if ($_FILES['foto']['name'] == "") {
@@ -350,7 +353,7 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diubah', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/media/'.$links2);
         }
-			}else  if ($links == "edit") {
+			}else if ($links == "edit") {
 				$data = array(
 					'request' => $this->m_admin->getRequest(),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
@@ -369,7 +372,8 @@ class Admin extends CI_Controller {
 			    	'tanggal'    => $this->input->post('tanggal'),
 			    	'konten'     => $this->input->post('isi'),
 			    	'link_foto'  => $this->input->post('link_foto'),
-			    	'link_video' => $this->input->post('link_video'),
+            'link_video' => $this->input->post('link_video'),
+            'link_maps'  => $this->input->post('link_maps'),
 			    );
 
 			    if ($_FILES['foto']['name'] == "") {
@@ -536,20 +540,45 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/media/'.$links2);
         }
+			}else if ($links == "verifikasi") {        
+        $data_media = array(
+          'status'     => 1,
+        );
+
+				$where = array('id' => $links3);
+				$upd_media = $this->m_admin->UpdateData($tableName, $data_media, $where);
+				if($upd_media){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diverifikasi', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/media/'.$links2);
+				}else {
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diverifikasi', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/media/'.$links2);
+				}
+			}else if ($links == "detail") {
+        $data_foto = $this->m_admin->getContent($tableName, array('id'=>$links3));
+        $foto = $this->m_admin->getContent('tb_media', array('id'=>substr($data_foto[0]->link_foto, (strpos($data_foto[0]->link_foto, 'o/'))+2)));
+
+				$data = array(
+					'request' => $this->m_admin->getRequest(),
+          'data' => $data_foto,
+          'foto' => $foto,
+					'title' => 'Detail Media',
+					'page'  => 'admin/lihat_media',
+				);
 			}else {
 				$data = array(
 					'request' => $this->m_admin->getRequest(),
-					'data' => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
-					'title' => 'Manajemen Media Website',
+          'data' => $this->m_admin->getContent($tableName, array('jenis'=>$links), "1"),
+					'title' => "Manajemen Media Website",
 					'page' => "admin/media",
-				);
+        );
+
+        if ($links == "artikel") {
+          $data['data_pending'] = $this->m_admin->getContent($tableName, array('jenis'=>$links), "0");
+        }
 			}
 		}
 		$this->load->view('admin/dashboard', $data);
-		// echo "<pre>";
-		// print_r($explode);
-		// echo "<br>";
-		// print_r($carigambar);
 	}
 
 	public function kreatif(){

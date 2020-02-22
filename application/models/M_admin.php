@@ -15,8 +15,12 @@ class M_admin extends CI_Model
     return $data->result();
   }
 
-  public function getContent($tableName, $id = null)
+  public function getContent($tableName, $id = null, $where = null)
   {
+    if ($where != null) {
+      $this->db->where('status', $where);
+    }
+    $this->db->order_by('id','DESC');
     $data = $this->db->get_where($tableName, $id);
     return $data->result();
   }
@@ -55,6 +59,7 @@ class M_admin extends CI_Model
   {
     if ($jenis != null) {
       $this->db->where('jenis', $jenis);
+      $this->db->where('status', "1");
     }
     if ($limit != null) {
       $this->db->limit($limit, $offset);
@@ -116,11 +121,14 @@ class M_admin extends CI_Model
     return $data->result();
   }
 
-  public function getOther($tableName = null, $jenis = null)
+  public function getOther($tableName = null, $jenis = null, $status = null)
   {
     $this->db->order_by('id', 'RANDOM');
     if ($jenis != null) {
       $this->db->where('jenis', $jenis);
+    }
+    if ($status != null) {
+      $this->db->where('status', $status);
     }
     $this->db->limit(2);
     $data = $this->db->get($tableName);

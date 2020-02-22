@@ -75,7 +75,7 @@ class Media extends CI_Controller {
 
 		if ($links == "all") {
 			/* pagination */	
-			$total_row		= $this->db->query("SELECT * FROM `tb_media` WHERE jenis = 'artikel'")->num_rows();
+			$total_row		= $this->db->query("SELECT * FROM `tb_media` WHERE jenis = 'artikel' AND status = '1'")->num_rows();
 			$per_page		= 4;
 			
 			$awal	= $this->uri->segment(4); 
@@ -94,7 +94,7 @@ class Media extends CI_Controller {
 		}else{
 			$artikel = $this->m_admin->getContent($tableName, array('id'=>$links));
 			$foto = $this->m_admin->getContent('tb_media', array('id'=>substr($artikel[0]->link_foto, (strpos($artikel[0]->link_foto, 'i/'))+2)));
-			$other = $this->m_admin->getOther($tableName, $artikel[0]->jenis);
+			$other = $this->m_admin->getOther($tableName, $artikel[0]->jenis, "1");
 			$data = array(
 				'data' => $artikel,
 				'foto' => $foto,

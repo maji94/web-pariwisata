@@ -1,6 +1,6 @@
 <?php 
 	$konten = unserialize($foto[0]->konten);
- ?>
+?>
 <!-- Banner -->
 	<section id="One" class="wrapper style3">
 		<div class="inner">
@@ -31,7 +31,7 @@
 						<a href="<?php echo base_url('assets/images/foto/'.str_replace('.', '_thumb.', $konten[$m])); ?>" data-lightbox="mygallery">
 					<?php } ?>
 					<a id="video" video-url="<?php echo $d->link_video ?>" class="button special alt"><i class="fa fa-film" aria-hidden="true"></i> Lihat Video</a>
-					<a href="https://goo.gl/maps/sEBduEGu7czKC9MW9" class="button special alt" target="_blank"><i class="fa fa-map-o" aria-hidden="true"></i> Lihat Maps</a>
+					<a href="<?php echo $d->link_maps?>" class="button special alt" target="_blank"><i class="fa fa-map-o" aria-hidden="true"></i> Lihat Maps</a>
 					<br><hr>
 					Share this : 
 					<div class="sharethis-inline-share-buttons"></div>

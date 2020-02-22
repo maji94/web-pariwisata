@@ -27,6 +27,7 @@
       $headline = "";
       $link_foto = "";
       $link_video = "";
+      $link_maps = "";
     }else if ($links2 == 'foto') {
       $konten = "";
       $konten0 = "";
@@ -50,6 +51,7 @@
       $headline = $data[0]->headline;
       $link_foto = $data[0]->link_foto;
       $link_video = $data[0]->link_video;
+      $link_maps = $data[0]->link_maps;
     }else if ($links2 == "foto") {
       $konten = unserialize($data[0]->konten);
       $konten0 = base_url('assets/images/foto/'.str_replace('.', '_thumb.', $konten[0]));
@@ -59,7 +61,8 @@
       $headline = $data[0]->headline;
     }
   }
- ?>
+?>
+
 <div class="content-wrapper">
   <!-- Container-fluid starts -->
   <div class="container-fluid">
@@ -135,6 +138,12 @@
                 <label for="link_video" class="col-md-2 col-form-label form-control-label">Link Video </label>
                 <div class="col-md-10">
                     <input type="text" id="link_video" name="link_video" class="form-control" placeholder="Copy dan paste link video yang ada pada Youtube" value="<?php echo $link_video; ?>">
+                </div>
+              </div>
+              <div class="form-group row">
+                <label for="link_maps" class="col-md-2 col-form-label form-control-label">Link Maps </label>
+                <div class="col-md-10">
+                    <input type="text" id="link_maps" name="link_maps" class="form-control" placeholder="Copy dan paste link yang ada pada Google Maps" value="<?php echo $link_maps; ?>">
                 </div>
               </div>
               <?php }else if ($links2 == "foto") { ?>
