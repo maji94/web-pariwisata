@@ -145,14 +145,16 @@
                       <td><?php echo $d->nama; ?></td>
                       <td><?php echo substr(strip_tags($d->konten), 0, 200); ?> ...</td>
                       <td align="center" width="5%">
-                        <?php if ($links == "event") { ?>
+                        <?php if ($links == "event") {
+                          if ($this->session->userdata('lvl_user') == "admin") {
+                        ?>
                           <a href="<?php echo site_url('admin/kreatif/detail/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 100px;" class="btn btn-info waves-effect waves-light" title="Lihat Detail">
                             <i class="icofont icofont-search"></i><span class="m-l-10">Lihat Detail</span>
                           </a><br>
                           <a href="<?php echo site_url('admin/kreatif/verifikasi/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 100px;" class="btn btn-success waves-effect waves-light" title="Verifikasi Data" onclick="return confirm('Verifikasi data. Lanjutkan ?');">
                             <i class="icofont icofont-tick-mark"></i><span class="m-l-10">Verifikasi</span>
                           </a><br>
-                        <?php } ?>
+                        <?php } } ?>
                         <a href="<?php echo site_url('admin/kreatif/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 100px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
                           <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
                         </a><br>

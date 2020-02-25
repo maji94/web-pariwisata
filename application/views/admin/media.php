@@ -160,12 +160,14 @@
                       <td><?php echo $d->konten; ?></td>
                       <?php } ?>
                       <td align="center" width="5%">
+                      <?php if ($this->session->userdata('lvl_user') == "admin") { ?>
                         <a href="<?php echo site_url('admin/media/detail/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 100px;" class="btn btn-info waves-effect waves-light" title="Lihat Detail">
                           <i class="icofont icofont-search"></i><span class="m-l-10">Lihat Detail</span>
                         </a><br>
                         <a href="<?php echo site_url('admin/media/verifikasi/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 100px;" class="btn btn-success waves-effect waves-light" title="Verifikasi Data" onclick="return confirm('Verifikasi data. Lanjutkan ?');">
                           <i class="icofont icofont-tick-mark"></i><span class="m-l-10">Verifikasi</span>
                         </a><br>
+                      <?php } ?>
                         <a href="<?php echo site_url('admin/media/edit/'.$jenis.'/'.$d->id); ?>" style="margin-bottom: 5px;width: 100px;" class="btn btn-primary waves-effect waves-light" title="Ubah Data">
                           <i class="icofont icofont-pencil "></i><span class="m-l-10">Edit</span>
                         </a><br>

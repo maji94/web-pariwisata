@@ -23,7 +23,7 @@
 			<div>
 				<div class="box">
 					<div class="image fit">
-						<a href="<?php echo site_url('media/galeri/'.$d->id); ?>">
+						<a href="<?php echo site_url('tentang/galeri_dinas/'.$d->id); ?>">
 							<img src="<?php echo base_url('assets/images/tentang/'.str_replace('.', '_thumb.', unserialize($d->konten)[0])); ?>" alt="">
 						</a>
 					</div>

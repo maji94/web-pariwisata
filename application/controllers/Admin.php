@@ -545,20 +545,24 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/media/'.$links2);
         }
-			}else if ($links == "verifikasi") {        
-        $data_media = array(
-          'status'     => "1",
-        );
-
-				$where = array('id' => $links3);
-				$upd_media = $this->m_admin->UpdateData($tableName, $data_media, $where);
-				if($upd_media){
-					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diverifikasi', 'success','icofont icofont-tick-mark');\"");
-					redirect('admin/media/'.$links2);
-				}else {
-					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diverifikasi', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/media/'.$links2);
-				}
+			}else if ($links == "verifikasi") {
+        if ($this->set == "admin") {
+          $data_media = array(
+            'status'     => "1",
+          );
+  
+          $where = array('id' => $links3);
+          $upd_media = $this->m_admin->UpdateData($tableName, $data_media, $where);
+          if($upd_media){
+            $this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diverifikasi', 'success','icofont icofont-tick-mark');\"");
+            redirect('admin/media/'.$links2);
+          }else {
+            $this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diverifikasi', 'danger','icofont icofont-warning-alt');\"");
+            redirect('admin/media/'.$links2);
+          }
+        } else {
+          redirect('admin/media/'.$links2);
+        }
 			}else if ($links == "detail") {
         $data_foto = $this->m_admin->getContent($tableName, array('id'=>$links3));
         $foto = $this->m_admin->getContent('tb_media', array('id'=>substr($data_foto[0]->link_foto, (strpos($data_foto[0]->link_foto, 'o/'))+2)));
@@ -788,20 +792,24 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/kreatif/'.$links2);
         }
-			}else if ($links == "verifikasi") {        
-        $data_kreatif = array(
-          'status'     => "1",
-        );
-
-				$where = array('id' => $links3);
-				$upd_kreatif = $this->m_admin->UpdateData($tableName, $data_kreatif, $where);
-				if($upd_kreatif){
-					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diverifikasi', 'success','icofont icofont-tick-mark');\"");
-					redirect('admin/kreatif/'.$links2);
-				}else {
-					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diverifikasi', 'danger','icofont icofont-warning-alt');\"");
-					redirect('admin/kreatif/'.$links2);
-				}
+			}else if ($links == "verifikasi") {
+        if ($this->set == "admin") {
+          $data_kreatif = array(
+            'status'     => "1",
+          );
+  
+          $where = array('id' => $links3);
+          $upd_kreatif = $this->m_admin->UpdateData($tableName, $data_kreatif, $where);
+          if($upd_kreatif){
+            $this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diverifikasi', 'success','icofont icofont-tick-mark');\"");
+            redirect('admin/kreatif/'.$links2);
+          }else {
+            $this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diverifikasi', 'danger','icofont icofont-warning-alt');\"");
+            redirect('admin/kreatif/'.$links2);
+          }
+        } else {
+          redirect('admin/kreatif/'.$links2);
+        }
 			}else if ($links == "detail") {
         $data_foto = $this->m_admin->getContent($tableName, array('id'=>$links3));
         $foto = unserialize($data_foto[0]->foto_galeri);
