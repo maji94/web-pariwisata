@@ -31,7 +31,7 @@
 						<a href="<?php echo base_url('assets/images/kreatif/'.str_replace('.', '_thumb.', $foto_galeri[$m])); ?>" data-lightbox="mygallery">
 					<?php } ?>
 					<a id="video" video-url="<?php echo $d->link_video ?>" class="button special alt"><i class="fa fa-film" aria-hidden="true"></i> Lihat Video</a>
-					<a href="https://goo.gl/maps/sEBduEGu7czKC9MW9" class="button special alt" target="_blank"><i class="fa fa-map-o" aria-hidden="true"></i> Lihat Maps</a>
+					<a href="<?= $d->link_maps; ?>" class="button special alt" target="_blank"><i class="fa fa-map-o" aria-hidden="true"></i> Lihat Maps</a>
 					<br><hr>
 					Share this : 
 					<div class="sharethis-inline-share-buttons"></div>
@@ -41,7 +41,7 @@
 				<!-- More Photos-->
 				<div class="content">
 					<header class="align-center">
-						<h2>Informasi Akomodasi Lainnya</h2>
+						<h2>Informasi Kreatif Lainnya</h2>
 					</header>
 
 					<div class="grid-style">

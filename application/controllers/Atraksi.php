@@ -234,7 +234,7 @@ class Atraksi extends CI_Controller {
 		}
 		$this->load->view('home/st_front', $data);
 		// echo "<pre>";
-		// print_r($galeri);
+		// print_r($data);
 	}
 
 

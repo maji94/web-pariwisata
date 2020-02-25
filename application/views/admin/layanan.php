@@ -85,7 +85,7 @@
                         </td>
                       </tr>
                       <?php }else if ($links == "request") { ?>
-                      <tr <?php if ($d->status == 1) { echo 'style="background-color: #4CAF50 ;color:white;font-weight:bold;"';} ?>>
+                      <tr <?php if ($d->status == "0") { echo 'style="background-color: #4CAF50 ;color:white;font-weight:bold;"';} ?>>
                         <td width="5%"><?php echo $no; ?></td>
                         <td><?php echo $d->nama; ?></td>
                         <td><?php echo $d->email.'<br>'.$d->nohp; ?></td>

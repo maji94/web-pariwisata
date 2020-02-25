@@ -34,14 +34,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5df84c97076ae6001453b6bf&product=inline-share-buttons&cms=sop' async='async'></script>
 		
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115883445-5"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'UA-115883445-5');
-        </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-115883445-5"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-115883445-5');
+    </script>
 
 	</head>
 	<body <?php echo $this->session->flashdata('notif'); ?>>

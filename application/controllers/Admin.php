@@ -16,7 +16,9 @@ class Admin extends CI_Controller {
 
 	public function index(){
 		$data = array(
-			'request' => $this->m_admin->getRequest(),
+      'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+      'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+      'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 			'title'	=> "BERANDA ".strtoupper($this->set),
 			'page'	=> "admin/a_main",
 		);
@@ -197,7 +199,9 @@ class Admin extends CI_Controller {
 				}
 			}else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data' => $this->m_admin->getBanner('foto'),
 					'headline' => $this->m_admin->getBanner('headline'),
 					'title' => 'Manajemen Banner',
@@ -231,7 +235,9 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'title' => 'Tambah Data Media',
 					'page' => "admin/crud_media",
 				);
@@ -250,8 +256,7 @@ class Admin extends CI_Controller {
 						'konten'     => $this->input->post('isi'),
 						'link_foto'  => $this->input->post('link_foto'),
             'link_video' => $this->input->post('link_video'),
-            'link_maps'  => $this->input->post('link_maps'),
-						'dilihat'    => 1,
+            'link_maps'  => $this->input->post('link_maps')
 					);
 
 					if ($_FILES['foto']['name'] == "") {
@@ -282,8 +287,7 @@ class Admin extends CI_Controller {
 			    	'judul'   => $this->input->post('judul'),
 			    	'tanggal' => $this->input->post('tanggal'),
 			    	'jenis'   => "foto",
-            'oleh'    => $this->input->post('oleh'),
-            'status'  => "1"
+            'oleh'    => $this->input->post('oleh')
 			    );
 
 			    $input = sizeof($_FILES['foto']['tmp_name']);
@@ -320,8 +324,7 @@ class Admin extends CI_Controller {
 						'judul'      => $this->input->post('judul'),
 						'tanggal'    => $this->input->post('tanggal'),
 						'jenis'      => "video",
-            'konten'     => $this->input->post('konten'),
-            'status'     => "1"
+            'konten'     => $this->input->post('konten')
 					);
 
 					if ($_FILES['foto']['name'] == "") {
@@ -355,7 +358,9 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => 'Ubah Data Media',
 					'page'  => 'admin/crud_media',
@@ -542,7 +547,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "verifikasi") {        
         $data_media = array(
-          'status'     => 1,
+          'status'     => "1",
         );
 
 				$where = array('id' => $links3);
@@ -559,7 +564,9 @@ class Admin extends CI_Controller {
         $foto = $this->m_admin->getContent('tb_media', array('id'=>substr($data_foto[0]->link_foto, (strpos($data_foto[0]->link_foto, 'o/'))+2)));
 
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
           'data' => $data_foto,
           'foto' => $foto,
 					'title' => 'Detail Media',
@@ -567,7 +574,9 @@ class Admin extends CI_Controller {
 				);
 			}else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
           'data' => $this->m_admin->getContent($tableName, array('jenis'=>$links), "1"),
 					'title' => "Manajemen Media Website",
 					'page' => "admin/media",
@@ -605,7 +614,9 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'title' => "Tambah Data Kreatif",
 					'page' => "admin/crud_kreatif",
 				);
@@ -652,12 +663,15 @@ class Admin extends CI_Controller {
 					redirect('admin/kreatif/'.$links2);
         }
 			}else if ($links == "edit") {
-				$data = array(
-					'request' => $this->m_admin->getRequest(),
-					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
-					'title' => "Ubah Data Kreatif",
-					'page'  => "admin/crud_kreatif",
-				);
+        $data = array(
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
+          'data'  => $this->m_admin->getContent($tableName, array('id' => $links3)),
+          'title' => "Ubah Data Kreatif",
+          'page'  => "admin/crud_kreatif",
+        );
 			}else if ($links == "do_edit") {
 				ini_set('memory_limit', '1024M');
 				$data_kreatif = array(
@@ -774,17 +788,52 @@ class Admin extends CI_Controller {
 					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal dihapus', 'danger','icofont icofont-warning-alt');\"");
 					redirect('admin/kreatif/'.$links2);
         }
-			}else {
+			}else if ($links == "verifikasi") {        
+        $data_kreatif = array(
+          'status'     => "1",
+        );
+
+				$where = array('id' => $links3);
+				$upd_kreatif = $this->m_admin->UpdateData($tableName, $data_kreatif, $where);
+				if($upd_kreatif){
+					$this->session->set_flashdata('notif', "onload=\"notify(' Sukses !!. ','Data berhasil diverifikasi', 'success','icofont icofont-tick-mark');\"");
+					redirect('admin/kreatif/'.$links2);
+				}else {
+					$this->session->set_flashdata('notif', "onload=\"notify(' Terjadi Kesalahan !!. ','Data gagal diverifikasi', 'danger','icofont icofont-warning-alt');\"");
+					redirect('admin/kreatif/'.$links2);
+				}
+			}else if ($links == "detail") {
+        $data_foto = $this->m_admin->getContent($tableName, array('id'=>$links3));
+        $foto = unserialize($data_foto[0]->foto_galeri);
+
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
-					'data'  => $this->m_admin->getContent2($tableName, array('jenis'=>$links)),
-					'title' => 'Manajemen Kreatif',
-					'page'  => "admin/kreatif",
-				);				
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
+          'data' => $data_foto,
+          'foto' => $foto,
+					'title' => 'Detail Kreatif',
+					'page'  => 'admin/lihat_kreatif',
+				);
+			}else {
+        $data = array(
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
+          'data'  => $this->m_admin->getContent2($tableName, array('jenis' => $links), null, "1"),
+          'title' => 'Manajemen Kreatif',
+          'page'  => "admin/kreatif",
+        );
+
+        if ($links == "event") {
+          $data['data_pending'] = $this->m_admin->getContent2($tableName, array('jenis' => $links), null, "0");
+        }
 			}
 		}
 
-		$this->load->view('admin/dashboard', $data);
+    $this->load->view('admin/dashboard', $data);
+    // echo "<pre>";
+    // print_r($data);
 	}
 
 	public function atraksi(){
@@ -811,7 +860,9 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'title' => 'Tambah Data Atraksi',
 					'page' => "admin/crud_atraksi",
 				);
@@ -854,7 +905,9 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Atraksi",
 					'page'  => "admin/crud_atraksi",
@@ -935,7 +988,9 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Atrkasi',
 					'page'  => "admin/atraksi",
@@ -971,7 +1026,9 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'title' => 'Tambah Data Akomodasi',
 					'page' => "admin/crud_akomodasi",
 				);
@@ -1021,7 +1078,9 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Akomodasi",
 					'page'  => "admin/crud_akomodasi",
@@ -1133,7 +1192,9 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Akomodasi',
 					'page'  => "admin/akomodasi",
@@ -1150,7 +1211,6 @@ class Admin extends CI_Controller {
 		$links3 = $this->uri->segment(5);
 		$tableName = 'tb_layanan';
 
-
 		$time = time();
 		$path = './assets/dokumen/'.$links2.'/';
     $config['allowed_types']  = 'pdf|doc|docx|xls|xlsx';
@@ -1164,7 +1224,9 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'title' => 'Tambah Data Layanan',
 					'page' => "admin/crud_layanan",
 				);
@@ -1199,7 +1261,9 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Layanan",
 					'page'  => "admin/crud_layanan",
@@ -1250,7 +1314,7 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "tandai") {
 				$data_layanan = array(
-					'status'       => 0,
+					'status'       => "1",
 				);
 
 				$where = array('id' => $links3);
@@ -1265,7 +1329,9 @@ class Admin extends CI_Controller {
 			}
 			else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Layanan',
 					'page'  => "admin/layanan",
@@ -1302,7 +1368,9 @@ class Admin extends CI_Controller {
 		}else{
 			if ($links == "add") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'title' => "Tambah Data Tentang",
 					'page' => "admin/crud_tentang",
 				);
@@ -1348,7 +1416,9 @@ class Admin extends CI_Controller {
         }
 			}else if ($links == "edit") {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('id'=>$links3)),
 					'title' => "Ubah Data Tentang",
 					'page'  => "admin/crud_tentang",
@@ -1453,7 +1523,9 @@ class Admin extends CI_Controller {
         }
 			}else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'data'  => $this->m_admin->getContent($tableName, array('jenis'=>$links)),
 					'title' => 'Manajemen Tentang',
 				);
@@ -1544,8 +1616,11 @@ class Admin extends CI_Controller {
 				$data_operator = array(
 					'nama'    	=> $this->input->post('nama'),
 					'username'  => $this->input->post('username'),
-					'level' 		=> $this->input->post('level'),
-				);
+        );
+        
+        if ($this->set == "admin"){
+					$data_operator['level'] = $this->input->post('level');
+        }
 
 				if ($_FILES['foto']['name'] == "") {
           $data_operator['foto'] = $this->input->post('oldFoto');
@@ -1593,21 +1668,26 @@ class Admin extends CI_Controller {
     			}
 			}else {
 				$data = array(
-					'request' => $this->m_admin->getRequest(),
+          'count_artikel' => $this->m_admin->getCount('tb_media', 'artikel'),
+          'count_request' => $this->m_admin->getCount('tb_layanan', 'request'),
+          'count_event' => $this->m_admin->getCount('tb_kreatif', 'event'),
 					'page'  => 'admin/operator',
 					'title' => 'Manajemen Operator',
 				);
-				
-				if($this->set == "admin"){
-				    $data['data']  = $this->m_admin->getContent($tableName, array('level'=>"operator"));
-				}else if($this->set == "operator"){
-				    $data['data']  = $this->m_admin->getContent($tableName, array('id_user'=>$this->session->userdata('id_user')));
-				}
+
+        if ($this->set == "admin") {
+          $data['data']  = $this->m_admin->getContent($tableName, array('level' => "operator"));
+        } else if ($this->set == "operator") {
+          $data['data']  = $this->m_admin->getContent($tableName, array('id_user' => $this->session->userdata('id_user')));
+        }
 			}
 			
 		}
 
-		$this->load->view('admin/dashboard', $data);
+    $this->load->view('admin/dashboard', $data);
+    // echo "<pre>";
+    // print_r($data);
+    // print_r($this->session->userdata());
 	}
 
 	// ==========================

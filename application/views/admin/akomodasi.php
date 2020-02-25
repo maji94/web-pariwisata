@@ -10,7 +10,7 @@
     $header = "Transportasi";
     $jenis = "transportasi";
   }
- ?>
+?>
 <div class="content-wrapper">
   <!-- Container-fluid starts -->
   <div class="container-fluid">
